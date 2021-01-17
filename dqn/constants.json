@@ -1,0 +1,31 @@
+{
+  "db_file_paths": {
+    "database": "/home/taindp/PycharmProjects/thesis/data/db_hcmut_dqn_31dec.json",
+    "dict": "/home/taindp/PycharmProjects/thesis/data/db_entity_31dec.json",
+    "user_goals": "/home/taindp/PycharmProjects/thesis/data/goal_hcmut_1_6.json"
+  },
+  "run": {
+    "usersim": true,
+    "warmup_mem": 6000,
+    "num_ep_run": 20000,
+    "train_freq": 100,
+    "max_round_num": 15,
+    "success_rate_threshold": 0.2
+  },
+  "agent": {
+    "save_weights_file_path": "",
+    "load_weights_file_path": "/home/taindp/PycharmProjects/thesis/dqn/weight/09_01_2021_40000_100_15.h5",
+    "vanilla": true,
+    "learning_rate": 5e-4,
+    "batch_size": 64,
+    "dqn_hidden_size": 100,
+    "epsilon_init": 0.0,
+    "gamma": 0.9,
+    "max_mem_size": 500000
+  },
+  "emc": {
+    "slot_error_mode": 0,
+    "slot_error_prob": 0.1,
+    "intent_error_prob": 0.0
+  }
+}
