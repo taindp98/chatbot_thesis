@@ -57,8 +57,10 @@ if __name__ == '__main__':
     mess = 'cho em hỏi em muốn  thi ngành bảo dưỡng công nghiệp thì nên tập trung học môn nào ạ'
     # mess = 'cho em hỏi học điện tử sau này ra trường làm gì ạ'
     user_action,confirm_obj = (user_request(mess,state_tracker))
-    print(user_action)
-    agent_action = get_agent_action(state_tracker, dqn_agent, user_action)
-    print(agent_action)
-    print(response_craft(agent_action, state_tracker,confirm_obj))
+    # print(database)
+
+    # print(user_action)
+    # agent_action = get_agent_action(state_tracker, dqn_agent, user_action)
+    # print(agent_action)
+    # print(response_craft(agent_action, state_tracker,confirm_obj))
 
