@@ -1,28 +1,27 @@
 import pymongo
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-mydb = myclient["hcmut"]
-doc = mydb["general"]
+client = pymongo.MongoClient("mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority")
+db = client.hcmut
+# collection = db['general'].find({})
+# collection = db['general']
+database = db['general']
+# database = []
+# for item in collection:
+#     database.append(item)
 dict_entity={}
+# dict_entity['_id'] = database.distinct('_id')
+dict_entity['major_code']=database.distinct('major_code')
+dict_entity['major_name']=database.distinct('major_name')
+dict_entity['subject_group']=database.distinct('subject_group')
+dict_entity['point'] = database.distinct('point')
+dict_entity['type_edu']= database.distinct('type_edu')
+dict_entity['year'] = database.distinct('year')
+dict_entity['satisfy'] = database.distinct('satisfy')
 
-dict_entity['major_code']=doc.distinct('major_code')
-dict_entity['major_name']=doc.distinct('major_name')
-dict_entity['subject_group']=doc.distinct('subject_group')
-dict_entity['point'] =doc.distinct('point')
-dict_entity['type_edu']=doc.distinct('type_edu')
-dict_entity['year'] = doc.distinct('year')
-dict_entity['satify'] = doc.distinct('satify')
-# dict_entity['university_name']=doc.distinct('university_name')
-# dict_entity['university_code']=doc.distinct('university_code')
-dict_entity['subject'] = doc.distinct('subject')
-dict_entity['career'] = doc.distinct('career')
-# dict_entity['typical_group'] = doc.distinct('typical_group')
-# dict_entity['company'] = doc.distinct('company')
-dict_entity['tuition_one_credit'] = doc.distinct('tuition_one_credit')
-# dict_entity['tuition_avg_one_sem'] = doc.distinct('tuition_avg_one_sem')
-# dict_entity['duration_std'] = doc.distinct('duration_std')
-# dict_entity['credits'] = doc.distinct('credits')
-# dict_entity['foreign_lang_min'] = doc.distinct('foreign_lang_min')
-file_output=open('/home/taindp/PycharmProjects/thesis/data/db_entity_31dec.json','w')
+dict_entity['subject'] = database.distinct('subject')
+dict_entity['career'] = database.distinct('career')
+dict_entity['tuition'] = database.distinct('tuition')
+
+file_output=open('../data/db_entity_jan23.json','w')
 list_final=[]
 list_final.append(dict_entity)
 dict_str=str(list_final)

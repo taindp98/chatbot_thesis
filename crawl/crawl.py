@@ -156,10 +156,14 @@ def get_post(time_scroll,url):
 if __name__== '__main__':
     email = '0387681482'
     password = '171@3012Hyvy'
-    time_scroll = 100
+    time_scroll = 15
+
     url = 'https://www.facebook.com/'
     init_browser(url)
     login(email,password)
-    url = 'https://www.facebook.com/groups/huongnghieptuvantuyensinh/'
+    # url = 'https://www.facebook.com/groups/huongnghieptuvantuyensinh/'
+    #url="https://www.facebook.com/groups/huongnghieptuvantuyensinh/"
+    # url="https://www.facebook.com/groups/HuongNghiepThongMinh/"
+    url="https://www.facebook.com/groups/533625860900876/"
     get_post(time_scroll,url)
     browser.close()
