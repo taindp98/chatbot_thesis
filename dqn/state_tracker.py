@@ -30,6 +30,7 @@ class StateTracker:
         self.max_round_num = constants['run']['max_round_num']
         self.none_state = np.zeros(self.get_state_size())
         self.reset()
+        self.list_agent_request = []
 
     def get_state_size(self):
         """Returns the state size of the state representation used by the agent."""
@@ -43,6 +44,7 @@ class StateTracker:
         # A list of the dialogues (dicts) by the agent and user so far in the conversation
         self.history = []
         self.round_num = 0
+        self.list_agent_request = []
 
     def print_history(self):
         """Helper function if you want to see the current history action by action."""
@@ -175,6 +177,9 @@ class StateTracker:
             else:
                 agent_action['inform_slots'][self.match_key] = 'no match available'
             self.current_informs[self.match_key] = agent_action['inform_slots'][self.match_key]
+                    ## dùng để detect request lặp lại
+        elif agent_action['intent'] == 'request':
+            self.list_agent_request.append(agent_action)
         agent_action.update({'round': self.round_num, 'speaker': 'Agent'})
         self.history.append(agent_action)
 

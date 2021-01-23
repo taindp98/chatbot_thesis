@@ -6,7 +6,8 @@ import pandas as pd
 + nên chọn ngành nào
 + review về ngành
 """
-path = 'data/'
+# path = 'data/'
+path = '/home/taindp/PycharmProjects/thesis/data'
 def catch_intent(mess):
     # input: câu nhập vào của người dùng
     # return: intent,probability,messcleaned

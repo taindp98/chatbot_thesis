@@ -10,7 +10,8 @@ import json
 from fastai.text import *
 import pickle
 # path = '/home/taindp/Database/intent/'
-path = 'data/'
+# path = 'data/'
+path = '/home/taindp/PycharmProjects/thesis/data/'
 def check_question(mess):
     # input: câu nhập vào người dùng
     # return: nếu là câu hỏi True
@@ -186,7 +187,8 @@ def check_shorted_entity(path_db_entity):
 
 def predict_fastai(mess):
     np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
-    model_path = 'intent/'
+    # model_path = 'intent/'
+    model_path = '/home/taindp/PycharmProjects/thesis/intent/'
     data_classify = load_data(model_path,'data_classify')
     # model = text_classifier_learner(data_classify, AWD_LSTM, drop_mult=0.6, metrics=[accuracy])
     model = text_classifier_learner(data_classify, AWD_LSTM, drop_mult=0.65, metrics=[accuracy])

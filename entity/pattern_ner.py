@@ -34,7 +34,7 @@ map_order_entity['career']=['major_name','subject','subject_group']
 
 # bổ sung intent là INFORM cho user_request:
 map_order_entity['not_intent']=['major_code', 'major_name', 'subject_group', 'point', 'type_edu', 'year', 'satisfy', 'subject', 'career', 'tuition']
-entity_path = 'data/db_entity_31dec.json'
+entity_path = '/home/taindp/PycharmProjects/thesis/data/db_entity_jan23.json'
 with open(entity_path,'r') as jsonfile:
     dict_entity = json.load(jsonfile)[0]
 
