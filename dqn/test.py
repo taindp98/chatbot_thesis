@@ -83,8 +83,11 @@ def test_run():
         done = False
         # Get initial state from state tracker
         state = state_tracker.get_state()
+        # print('state: {}'.format(state))
         while not done:
             # Agent takes action given state tracker's representation of dialogue
+            # print('dqn action {}'.format(dqn_agent.beh_model.predict(state)))
+            # print('rule action {}'.format(dqn_agent._rule_action()))
             agent_action_index, agent_action = dqn_agent.get_action(state)
             # Update state tracker with the agent's action
             state_tracker.update_state_agent(agent_action)

@@ -27,9 +27,9 @@ usersim_required_init_inform_keys = ['major_name']
 
 # Possible inform and request slots for the agent
 agent_inform_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year',usersim_default_key]
-	
-# agent_request_slots = ['major_name', 'type_edu', 'career', 'subject','tuition_one_credit', 'subject_group', 'satify', 'point','major_code','year']
-agent_request_slots = ['major_name', 'type_edu','subject','subject_group','point', 'year']
+
+agent_request_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year']
+# agent_request_slots = ['major_name', 'type_edu','subject','subject_group','point', 'year']
 
 
 # Possible actions for agent
@@ -49,8 +49,8 @@ for slot in agent_request_slots:
 # rule_requests = ['moviename', 'starttime', 'city', 'date', 'theater', 'numberofpeople']
 # rule_requests=['name_activity', 'type_activity', 'holder', 'time', 'city', 'district', 'ward', 'name_place', 'street','reward', 'contact', 'register', 'works', 'joiner']
 #rule_requests = ['major_code','major_name','type_edu','point','subject_group','year']
-rule_requests = ['major_name', 'type_edu','subject','subject_group','point', 'year']
-# rule_requests =['major_name', 'type_edu', 'career', 'subject','tuition_one_credit', 'subject_group', 'satify', 'point','major_code','year']
+# rule_requests = ['major_name', 'type_edu','subject','subject_group','point', 'year']
+rule_requests = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year']
 
 # rule_requests = ['name_activity', 'type_activity', 'holder', 'time', 'city', 'district', 'ward', 'name_place', 'street', 'reward', 'contact', 'register', 'works', 'joiner']
 # These are possible inform slot keys that cannot be used to query

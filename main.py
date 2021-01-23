@@ -54,13 +54,13 @@ if __name__ == '__main__':
     state_tracker = StateTracker(database, constants)
     dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
     done = False
-    mess = 'cho em hỏi em muốn  thi ngành bảo dưỡng công nghiệp thì nên tập trung học môn nào ạ'
-    # mess = 'cho em hỏi học điện tử sau này ra trường làm gì ạ'
+    # mess = 'cho em hỏi em muốn  thi ngành bảo dưỡng công nghiệp thì nên tập trung học môn nào ạ'
+    mess = 'cho em hỏi học phí ngành máy tính chất lượng cao có đắt không ạ'
     user_action,confirm_obj = (user_request(mess,state_tracker))
     # print(database)
 
-    # print(user_action)
-    # agent_action = get_agent_action(state_tracker, dqn_agent, user_action)
-    # print(agent_action)
-    # print(response_craft(agent_action, state_tracker,confirm_obj))
+    print(user_action)
+    agent_action = get_agent_action(state_tracker, dqn_agent, user_action)
+    print(agent_action)
+    print(response_craft(agent_action, state_tracker,confirm_obj))
 
