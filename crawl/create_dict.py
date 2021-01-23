@@ -1,6 +1,4 @@
 import json
-import nltk
-from nltk.tokenize.treebank import TreebankWordDetokenizer
 from pyvi import ViTokenizer
 import pandas as pd
 import csv

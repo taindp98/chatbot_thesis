@@ -144,19 +144,19 @@ def get_post(time_scroll,url):
                                 # print(txt.text)
                                 if txt.text != '':
                                     list_content.append(txt.text)
-
-                            dict_post['content'] = list_content
-                            with open(path_out, 'a') as jsonfile:
-                                dict2str = str(dict_post).replace(r"'",r'"')
-                                jsonfile.write(dict2str)
-                                jsonfile.write('\n')
+                            if len(list_content) > 0:
+                                dict_post['content'] = list_content
+                                with open(path_out, 'a') as jsonfile:
+                                    dict2str = str(dict_post).replace(r"'",r'"')
+                                    jsonfile.write(dict2str)
+                                    jsonfile.write('\n')
 
 
 
 if __name__== '__main__':
     email = '0387681482'
     password = '171@3012Hyvy'
-    time_scroll = 500
+    time_scroll = 100
     url = 'https://www.facebook.com/'
     init_browser(url)
     login(email,password)
