@@ -19,7 +19,6 @@ from response.default_response import response_to_user_free_style
 
 from bs4 import BeautifulSoup
 # from mongoengine import connect
-# StateTracker_Container = dict()
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017"
@@ -59,7 +58,7 @@ def get_new_id():
 
 def process_conversation_POST(state_tracker_id, message):
     state_tracker = None
-
+    print('tracker_id',state_tracker_id)
     if state_tracker_id in StateTracker_Container.keys():
         state_tracker = StateTracker_Container[state_tracker_id][0]
         confirm_obj = StateTracker_Container[state_tracker_id][1]
@@ -134,7 +133,7 @@ def post_api_cse_assistant():
         state_tracker_id = get_new_id()
     else:
         state_tracker_id = input_data["state_tracker_id"]
-    # print(StateTracker_Container)
+    print('StateTracker_Container',StateTracker_Container)
     K.clear_session()
     current_informs = 'null'
     agent_message , agent_action = process_conversation_POST(state_tracker_id, message)

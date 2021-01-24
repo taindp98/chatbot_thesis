@@ -36,7 +36,7 @@ if __name__ == "__main__":
     run_dict = constants['run']
     USE_USERSIM = run_dict['usersim']
     # NUM_EP_TEST = run_dict['num_ep_run']
-    NUM_EP_TEST = 100
+    NUM_EP_TEST = 1000
     MAX_ROUND_NUM = run_dict['max_round_num']
 
     # Load movie DB
@@ -83,7 +83,7 @@ def test_run():
         done = False
         # Get initial state from state tracker
         state = state_tracker.get_state()
-        # print('state: {}'.format(state))
+        # print('history',state_tracker.print_history())
         while not done:
             # Agent takes action given state tracker's representation of dialogue
             # print('dqn action {}'.format(dqn_agent.beh_model.predict(state)))
@@ -122,6 +122,5 @@ def episode_reset():
     state_tracker.update_state_user(user_action)
     # Finally, reset agent
     dqn_agent.reset()
-
 
 test_run()

@@ -16,6 +16,7 @@ def get_bot_response():
     api_url = 'http://0.0.0.0:6969/api/convers-manager'
     input_data = {}
     input_data['message'] = str(userText)
+    input_data['state_tracker_id'] = '1011'
     r = requests.post(url=api_url, json=input_data)
     chatbot_respose = r.json()
     mess_response = chatbot_respose['message'].replace('\n', r'').replace(r'"',r'')

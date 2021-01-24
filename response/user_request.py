@@ -50,19 +50,23 @@ def user_request(mess,state_tracker):
 
             if len(list(last_agent_action['request_slots'].keys())) > 0 or len(list(last_agent_action['inform_slots'].keys())) > 0:
                 final_intent = user_inform_key + '_inform'
+                # final_intent = user_inform_key
             else:
                 final_intent = 'not_intent'
             intent_catched = 'inform'
             user_action['intent'] = intent_catched
             user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess)
             user_action['request_slots'] = {}
-            list_map_key = ['major_name','point','type_edu']
+            user_action['list_match_obj'] = {}
+            list_map_key = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year']
             if user_inform_key in list_map_key:
                 for key in list_map_key:
                     if key ==  user_inform_key:
-                        user_action['list_match_obj'][0][key] = user_action['inform_slots'][user_inform_key]
+                        user_action['list_match_obj'][key] = user_action['inform_slots'][user_inform_key]
+                        # user_action['list_match_obj'][0][key] = user_action['inform_slots'][user_inform_key]
                     else:
-                        user_action['list_match_obj'][0][key] = ''
+                        user_action['list_match_obj'][key] = ''
+                        # user_action['list_match_obj'][0][key] = ''
 
         elif intent_catched == 'anything':
             # mac dinh de tranh crash server

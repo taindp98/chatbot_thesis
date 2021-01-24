@@ -126,15 +126,15 @@ REQUEST_REPEAT = [
 """
 INFORM = {}
 INFORM['major_code'] = [
-    'có phải bạn muốn hỏi về *major_code_instance* không?',
+    '*major_code_instance* là mã của ngành bạn cần tìm',
     '*major_code_instance* có phải là *major_code* bạn muốn tìm không?'
 ]
 INFORM['major_name'] = [
-    'có phải bạn muốn hỏi về *major_name_instance* không?',
+    'ngành *major_name_instance* đó bạn',
     '*major_name_instance* có phải là *major_name* bạn muốn tìm không?'
 ]
 INFORM['type_edu'] = [
-    'có phải bạn muốn hỏi về *type_edu_instance* không?',
+    'có phải bạn muốn hỏi về chương trình *type_edu_instance* không?',
     '*type_edu_instance* có phải là *type_edu* bạn muốn tìm không?'
 ]
 INFORM['point'] = [
@@ -150,16 +150,16 @@ INFORM['year'] = [
 ]
 
 INFORM['career'] = [
-    '*career_instance* của ngành bạn cần tìm'
+    '*career_instance* là cơ hội nghề nghiệp của ngành bạn cần tìm'
 ]
 INFORM['subject'] = [
     '*subject_instance* thuộc tổ hợp khối thi cho ngành bạn cần tìm'
 ]
 INFORM['tuition'] = [
-    '*tuition_instance* của ngành bạn cần tìm'
+    '*tuition_instance* là mức học phí trên một tín chỉ của ngành bạn cần tìm'
 ]
 INFORM['satisfy'] = [
-    '*career_instance* của ngành bạn cần tìm'
+    '*satisfy_instance* là mức độ hài lòng của sinh viên đang theo học ngành bạn cần tìm'
 ]
 INFORM['major'] = [
     'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *major_instance*'

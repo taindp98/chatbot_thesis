@@ -72,6 +72,7 @@ class StateTracker:
             return self.none_state
 
         user_action = self.history[-1]
+        # print('user_action_history',user_action)
         db_results_dict = self.db_helper.get_db_results_for_slots(self.current_informs)
         
         last_agent_action = self.history[-2] if len(self.history) > 1 else None

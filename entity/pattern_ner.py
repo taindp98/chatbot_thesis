@@ -34,6 +34,18 @@ map_order_entity['career']=['major_name','subject','subject_group']
 
 # bổ sung intent là INFORM cho user_request:
 map_order_entity['not_intent']=['major_code', 'major_name', 'subject_group', 'point', 'type_edu', 'year', 'satisfy', 'subject', 'career', 'tuition']
+map_order_entity['major_name_inform'] = ['major_name']
+map_order_entity['major_code_inform'] = ['major_code']
+map_order_entity['subject_group_inform'] = ['subject_group']
+map_order_entity['point_inform'] = ['point']
+map_order_entity['type_edu_inform'] = ['type_edu']
+map_order_entity['year_inform'] = ['year']
+map_order_entity['satisfy_inform'] = ['satisfy']
+map_order_entity['subject_inform'] = ['subject']
+map_order_entity['career_inform'] = ['career']
+map_order_entity['tuition_inform'] = ['tuition']
+
+
 entity_path = '/home/taindp/PycharmProjects/thesis/data/db_entity_jan23.json'
 with open(entity_path,'r') as jsonfile:
     dict_entity = json.load(jsonfile)[0]
@@ -45,6 +57,7 @@ def find_all_entity(intent,input_sentence):
     normalized_input_sentence = convert_unicode(input_sentence)
     result_entity_dict={}
     list_order_entity_name=map_order_entity[intent]
+    # print(list_order_entity_name)
     map_entity_name_to_threshold={}
     for entity_name in list_order_entity_name:
         # tìm chiều dài ngắn nhất cho từng entity
@@ -74,10 +87,10 @@ def find_all_entity(intent,input_sentence):
         # threshold wordnumber
         if entity_name in ['type_edu', 'career', 'subject','tuition', 'subject_group','point','major_code','year']:
             map_entity_name_to_threshold[entity_name]=1
-        elif entity_name in ['major_name']:
-            map_entity_name_to_threshold[entity_name]=2
         else:
-            map_entity_name_to_threshold[entity_name]=4
+            map_entity_name_to_threshold[entity_name]=2
+        # else:
+            # map_entity_name_to_threshold[entity_name]=4
 
     ordered_real_dict = OrderedDict()
     for entity_name in map_order_entity[intent]:
@@ -85,12 +98,12 @@ def find_all_entity(intent,input_sentence):
         ordered_real_dict[entity_name] = dict_entity[entity_name]
     for entity_name, list_entity in ordered_real_dict.items():
         # phân biệt cho từng order
-        if entity_name == "major_name":
+        if entity_name in ["major_name",'type_edu']:
             matching_threshold = 0.2
-        elif entity_name == 'type_edu':
-            matching_threshold = 0.2
+        elif entity_name == 'subject':
+            matching_threshold = 0.55
         else:
-            matching_threshold = 0.5
+            matching_threshold = 0.3
         catch_entity_threshold_loop = 0
         while True:
             if catch_entity_threshold_loop > 3:
@@ -140,5 +153,5 @@ def find_all_entity(intent,input_sentence):
 
 # mess = 'cho em hỏi điểm ngành hóa học năm nay có tầm 25 điểm không ạ'
 # intent_catched, prob,mess_clean = catch_intent(mess)
-# entity_dict,confirm = find_all_entity(intent_catched,mess)
-# print(confirm)
+# entity_dict,confirm = find_all_entity('tuition_inform','đại học chính quy đại trà')
+# print(entity_dict)
