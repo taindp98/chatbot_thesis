@@ -62,11 +62,11 @@ def user_request(mess,state_tracker):
             if user_inform_key in list_map_key:
                 for key in list_map_key:
                     if key ==  user_inform_key:
-                        user_action['list_match_obj'][key] = user_action['inform_slots'][user_inform_key]
-                        # user_action['list_match_obj'][0][key] = user_action['inform_slots'][user_inform_key]
+                        # user_action['list_match_obj'][key] = user_action['inform_slots'][user_inform_key]
+                        user_action['list_match_obj'][0][key] = user_action['inform_slots'][user_inform_key]
                     else:
-                        user_action['list_match_obj'][key] = ''
-                        # user_action['list_match_obj'][0][key] = ''
+                        # user_action['list_match_obj'][key] = ''
+                        user_action['list_match_obj'][0][key] = ''
 
         elif intent_catched == 'anything':
             # mac dinh de tranh crash server

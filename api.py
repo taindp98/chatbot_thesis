@@ -1,5 +1,6 @@
 import flask
 import io
+import sys
 import pymongo
 from flask_pymongo import PyMongo
 from flask import Flask, request,render_template,jsonify
@@ -82,11 +83,17 @@ def process_conversation_POST(state_tracker_id, message):
     if user_action['intent'] not in ["hello","other","done"] :
         dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
         agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
+        print('========================')
+        print('agent action',agent_act)
+        print('========================')
         StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
         agent_message = response_craft(agent_act, state_tracker,confirm_obj)
     else:
         # to prevent key error
         agent_act = {'intent':user_action['intent'],'request_slots':[],'inform_slots':[]}
+        print('========================')
+        print('agent action',agent_act)
+        print('========================')
         agent_message = random.choice(response_to_user_free_style[user_action['intent']])
         #nếu là done thì reset và cho confirm về None
         if user_action['intent'] == "done":
@@ -221,3 +228,4 @@ def post_api_classify_message():
 if __name__ == '__main__':
     # app.run()
     app.run(host='0.0.0.0',port=6969,debug=True)
+

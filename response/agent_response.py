@@ -36,7 +36,7 @@ MATCH_FOUND = {
     'not_found': [
         "Mình không tìm thấy ngành nào chứa thông tin *found_slot* mà bạn cần, bạn xem lại các thông tin đã cung cấp dưới đây và điều chỉnh lại giúp mình nhé!"
     ],
-    'found_activity' :[
+    'found_major' :[
         "Dưới đây là thông tin bạn cần tìm."
     ]
 }
@@ -283,7 +283,7 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
     elif agent_intent == "match_found":
         ########### TO DO : lấy list_match_obj ra inform cho user (dạng câu)
         # list_match_obj = agent_action['list_match_obj']
-        assert len(state_tracker.current_request_slots) > 0
+        # assert len(state_tracker.current_request_slots) > 0
         inform_slot = state_tracker.current_request_slots[0]
         if agent_action['inform_slots']['activity'] == "no match available":
             sentence_pattern = random.choice(MATCH_FOUND['not_found'])
@@ -333,18 +333,16 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
                     # inform_value = "không có thông tin này"
                     sentence = EMPTY_SLOT[0].replace("*request_slot*",AGENT_INFORM_OBJECT[inform_slot])
             else:
-                sentence = random.choice(MATCH_FOUND['found_activity'])
+                sentence = random.choice(MATCH_FOUND['found_major'])
             response_obj = ''
-            list_obj_map_match = []
-            if list_obj_map_match != []:
-                response_obj += "Cụ thể các thông tin về ngành này là:\n"
-                for obj_map_match in list_obj_map_match:
-                    response_obj += "************************************************* \n"
-                    for key in list_map_key:
-                        response_obj += "+ {0} : {1} \n".format(AGENT_INFORM_OBJECT[key], ', '.join(obj_map_match[key]))
-
-
-            # print(sentence)
+            # list_obj_map_match = []
+            # if list_match_obj != []:
+            #     response_obj += "Cụ thể các thông tin về ngành này là:\n"
+            #     for obj_map_match in list_match_obj:
+            #         response_obj += "************************************************* \n"
+            #         for key in list_map_key:
+            #             response_obj += "+ {0} : {1} \n".format(AGENT_INFORM_OBJECT[key], ', '.join(obj_map_match[key]))
+            # # print(sentence)
             sentence += "\n" + response_obj + response_match
             print("-----------------------------match sentence")
             # print(sentence)

@@ -1,8 +1,9 @@
 from dqn.db_query import DBQuery
 import numpy as np
 from dqn.utils import convert_list_to_dict
-from dqn.dialogue_config import all_intents, all_slots, usersim_default_key
+from dqn.dialogue_config import all_intents, all_slots, usersim_default_key,agent_inform_slots,agent_request_slots
 import copy
+import time
 
 
 class StateTracker:
@@ -30,7 +31,6 @@ class StateTracker:
         self.max_round_num = constants['run']['max_round_num']
         self.none_state = np.zeros(self.get_state_size())
         self.reset()
-        self.list_agent_request = []
 
     def get_state_size(self):
         """Returns the state size of the state representation used by the agent."""
@@ -44,7 +44,6 @@ class StateTracker:
         # A list of the dialogues (dicts) by the agent and user so far in the conversation
         self.history = []
         self.round_num = 0
-        self.list_agent_request = []
 
     def print_history(self):
         """Helper function if you want to see the current history action by action."""
@@ -72,9 +71,7 @@ class StateTracker:
             return self.none_state
 
         user_action = self.history[-1]
-        # print('user_action_history',user_action)
         db_results_dict = self.db_helper.get_db_results_for_slots(self.current_informs)
-        
         last_agent_action = self.history[-2] if len(self.history) > 1 else None
 
         # Create one-hot of intents to represent the current user action
@@ -103,19 +100,18 @@ class StateTracker:
 
         # Encode last agent inform slots
         agent_inform_slots_rep = np.zeros((self.num_slots,))
+        # print(last_agent_action)
         if last_agent_action:
-            # print(last_agent_action['inform_slots'].keys())
-            # print(self.slots_dict)
-            # print(self.num_slots)
             for key in last_agent_action['inform_slots'].keys():
-                if key in self.slots_dict.keys():
+                if key in agent_inform_slots:
                     agent_inform_slots_rep[self.slots_dict[key]] = 1.0
 
         # Encode last agent request slots
         agent_request_slots_rep = np.zeros((self.num_slots,))
         if last_agent_action:
             for key in last_agent_action['request_slots'].keys():
-                agent_request_slots_rep[self.slots_dict[key]] = 1.0
+                if key in agent_request_slots:
+                    agent_request_slots_rep[self.slots_dict[key]] = 1.0
 
         # Value representation of the round num
         turn_rep = np.zeros((1,)) + self.round_num / 5.
@@ -140,7 +136,9 @@ class StateTracker:
             [user_act_rep, user_inform_slots_rep, user_request_slots_rep, agent_act_rep, agent_inform_slots_rep,
              agent_request_slots_rep, current_slots_rep, turn_rep, turn_onehot_rep, kb_binary_rep,
              kb_count_rep]).flatten()
-
+        # print("---------------------------------------state")
+        # print(state_representation)
+        # time.sleep(0.5)
         return state_representation
 
     def update_state_agent(self, agent_action):
@@ -178,9 +176,6 @@ class StateTracker:
             else:
                 agent_action['inform_slots'][self.match_key] = 'no match available'
             self.current_informs[self.match_key] = agent_action['inform_slots'][self.match_key]
-                    ## dùng để detect request lặp lại
-        elif agent_action['intent'] == 'request':
-            self.list_agent_request.append(agent_action)
         agent_action.update({'round': self.round_num, 'speaker': 'Agent'})
         self.history.append(agent_action)
 
