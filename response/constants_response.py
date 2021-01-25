@@ -1,201 +1,212 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# from sklearn.externals import joblib
-import numpy as np
-from sklearn import preprocessing
-from sklearn.feature_extraction.text import TfidfVectorizer
-from fastai.text import *
-import torch
-import numpy as np
-# from sklearn.externals import joblib
-from sklearn import preprocessing
-import joblib
-import os.path
-from collections import OrderedDict
-
-current_path = os.path.abspath(os.path.dirname(__file__))
-TAGS = OrderedDict()
-TAGS.update([('normal', 'O'),
-             ('addr_street', 'STREET'),
-             ('addr_district', 'DISTRICT'),
-             ('addr_city', 'CITY'),
-             ('addr_ward', 'WARD'),
-             ('position', 'POSITION'),
-             ('area', 'AREA'),
-             ('price', 'PRICE'),
-             ('transaction_type', 'TRANSACTION_TYPE'),
-             ('realestate_type', 'REAL_ESTATE_TYPE'),
-             ('legal', 'LEGAL'),
-             ('potential', 'POTENTIAL'),
-             ('surrounding', 'SURROUNDING_PLACE'),
-             ('surrounding_characteristics', 'SURROUNDING_CHARACTERISTIC'),
-             ('surrounding_name', 'SURROUNDING_NAME'),
-             ('interior_floor', 'FLOOR'),
-             ('interior_room', 'ROOM'),
-             ('orientation', 'ORIENTATION'),
-             ('project', 'PROJECT')])
-SPLIT_TOKEN = ' '
-B_TOKEN = 'B-{}'
-I_TOKEN = 'I-{}'
-WORD_TAG_SEPARATOR = '\t'
-CHARACTER_SEPARATOR = '|'
-ALL_TEXTS = 'all_text.txt'
-WORD_VEC_PATH = './output/word_vec.bin'
-REVERSE_TAGS = {v: k for k, v in TAGS.items()}
-
-def tags2classes(tags):
-    i = 0
-    result = {}
-    for value in tags:
-        if value == TAGS['normal']:
-            result[value] = str(i)
-            i += 1
-        else:
-            result[B_TOKEN.format(value)] = str(i)
-            result[I_TOKEN.format(value)] = str(i+1)
-            i += 2
-    return result
-
-
-CLASSES = tags2classes(TAGS.values())
-NUM_CLASSES = len(CLASSES)
-
-#MODEL LANGUAGE, CLASSIFIER
-CONST_THRESHOLD=0.4
-list_label=['contact','register','activity','work','joiner']
-le = preprocessing.LabelEncoder()
-y = le.fit_transform(list_label)
-vocab = torch.load(os.path.join(current_path,'saved_model/new_vocab.h5'))
-lm = get_language_model(AWD_LSTM, 27498)
-lm.eval()
-lm.load_state_dict(torch.load(os.path.join(current_path,"saved_model/model_cpu_add_new_vocab.pth")))
-clf = joblib.load(os.path.join(current_path,'saved_model/lm_kernel_linear_svm_classifier_final.pkl'))
-emb_sz=lm[0].emb_sz
-
-#INTENT PATTERN MATCHING SIGNAL
-list_name_place_notification=["nơi","tại đâu","địa điểm diễn ra","tại chỗ nào","ở đâu","chỗ nào","tại đâu","khu nào","địa điểm của","địa điểm nào","chỗ diễn ra","chỗ đâu","khu tổ chức","là ở","là tại","là nơi","là tập trung tại","là diễn ra tại","là diễn ra ở"]
-list_address_notification=["ấp nào","phường nào","xã nào","quận nào","huyện nào","thành phố nào","tỉnh nào","đường nào","đường gì","số mấy","địa chỉ nào","địa chỉ","tên đường","số nhà","phường mấy","quận mấy","số mấy"]
-list_type_activity_notification=["loại hoạt động","loại nào","loại gì","kiểu hoạt động","kiểu gì","kiểu nào"]
-list_name_activity_notification=["tên gì","tên là gì","tên hoạt động là gì","tên hoạt động"] #check lai
-list_time_notification=["là tháng","là ngày","là vào","tháng mấy","thứ mấy","là diễn ra vào","là diễn ra lúc","ngày mấy","khi nào","lúc nào","thời gian nào","ngày nào","ngày bao nhiêu","giờ nào","giờ bao nhiêu","mấy giờ","mấy h ","thời gian"]
-list_holder_notification=["ban tổ chức","btc","ai tổ chức","đơn vị nào tổ chức","đơn vị tổ chức","trường nào tổ chức","clb nào tổ chức","câu lạc bộ nào tổ chức","người tổ chức","tổ chức hả","tổ chức phải không","tổ chức đúng không"]
-list_reward_notification=["có được drl",'có được đrl','có được điểm rèn luyện',"được thứ gì","bao nhiêu tiền","thưởng cái gì","được lợi gì","mấy ngày ctxh","mấy điểm rèn luyện","mấy drl","mấy đrl","mấy ngày công tác xã hội","bao nhiêu ngày ctxh","bao nhiêu ctxh","bao nhiêu điểm rèn luyện","bao nhiêu drl","bao nhiêu đrl","bao nhiêu ngày công tác xã hội","có ích gì","điểm rèn luyện","được công tác xã hội","được ctxh","được thưởng gì","được gì","được cái gì","có lợi gì","lợi ích","phần thưởng","được quà gì","tặng gì","được bao nhiêu","số tiền","có được ctxh","có được ngày công tác xã hội","có được ngày ctxh","có được tặng","có được thưởng","có được cho","là được ctxh","là được ngày công tác xã hội","là được ngày ctxh","là được tặng","là được thưởng","là được cho"]
-
-
-
-#INTENT MESSAGE SIGNALS
-list_question_signal = [" hả ","chứ","có biết","phải không","đâu","là sao","nào","khi nào","nơi nào","không ạ","k ạ","là sao","nữa vậy","chưa á","ko ạ","sao ạ","chưa ạ","sao vậy","không vậy","k vậy","ko vậy","chưa vậy","thế"," nhỉ "," ai"," ai ","ở đâu","ở mô","đi đâu","bao giờ","bao lâu","khi nào","lúc nào","hồi nào","vì sao","tại sao","thì sao","làm sao","như nào","thế nào","cái chi","gì","bao nhiêu","mấy","?"," hả ","được không","được k","được ko","vậy ạ","nào vậy","nào thế","nữa không","đúng không","đúng k","đúng ko","nữa k","nữa ko","nào ấy","nào ạ"]
-list_question_signal_last = ["vậy","chưa","không","sao","à","hả","nhỉ","thế"]
-list_object = ["bạn","cậu","ad","anh","chị","admin","em","mày","bot"]
-list_subject = ["mình","tôi","tớ","tao","tui","anh","em"]
-list_verb_want = ["hỏi","biết","xin"]
-list_verb_have = ["có","được"]
-
-
-#intent not want information
-list_hello_notification = [" hi ","hello","chào","helo"]
-list_done_notification = ["bye","tạm biệt","bai","gặp lại"]
-list_thanks_notification = ["cảm ơn","tks","thanks",'thank']
-list_anything_notification = ["sao cũng được","gì cũng được","anything","s cũng được",\
-    'j cũng được',"không biết","k biết","ko biết","không nhớ","ko nhớ","k nhớ","không rõ",\
-        "k rõ","ko rõ","cũng được","cũng ok","cũng không sao","cũng dc","cũng k sao","cũng ko sao"]
-
-
-#map
-list_map_key = ["works", "name_place", "address", "time"]
-
-
-
-#indicator
-list_joiner_indicator = ["có được tham gia","có được tham dự","có được đi",\
-                        "được tham gia","được tham dự","được đi","tham gia","tham dự"]
-
-map_entity_name_to_list_noti_anything = {
-    'time':['thời gian',"lúc"],
-    'name_activity':['tên hoạt động',"tên"],
-    'type_activity':["loại hoạt động","loại"],
-    'holder':["tổ chức","đơn vị"],
-    'name_place':["địa điểm","chỗ","nơi"],
-    'address':["địa chỉ","đường","quận","phường"],
-    'contact':["liên hệ","liên lạc"],
-    'works':["việc","làm"],
-    'register':["đăng ký","đăng kí"],
-    'reward':["thưởng","lợi ích"],
-    'joiner':["đối tượng","ai tham gia","người nào tham gia"]
-}
-
-
-#dictionary
-with open('real_dict_2000_new_only_delete_question_noti_new_and_space_newest.json','r') as real_dict_file:
-    real_dict = json.load(real_dict_file)
-    real_dict_file.close()
-
-with open('list_constants.json','r') as list_file:
-    list_file_obj = json.load(list_file)
-    list_extra_word = list_file_obj['list_extra_word']
-
-    list_pattern_time = list_file_obj['list_pattern_time']
-    list_pattern_reward = list_file_obj['list_pattern_reward']
-
-
-#works -> []
-map_intent_to_list_order_entity_name = {
-    'time':['name_activity','type_activity', 'time','name_place', \
-                            'holder', 'address'],
-    'name_activity':['name_activity','type_activity', 'time', 'name_place', \
-                            'holder', 'address','reward','works'],
-    'type_activity':['name_activity','type_activity','time', 'name_place',  \
-                            'holder', 'address', 'works'\
-                            , 'reward'],
-    'holder':['name_activity', 'type_activity','time', 'name_place', \
-                            'holder', 'address'],
-    'name_place':['name_activity','type_activity','time',  'name_place','holder', \
-                             'address'],
-    'address':['address', 'name_activity','type_activity','time', 'name_place', \
-                            'holder'],
-    'contact':['contact','name_activity', 'type_activity','time', 'name_place',  \
-                            'holder', 'address'],
-    'works':['name_activity','type_activity','time', 'name_place', 'works', \
-                            'holder', 'address'],
-    'register':['name_activity','type_activity','time', 'name_place',  \
-                            'holder', 'address','register'],
-    'reward':[ 'name_activity','type_activity','name_place','reward','time', \
-                            'holder', 'address'],
-    'joiner':['name_activity', 'type_activity','time','name_place','joiner', \
-                            'holder', 'address'\
-                            ],\
-    'activity':['name_activity', 'type_activity','time','name_place', \
-                            'reward','holder', 'address'\
-                            ],\
-    'not intent':['name_activity','type_activity','time', 'name_place', \
-                            'holder', 'address','contact','register','reward','joiner','works'\
-                            ],
-    'time_inform':['time'],
-    'name_activity_inform':['name_activity'],
-    'type_activity_inform':['type_activity'],
-    'holder_inform':['holder'],
-    'name_place_inform':['name_place'],
-    'address_inform':['address'],
-    'contact_inform':['contact'],
-    'works_inform':['works'],
-    'register_inform':['register'],
-    'reward_inform':['reward'],
-    'joiner_inform':['joiner']
-}
-
-response_to_user_free_style = {
-    'hello':["Chào bạn ^^ ! Chúc bạn một ngày tốt lành nè .",\
-            "OK chào bạn nè ^^. Cần mình hỗ trợ gì nè ? :3"
-        ],
-    'other':["Huhu xin lỗi mình không hiểu ý bạn lắm :'( :'( ",\
-            "Xin lỗi bạn, mình không hiểu ý bạn lắm nè ^^"
-        ],
-    'done':[
-        "OK chào tạm biệt nha ^^ ! Rất vui được giúp bạn nè ",
-        "Okie bái bai bạn nè ^^ ! Rất vui được giúp bạn nè ",
-        "Bye bye nha ! :D Rất vui được giúp bạn nè "
+MATCH_FOUND = {
+    'found': [
+        "Thông tin *found_slot* chung bạn cần: *found_slot_instance*, bên dưới là ngành cụ thể chứa thông tin đó và một số ngành khác cũng thỏa điều kiện bạn đưa ra"
+    ],
+    'not_found': [
+        "Mình không tìm thấy ngành nào chứa thông tin *found_slot* mà bạn cần, bạn xem lại các thông tin đã cung cấp dưới đây và điều chỉnh lại giúp mình nhé!"
+    ],
+    'found_major' :[
+        "Dưới đây là thông tin bạn cần tìm."
     ]
 }
-if __name__ == '__main__':
-    print(CLASSES)
+REQUEST = {}
+"""
+user_known = ['major_name', 'type_edu','subject','subject_group','point', 'year']
+# sửa lại dialogue train
+'major_code',
+'major_name',
+'type_edu',
+'point',
+'subject_group',
+'university_code',
+'university_name',
+'year',
+
+
+
+'career',
+'company',
+'subject',
+'tuition_one_credit',
+'duration_std',
+'credits',
+'foreign_lang_min'
+"""
+###############################################################################################################
+REQUEST['major_name'] = [
+    'Bạn định hỏi về *major_name* nào? (khoa học máy tính, điện điện tử, cơ khí, ...)',
+    '*major_name* là gì vậy bạn?',
+    'Bạn cần thông tin về *major_name* nào?'
+]
+REQUEST['type_edu'] = [
+    '*type_edu* bạn cần tìm là gì vậy ạ?',
+    'Bạn muốn tìm thông tin về *type_edu* nào?'
+]
+REQUEST['point'] = [
+    'Bạn muốn tra cứu mức *point* thế nào ạ?',
+    'Bạn muốn tìm ngành với *point* tầm bao nhiêu ạ?',
+    'Cho mình xin thêm thông tin về *point* mong muốn của bạn được không?'
+]
+REQUEST['subject_group'] = [
+    'Bạn muốn tra cứu *subject_group* nào bạn?',
+    'Cụ thể là *subject_group* nào vậy bạn?',
+    'Mời bạn cung cấp thông tin *subject_group* '
+]
+
+REQUEST['subject'] = [
+    'Bạn muốn tra cứu *subject* nào bạn?',
+    'Cụ thể là *subject* nào vậy bạn?',
+    'Mời bạn cung cấp thông tin *subject* '
+]
+
+REQUEST['year'] = [
+    'Bạn cho mình xin *year* cụ thể bạn muốn tìm nha!',
+    '*year* là bao nhiêu vậy bạn?'
+]
+
+REQUEST_REPEAT = [
+    'Thông tin *request_key* bạn nhập vào chưa rõ ràng, bạn cung cấp lại giúp mình thông tin này nhé! ',
+    'Rất tiếc, thông tin *request_key* bạn nhập vào mình vẫn chưa rõ, bạn vui lòng cung cấp lại thông tin này giúp mình nhé!',
+    'Bạn cung cấp lại thông tin *request_key* giúp mình với nhé!'
+]
+################################################################################
+"""
+# sửa lại dialogue train
+'major_code',
+'major_name',
+'type_edu',
+'point',
+'subject_group',
+'university_code',
+'university_name',
+'year',
+'typical_group',
+
+
+'rate',
+'career',
+'company',
+'subject',
+'tuition_one_credit',
+'tuition_avg_one_sem',
+'duration_std',
+'credits',
+'foreign_lang_min'
+"""
+INFORM = {}
+INFORM['major_code'] = [
+    '*major_code_instance* là mã của ngành bạn cần tìm',
+    '*major_code_instance* có phải là *major_code* bạn muốn tìm không?'
+]
+INFORM['major_name'] = [
+    'ngành *major_name_instance* đó bạn',
+    '*major_name_instance* có phải là *major_name* bạn muốn tìm không?'
+]
+INFORM['type_edu'] = [
+    'có phải bạn muốn hỏi về chương trình *type_edu_instance* không?',
+    '*type_edu_instance* có phải là *type_edu* bạn muốn tìm không?'
+]
+INFORM['point'] = [
+    '*point_instance* điểm đó bạn'
+]
+INFORM['subject_group'] = [
+    'có phải bạn muốn hỏi về *subject_group_instance* không?',
+    '*subject_group_instance* có phải là *subject_group* bạn muốn tìm không?'
+]
+
+INFORM['year'] = [
+    'năm *year_instance* đó bạn'
+]
+
+INFORM['career'] = [
+    '*career_instance* là cơ hội nghề nghiệp của ngành bạn cần tìm'
+]
+INFORM['subject'] = [
+    '*subject_instance* thuộc tổ hợp khối thi cho ngành bạn cần tìm'
+]
+INFORM['tuition'] = [
+    '*tuition_instance* là mức học phí trên một tín chỉ của ngành bạn cần tìm'
+]
+INFORM['satisfy'] = [
+    '*satisfy_instance* là mức độ hài lòng của sinh viên đang theo học ngành bạn cần tìm'
+]
+INFORM['major'] = [
+    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *major_instance*'
+]
+"""
+# sửa lại dialogue train
+'major_code',
+'major_name',
+'type_edu',
+'point',
+'subject_group',
+'university_code',
+'university_name',
+'year',
+'typical_group'
+"""
+user_known = ['major_name', 'type_edu','subject','subject_group','point', 'year']
+AGENT_REQUEST_OBJECT = {
+    "major_name": "tên ngành",
+    "type_edu": "chương trình đào tạo",
+    "point": "điểm chuẩn",
+    "subject_group": "tổ hợp khối",
+    "subject": "môn thi",
+    "year":"năm",
+}
+"""
+# sửa lại dialogue train
+'major_code',
+'major_name',
+'type_edu',
+'point',
+'subject_group',
+'university_code',
+'university_name',
+'year',
+'typical_group',
+
+
+'rate',
+'career',
+'company',
+'subject',
+'tuition_one_credit',
+'tuition_avg_one_sem',
+'duration_std',
+'credits',
+'foreign_lang_min'
+"""
+AGENT_INFORM_OBJECT = {
+    "major_code": "mã ngành",
+    "major_name": "tên ngành",
+    "type_edu": "chương trình đào tạo",
+    "point": "điểm chuẩn",
+    "subject_group": "khối thi",
+    "year":"năm",
+    "career": "cơ hội nghề nghiệp",
+    "subject": "môn thi",
+    "tuition": "giá học phí một tín chỉ",
+    "satisfy": "sự hài lòng"
+}
+list_map_key = ["major_name", "point", "subject_group","year"]
+GREETING = [
+    'Xin chào! Mình là BK Assistant. Mình có thể giúp gì được bạn?',
+    'Hi! BK Assistant có thể giúp gì được bạn đây?'
+]
+DONE = [
+    'Cảm ơn bạn, hy vọng bạn hài lòng với trải nghiệm vừa rồi! Bye ',
+    'Rất vui được tư vấn cho bạn! Chào bạn nhé!',
+    'Hy vọng bạn hài lòng với những gì mình tư vấn. Chào bạn!'
+]
+DONT_UNDERSTAND = [
+    'Xin lỗi, mình không hiểu. Bạn nói cách khác dễ hiểu hơn được không?',
+    'Mình không hiểu ý bạn lắm'
+]
+
+NOT_FOUND = [
+    'Mình không tìm thấy ngành nào thỏa mãn các thông tin bạn đã cung cấp, vui lòng điều chỉnh lại giúp mình nhé!'
+]
+EMPTY_SLOT = [
+    'Thông tin về ngành thỏa mãn điều kiện của bạn nhưng nó không đề cập đến thông tin *request_slot*'
+]
