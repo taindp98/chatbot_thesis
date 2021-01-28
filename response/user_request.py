@@ -1,6 +1,7 @@
 from utils import *
 from intent.intent_regconize import *
 from entity.pattern_ner import *
+from response.constants_response import *
 """
 LIST INTENT PATTERN MATCHING
 'major_code',
@@ -58,7 +59,7 @@ def user_request(mess,state_tracker):
             user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess)
             user_action['request_slots'] = {}
             user_action['list_match_obj'] = {}
-            list_map_key = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year']
+            # list_map_key = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year']
             if user_inform_key in list_map_key:
                 for key in list_map_key:
                     if key ==  user_inform_key:
