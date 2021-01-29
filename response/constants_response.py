@@ -145,7 +145,7 @@ INFORM['major'] = [
 'year',
 'typical_group'
 """
-user_known = ['major_name', 'type_edu','subject','subject_group','point', 'year']
+user_known = ['major_name', 'type_edu','subject','subject_group', 'year']
 AGENT_REQUEST_OBJECT = {
     "major_name": "tên ngành",
     "type_edu": "chương trình đào tạo",
