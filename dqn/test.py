@@ -36,7 +36,7 @@ if __name__ == "__main__":
     run_dict = constants['run']
     USE_USERSIM = run_dict['usersim']
     # NUM_EP_TEST = run_dict['num_ep_run']
-    NUM_EP_TEST = 1
+    NUM_EP_TEST = 100
     MAX_ROUND_NUM = run_dict['max_round_num']
 
     # Load movie DB

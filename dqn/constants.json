@@ -1,8 +1,8 @@
 {
   "db_file_paths": {
-    "database": "/home/taindp/PycharmProjects/thesis/data/db_hcmut_600.json",
+    "database": "/home/taindp/PycharmProjects/thesis/data/db_hcmut_1000.json",
     "dict": "/home/taindp/PycharmProjects/thesis/data/db_entity_jan23.json",
-    "user_goals": "/home/taindp/PycharmProjects/thesis/data/goal_hcmut_600.json"
+    "user_goals": "/home/taindp/PycharmProjects/thesis/data/goal_hcmut_1000.json"
   },
   "run": {
     "usersim": true,
@@ -14,7 +14,7 @@
   },
   "agent": {
     "save_weights_file_path": "",
-    "load_weights_file_path": "/home/taindp/PycharmProjects/thesis/dqn/weight/27_01_2021_40000_100_10.h5",
+    "load_weights_file_path": "/home/taindp/PycharmProjects/thesis/dqn/weight/29_01_2021_25000_100_10.h5",
     "vanilla": true,
     "learning_rate": 5e-4,
     "batch_size": 64,
