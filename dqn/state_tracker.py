@@ -31,6 +31,7 @@ class StateTracker:
         self.max_round_num = constants['run']['max_round_num']
         self.none_state = np.zeros(self.get_state_size())
         self.reset()
+        self.current_request_slots = []
 
     def get_state_size(self):
         """Returns the state size of the state representation used by the agent."""
@@ -44,6 +45,8 @@ class StateTracker:
         # A list of the dialogues (dicts) by the agent and user so far in the conversation
         self.history = []
         self.round_num = 0
+        self.current_request_slots = []
+
 
     def print_history(self):
         """Helper function if you want to see the current history action by action."""
@@ -86,8 +89,11 @@ class StateTracker:
 
         # Create bag of request slots representation to represent the current user action
         user_request_slots_rep = np.zeros((self.num_slots,))
-        for key in user_action['request_slots'].keys():
+        for key in self.current_request_slots:
             user_request_slots_rep[self.slots_dict[key]] = 1.0
+
+        # for key in user_action['request_slots'].keys():
+        #     user_request_slots_rep[self.slots_dict[key]] = 1.0
 
         # Create bag of filled_in slots based on the current_slots
         current_slots_rep = np.zeros((self.num_slots,))
@@ -195,6 +201,10 @@ class StateTracker:
 
         for key, value in user_action['inform_slots'].items():
             self.current_informs[key] = value
+
+        for key, value in user_action['request_slots'].items():
+            if key not in self.current_request_slots:
+                self.current_request_slots.append(key)
         user_action.update({'round': self.round_num, 'speaker': 'User'})
         self.history.append(user_action)
         self.round_num += 1

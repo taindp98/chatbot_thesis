@@ -46,35 +46,26 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
     elif agent_intent == "done":
         return random.choice(DONE)
     elif agent_intent == "match_found":
-        ########### TO DO : lấy list_match_obj ra inform cho user (dạng câu)
-        # list_match_obj = agent_action['list_match_obj']
-        # assert len(state_tracker.current_request_slots) > 0
+        print('>'*50)
+        print('match_found')
         inform_slot = state_tracker.current_request_slots[0]
-        if agent_action['inform_slots']['activity'] == "no match available":
+        print('inf_slot',inform_slot)
+        if agent_action['inform_slots']['major'] == "no match available":
             sentence_pattern = random.choice(MATCH_FOUND['not_found'])
             sentence = sentence_pattern.replace("*found_slot*", AGENT_INFORM_OBJECT[inform_slot])
         else:
-            key = agent_action['inform_slots']['activity']
-            first_result_data = agent_action['inform_slots'][key][0]
+            key = agent_action['inform_slots']['major']
+            # first_result_data = agent_action['inform_slots'][key][0]
+            first_result_data = agent_action['inform_slots']
 
             # #nếu là câu hỏi intent confirm thì cần response lại mà match hay không
             # print("-------------------------------inform slot :{}".format(inform_slot))
             # print("---------------------------------confirm obj: {}".format(confirm_obj))
             response_match = ''
+            print('confirm_obj',confirm_obj)
             if confirm_obj != None:
                 if inform_slot not in list_map_key:
                     check_match = check_match_sublist_and_substring(confirm_obj[inform_slot],first_result_data[inform_slot])
-                # else: #nếu là 4 key map
-                #     check_match = check_match_sublist_and_substring(confirm_obj[inform_slot],first_result_data[inform_slot])
-                #     # neu chưa match với key chung thì tìm trong map
-                #     if not check_match:
-                #         if "time_works_place_address_mapping" in first_result_data and first_result_data["time_works_place_address_mapping"] not in [None,[]]:
-                #             list_obj_map = first_result_data["time_works_place_address_mapping"]
-                #             for obj_map in list_obj_map:
-                #                 if inform_slot in obj_map:
-                #                     if check_match_sublist_and_substring(confirm_obj[inform_slot],obj_map[inform_slot]):
-                #                         check_match = True
-                #                         break
 
                 value_match = ''
                 if len(confirm_obj[inform_slot]) > 1:

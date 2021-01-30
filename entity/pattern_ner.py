@@ -143,8 +143,8 @@ def find_all_entity(intent,input_sentence):
                 list_sentence_token[greatest_end_common_index - greatest_common_length +1 :greatest_end_common_index +1] = ["✪"]*greatest_common_length
                 normalized_input_sentence = ' '.join(list_sentence_token)
             catch_entity_threshold_loop = catch_entity_threshold_loop + 1
-    if intent == 'point':
-        result_entity_dict['point'] = catch_point(input_sentence)
+    # if intent == 'point':
+    #     result_entity_dict['point'] = catch_point(input_sentence)
     confirm_obj = None
     if intent in result_entity_dict:
         value = result_entity_dict.pop(intent)

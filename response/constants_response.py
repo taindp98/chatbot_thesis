@@ -1,6 +1,6 @@
 MATCH_FOUND = {
     'found': [
-        "Thông tin *found_slot* chung bạn cần: *found_slot_instance*, bên dưới là ngành cụ thể chứa thông tin đó và một số ngành khác cũng thỏa điều kiện bạn đưa ra"
+        "Thông tin *found_slot* bạn cần: *found_slot_instance*"
     ],
     'not_found': [
         "Mình không tìm thấy ngành nào chứa thông tin *found_slot* mà bạn cần, bạn xem lại các thông tin đã cung cấp dưới đây và điều chỉnh lại giúp mình nhé!"
@@ -54,14 +54,14 @@ REQUEST['subject_group'] = [
 ]
 
 REQUEST['subject'] = [
-    'Bạn muốn tra cứu *subject* nào bạn?',
-    'Cụ thể là *subject* nào vậy bạn?',
-    'Mời bạn cung cấp thông tin *subject* '
+    'Bạn muốn tìm *subject* nào vậy bạn?',
+    # 'Cụ thể là *subject* nào vậy bạn?',
+    # 'Mời bạn cung cấp thông tin *subject* '
 ]
 
 REQUEST['year'] = [
     'Bạn cho mình xin *year* cụ thể bạn muốn tìm nha!',
-    '*year* là bao nhiêu vậy bạn?'
+    '*year* bao nhiêu vậy bạn?'
 ]
 
 REQUEST_REPEAT = [
@@ -95,12 +95,12 @@ REQUEST_REPEAT = [
 """
 INFORM = {}
 INFORM['major_code'] = [
-    '*major_code_instance* là mã của ngành bạn cần tìm',
+    '*major_code_instance* là mã của ngành bạn cần tìm phải không ?',
     '*major_code_instance* có phải là *major_code* bạn muốn tìm không?'
 ]
 INFORM['major_name'] = [
-    'ngành *major_name_instance* đó bạn',
-    '*major_name_instance* có phải là *major_name* bạn muốn tìm không?'
+    'ngành *major_name_instance* có phải là *major_name* bạn đang tìm kiếm không ?',
+    '*major_name_instance* có phải là *major_name* bạn muốn tìm không ?'
 ]
 INFORM['type_edu'] = [
     'có phải bạn muốn hỏi về chương trình *type_edu_instance* không?',
@@ -115,20 +115,20 @@ INFORM['subject_group'] = [
 ]
 
 INFORM['year'] = [
-    'năm *year_instance* đó bạn'
+    'năm *year_instance* có phải là năm bạn tìm kiếm ?'
 ]
 
 INFORM['career'] = [
-    '*career_instance* là cơ hội nghề nghiệp của ngành bạn cần tìm'
+    '*career_instance* là *career* của ngành bạn cần tìm'
 ]
 INFORM['subject'] = [
-    '*subject_instance* thuộc tổ hợp khối thi cho ngành bạn cần tìm'
+    '*subject_instance* thuộc *subject_group* cho ngành bạn cần tìm'
 ]
 INFORM['tuition'] = [
     '*tuition_instance* là mức học phí trên một tín chỉ của ngành bạn cần tìm'
 ]
 INFORM['satisfy'] = [
-    '*satisfy_instance* là mức độ hài lòng của sinh viên đang theo học ngành bạn cần tìm'
+    '*satisfy_instance* là *satisfy* của sinh viên đang theo học ngành bạn cần tìm'
 ]
 INFORM['major'] = [
     'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *major_instance*'
@@ -153,6 +153,7 @@ AGENT_REQUEST_OBJECT = {
     "subject_group": "tổ hợp khối",
     "subject": "môn thi",
     "year":"năm",
+    "career": "cơ hội nghề nghiệp"
 }
 """
 # sửa lại dialogue train
@@ -187,7 +188,7 @@ AGENT_INFORM_OBJECT = {
     "career": "cơ hội nghề nghiệp",
     "subject": "môn thi",
     "tuition": "giá học phí một tín chỉ",
-    "satisfy": "sự hài lòng"
+    "satisfy": "mức độ hài lòng"
 }
 list_map_key = ["major_name", "point", "subject_group","year"]
 GREETING = [
