@@ -6,11 +6,6 @@ Flask-PyMongo==2.3.0
 grpcio==1.34.0
 gunicorn==20.0.4
 h5py==2.10.0
-ipykernel==5.4.2
-ipython==7.16.1
-ipython-genutils==0.2.0
-jupyter-client==6.1.7
-jupyter-core==4.7.0
 Keras==2.2.4
 numpy==1.16.4
 pandas==1.1.5
@@ -26,5 +21,3 @@ tensorboard==1.14.0
 tensorflow==1.14.0
 tensorflow-estimator==1.14.0
 torch==1.7.0
-torchaudio==0.7.0
-torchvision==0.8.1
