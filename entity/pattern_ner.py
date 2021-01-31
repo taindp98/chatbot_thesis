@@ -17,7 +17,7 @@ map_order_entity['major_name'] = ['point','subject_group','career']
 # xin mã ngành = tên ngành/program/khối
 map_order_entity['major_code']=['major_name','subject_group']
 # xin điểm = tên ngành/khối/program
-map_order_entity['point']=['major_name','subject_group','year']
+map_order_entity['point']=['major_name','subject_group','year','type_edu']
 # xin khối = subject/tên ngành
 map_order_entity['subject_group']=['major_name','subject']
 

@@ -14,6 +14,7 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
     if isGreeting:
         return random.choice(GREETING)
     agent_intent = agent_action['intent']
+
     if agent_intent == "inform":
         ############ TO DO : lấy list_match_obj ra inform cho user (dạng câu) (ok)
         # list_match_obj = agent_action['list_match_obj']
@@ -91,14 +92,7 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
             else:
                 sentence = random.choice(MATCH_FOUND['found_major'])
             response_obj = ''
-            # list_obj_map_match = []
-            # if list_match_obj != []:
-            #     response_obj += "Cụ thể các thông tin về ngành này là:\n"
-            #     for obj_map_match in list_match_obj:
-            #         response_obj += "************************************************* \n"
-            #         for key in list_map_key:
-            #             response_obj += "+ {0} : {1} \n".format(AGENT_INFORM_OBJECT[key], ', '.join(obj_map_match[key]))
-            # # print(sentence)
+
             sentence += "\n" + response_obj + response_match
             print("-----------------------------match sentence")
             # print(sentence)

@@ -11,7 +11,13 @@ def get_agent_action(state_tracker,dqn_agent,user_action,done=False):
     state_tracker.update_state_user(user_action)
     current_state = state_tracker.get_state(done)
     _, agent_action = dqn_agent.get_action(current_state)
-    state_tracker.update_state_agent(agent_action)
+    if 'round' not in agent_action.keys():
+        state_tracker.update_state_agent(agent_action)
+    else:
+        if agent_action['round'] < 10:
+            state_tracker.update_state_agent(agent_action)
+        else:
+            state_tracker.reset()
     # assert len(state_tracker.current_request_slots) > 0
 #     if agent_action['intent'] == 'match_found':
 # #         print("inform slot match found: {}".format(agent_action['inform_slots']))
