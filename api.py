@@ -73,11 +73,10 @@ def process_conversation_POST(state_tracker_id, message):
     user_action, new_confirm_obj = user_request(message,state_tracker)
     print("-----------------------------------user action")
     print(user_action)
-    #nếu là câu request mới của user thì reset state tracker và cho confirm về lại None
     if user_action['request_slots'] != {}:
         state_tracker.reset()
         confirm_obj = None
-    #nếu có câu confirm request mới thì ghi đè
+
     if new_confirm_obj != None:
         confirm_obj = new_confirm_obj
     if user_action['intent'] not in ["hello","other","done"] :

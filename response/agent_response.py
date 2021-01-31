@@ -15,6 +15,8 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
         return random.choice(GREETING)
     agent_intent = agent_action['intent']
 
+
+
     if agent_intent == "inform":
         ############ TO DO : lấy list_match_obj ra inform cho user (dạng câu) (ok)
         # list_match_obj = agent_action['list_match_obj']
