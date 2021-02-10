@@ -4,9 +4,6 @@ db = client.hcmut
 # collection = db['general'].find({})
 # collection = db['general']
 database = db['general']
-# database = []
-# for item in collection:
-#     database.append(item)
 dict_entity={}
 # dict_entity['_id'] = database.distinct('_id')
 dict_entity['major_code']=database.distinct('major_code')

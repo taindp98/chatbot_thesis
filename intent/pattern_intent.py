@@ -24,7 +24,7 @@ dict_business_intent["subject"] = ["môn thi","mon thi","môn nào","mon nao","t
 
 dict_random_intent = {}
 
-dict_random_intent["anything"] = ["không phải","khong phai","sai","không","nào cũng được","bất kỳ","bất kì","bất kể","sao cũng được","sao cung duoc","anything","gì cũng được","nào cũng được","không biết","j cung dc","nao cung dc","sao cung dc","nào cũng được","cũng được","cung dc","cung duoc","sao cũng đc"]
+dict_random_intent["anything"] = ["không phải","khong phai","sai","nào cũng được","bất kỳ","bất kì","bất kể","sao cũng được","sao cung duoc","anything","gì cũng được","nào cũng được","không biết","j cung dc","nao cung dc","sao cung dc","nào cũng được","cũng được","cung dc","cung duoc","sao cũng đc"]
 
 dict_random_intent["hello"] = ["chào"," xin chào","chao","xin chao","hello","chao buoi sang","chào buổi sáng","hi "]
 dict_random_intent["done"] = ["tạm biệt","bye bye","pp","tam biet","bye"]

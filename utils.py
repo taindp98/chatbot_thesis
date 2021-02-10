@@ -7,7 +7,8 @@ from pyvi import ViTokenizer
 import os
 import re
 import json
-from fastai.text import *
+# from fastai.text import *
+import pandas as pd
 import pickle
 # path = '/home/taindp/Database/intent/'
 # path = 'data/'
@@ -106,7 +107,7 @@ def find_entity_equation(sentence,list_entity):
 
 def longest_common_sublist(a, b):
     #input list a, list b
-    #output số item chung liền kề dài nhất và giá trị item đầu tiên trong list item chung
+    #output số item chung liền kề dài nhất và index item cuoi cung trong list item chung
     table = {}
     l = 0
     i_max = None
@@ -184,28 +185,6 @@ def check_shorted_entity(path_db_entity):
                 shorted = ele_len
         len_dict[item]=shorted
     return len_dict
-
-def predict_fastai(mess):
-    np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
-    # model_path = 'intent/'
-    model_path = '/home/taindp/PycharmProjects/thesis/intent/'
-    data_classify = load_data(model_path,'data_classify')
-    # model = text_classifier_learner(data_classify, AWD_LSTM, drop_mult=0.6, metrics=[accuracy])
-    model = text_classifier_learner(data_classify, AWD_LSTM, drop_mult=0.65, metrics=[accuracy])
-    # model.load(os.path.join(model_path,'vi_classify'), purge=False)
-    model.load('vi_classify', purge=False)
-    predict = model.predict(mess)
-
-    list_pred = predict[2].tolist()
-    probability = max(list_pred)
-    # print(list_pred)
-    index_pred = list_pred.index(probability)
-    list_label = ['satisfy','career']
-    label_pred = list_label[index_pred]
-    if probability > 0.6:
-        return label_pred,probability,mess
-    else:
-        return 'other_intent',1.0,mess
 
 def load_jsonfile(path):
     list_data = []
