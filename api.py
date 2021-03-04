@@ -17,14 +17,16 @@ from response.user_request import user_request
 from response.agent_action import get_agent_action
 from response.agent_response import response_craft
 from response.default_response import response_to_user_free_style
-
+import random
 from bs4 import BeautifulSoup
 # from mongoengine import connect
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017"
+# app.config["MONGO_URI"] = "mongodb://localhost:27017"
+app.config['MONGO_URI'] = "mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority"
 mongo = PyMongo(app)
-FOLDER_PATH = '/home/taindp/PycharmProjects/thesis/dqn'
+# FOLDER_PATH = '/home/taindp/PycharmProjects/thesis/dqn'
+FOLDER_PATH = './dqn'
 CONSTANTS_FILE_PATH = f'{FOLDER_PATH}/constants.json'
 # CONSTANT_FILE_PATH = 'constants.json'
 with open(CONSTANTS_FILE_PATH) as f:
