@@ -340,8 +340,8 @@ class UserSimulator:
         if self.constraint_check == FAIL:
             self.state['intent'] = 'reject'
             self.state['request_slots'].clear()
-#         if self.constraint_check == SUCCESS:
-#             print("match found, success: {}".format(self.constraint_check))
+        # if self.constraint_check == SUCCESS:
+        #     print("match found, success: {}".format(self.constraint_check))
     def _response_to_done(self):
         """
         Augments the state in response to the agent action having an intent of done.
@@ -363,9 +363,9 @@ class UserSimulator:
         if self.state['rest_slots']:
             # print("done: fail for rest_slots ")
 
-#             print("fail for rest_slots: {}".format(str(self.state['rest_slots'])))
+            # print("fail for rest_slots: {}".format(str(self.state['rest_slots'])))
             return FAIL
-#         print("pass rest_slots")
+        # print("pass rest_slots")
         # TEMP: ----
         assert self.state['history_slots'][self.default_key] != 'no match available'
 

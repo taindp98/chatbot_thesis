@@ -26,10 +26,12 @@ usersim_required_init_inform_keys = ['major_name']
 #######################################
 
 # Possible inform and request slots for the agent
-agent_inform_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year',usersim_default_key]
+# agent_inform_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year',usersim_default_key]
+agent_inform_slots = ['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register',usersim_default_key]
 
 # agent_request_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year']
-agent_request_slots = ['major_name', 'type_edu','subject_group', 'year']
+agent_request_slots = ['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
+# agent_request_slots = ['major_name', 'type_edu','subject_group', 'year']
 
 
 # Possible actions for agent
@@ -46,13 +48,12 @@ for slot in agent_request_slots:
     agent_actions.append({'intent': 'request', 'inform_slots': {}, 'request_slots': {slot: 'UNK'}})
 
 # Rule-based policy request list
-# rule_requests = ['moviename', 'starttime', 'city', 'date', 'theater', 'numberofpeople']
-# rule_requests=['name_activity', 'type_activity', 'holder', 'time', 'city', 'district', 'ward', 'name_place', 'street','reward', 'contact', 'register', 'works', 'joiner']
-#rule_requests = ['major_code','major_name','type_edu','point','subject_group','year']
-rule_requests = ['major_name', 'type_edu','subject_group', 'year']
-# rule_requests = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year']
 
-# rule_requests = ['name_activity', 'type_activity', 'holder', 'time', 'city', 'district', 'ward', 'name_place', 'street', 'reward', 'contact', 'register', 'works', 'joiner']
+#rule_requests = ['major_code','major_name','type_edu','point','subject_group','year']
+# rule_requests = ['major_name', 'type_edu','subject_group', 'year']
+rule_requests =['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
+
+
 # These are possible inform slot keys that cannot be used to query
 no_query_keys = [usersim_default_key,'_id']
 # no_query_keys = ['numberofpeople',usersim_default_key]
@@ -71,11 +72,5 @@ UNSUITABLE = -2
 all_intents = ['inform', 'request', 'done', 'match_found', 'thanks', 'reject']
 
 # All possible slots (for one-hot conversion in ST.get_state())
-# all_slots = ['actor', 'actress', 'city', 'critic_rating', 'date', 'description', 'distanceconstraints',
-#              'genre', 'greeting', 'implicit_value', 'movie_series', 'moviename', 'mpaa_rating',
-#              'numberofpeople', 'numberofkids', 'other', 'price', 'seating', 'starttime', 'state',
-#              'theater', 'theater_chain', 'video_format', 'zip', 'result', usersim_default_key, 'mc_list']
-# all_slots = ['name_activity', 'type_activity', 'holder', 'time', 'city', 'district', 'ward', 'name_place', 'street',
-#                        'reward', 'contact', 'register', 'works', 'joiner',usersim_default_key]
-all_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group', 'satisfy', 'point','major_code','year',usersim_default_key]
-#all_slots = ['major_code','major_name','type_edu','point','subject_group','university_code','university_name','year','career','subject','tuition_one_credit','duration_std','credits','foreign_lang_min',usersim_default_key]
+all_slots = ['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register',usersim_default_key]
+# all_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year',usersim_default_key]

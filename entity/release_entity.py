@@ -5,20 +5,14 @@ db = client.hcmut
 # collection = db['general']
 database = db['general']
 dict_entity={}
-# dict_entity['_id'] = database.distinct('_id')
-dict_entity['major_code']=database.distinct('major_code')
-dict_entity['major_name']=database.distinct('major_name')
-dict_entity['subject_group']=database.distinct('subject_group')
-dict_entity['point'] = database.distinct('point')
-dict_entity['type_edu']= database.distinct('type_edu')
-dict_entity['year'] = database.distinct('year')
-dict_entity['satisfy'] = database.distinct('satisfy')
-
-dict_entity['subject'] = database.distinct('subject')
-dict_entity['career'] = database.distinct('career')
-dict_entity['tuition'] = database.distinct('tuition')
-
-file_output=open('../data/db_entity_jan23.json','w')
+list_keys = []
+for item in database.find({}):
+    list_keys = list(dict(item).keys())
+for key in list_keys:
+    if key != '_id':
+        dict_entity[key] = database.distinct(key)
+# print(dict_entity)
+file_output=open('../data/db_entity_feb20.json','w')
 list_final=[]
 list_final.append(dict_entity)
 dict_str=str(list_final)

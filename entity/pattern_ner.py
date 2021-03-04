@@ -3,50 +3,60 @@ import json
 from intent.intent_regconize import *
 from collections import OrderedDict
 """
-    0 là review ngành có nên học không --> satify
-    1 là review ngành ra trường làm gì --> career
-    all_slot = ['major_name', 'type_edu', 'career', 'subject','tuition_one_credit', 'subject_group', 'satisfy', 'point','major_code','year']
-    user_known = ['major_name', 'type_edu','subject','subject_group','point', 'year']
+    
+    label = ['other_intent','type_edu','case','career']
 """
 map_order_entity = {}
 
 # intent pattern matching
 # tìm ngành
-map_order_entity['major_name'] = ['point','subject_group','career']
+map_order_entity['major_name'] = ['point','subject_group','career','criteria','object','register','case']
 
 # xin mã ngành = tên ngành/program/khối
 map_order_entity['major_code']=['major_name','subject_group']
 # xin điểm = tên ngành/khối/program
-map_order_entity['point']=['major_name','subject_group','year','type_edu']
+map_order_entity['point']=['major_name','subject_group','year','type_edu','case']
 # xin khối = subject/tên ngành
 map_order_entity['subject_group']=['major_name','subject']
-
-map_order_entity['type_edu']=['major_name','subject_group','subject']
 
 map_order_entity['subject']=['major_name','subject_group']
 map_order_entity['tuition']=['major_name','type_edu']
 
 map_order_entity['year'] = ['major_name','subject_group','point','subject']
-# intent fastai
-
-map_order_entity['satisfy']=['major_name','subject_group','subject','point','career']
 map_order_entity['career']=['major_name','subject','subject_group']
+map_order_entity['criteria'] = ['major_name','case','object','register','subject_group','subject','type_edu','year']
+# intent deep learning
+
+map_order_entity['type_edu']=['major_name','subject_group','subject','case','object','register','criteria']
+
+map_order_entity['case']=['major_name','criteria','subject','subject_group','case','register','criteria']
+map_order_entity['object'] = ['case','type_edu','major_name','register']
+map_order_entity['register'] = ['case','type_edu','major_name','object']
+
+map_order_entity['other_intent']=['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
+
+
 
 # bổ sung intent là INFORM cho user_request:
-map_order_entity['not_intent']=['major_code', 'major_name', 'subject_group', 'point', 'type_edu', 'year', 'satisfy', 'subject', 'career', 'tuition']
+map_order_entity['not_intent']=['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
 map_order_entity['major_name_inform'] = ['major_name']
 map_order_entity['major_code_inform'] = ['major_code']
 map_order_entity['subject_group_inform'] = ['subject_group']
 map_order_entity['point_inform'] = ['point']
 map_order_entity['type_edu_inform'] = ['type_edu']
 map_order_entity['year_inform'] = ['year']
-map_order_entity['satisfy_inform'] = ['satisfy']
+
+map_order_entity['case_inform'] = ['case']
+map_order_entity['criteria_inform'] = ['criteria']
+map_order_entity['object_inform'] = ['object']
+map_order_entity['register_inform'] = ['register']
 map_order_entity['subject_inform'] = ['subject']
 map_order_entity['career_inform'] = ['career']
 map_order_entity['tuition_inform'] = ['tuition']
 
 
-entity_path = '/home/taindp/PycharmProjects/thesis/data/db_entity_jan23.json'
+# entity_path = '/home/taindp/PycharmProjects/thesis/data/db_entity_jan23.json'
+entity_path = '/home/taindp/PycharmProjects/thesis/data/check_entity.json'
 with open(entity_path,'r') as jsonfile:
     dict_entity = json.load(jsonfile)[0]
 
@@ -60,30 +70,6 @@ def find_all_entity(intent,input_sentence):
     # print(list_order_entity_name)
     map_entity_name_to_threshold={}
     for entity_name in list_order_entity_name:
-        # tìm chiều dài ngắn nhất cho từng entity
-        # chung cho tất cả order
-        # {'major_code': 1,
-        # 'major_name': 2,
-        # 'subject_group': 1,
-        # 'point': 1,
-        # 'type_edu': 4,
-        # 'year': 1,
-        # 'rate': 1,
-        # 'university_name': 13,
-        # 'sub1': 1,
-        # 'sub2': 1,
-        # 'sub3': 1,
-        # 'career': 1,
-        # 'typical_group': 1,
-        # 'company': 0,
-        # 'tuition_one_credit': 4,
-        # 'tuition_avg_one_sem': 4,
-        # 'duration_std': 1,
-        # 'credits': 1,
-        # 'foreign_lang_min': 2}
-        all_slot = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group', 'satisfy', 'point','major_code','year']
-
-        # if entity_name in ['major_code','subject_group','point','year','rate','subject','typical_group','company','duration_std','credits','foreign_lang_min']:
         # threshold wordnumber
         if entity_name in ['type_edu', 'career', 'subject','tuition', 'subject_group','point','major_code','year']:
             map_entity_name_to_threshold[entity_name]=1
@@ -151,7 +137,7 @@ def find_all_entity(intent,input_sentence):
         confirm_obj = {intent:value}
     return result_entity_dict,confirm_obj
 
-# mess = 'cho em hỏi điểm ngành hóa học năm nay có tầm 25 điểm không ạ'
-# intent_catched, prob,mess_clean = catch_intent(mess)
-# entity_dict,confirm = find_all_entity('tuition_inform','đại học chính quy đại trà')
+# mess = 'cho em hỏi ngành kỹ thật điện điện tử thì có cơ hội việc làm ra sao ạ'
+# # intent_catched, prob,mess_clean = catch_intent(mess)
+# entity_dict,confirm = find_all_entity('review',mess)
 # print(entity_dict)

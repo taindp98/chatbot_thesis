@@ -1,13 +1,11 @@
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import Adam
-from keras.callbacks import LearningRateScheduler
 import random, copy
 import numpy as np
 from dqn.dialogue_config import rule_requests, agent_actions
 import re
-from tqdm import tqdm
-import math
+
 
 # Some of the code based off of https://jaromiru.com/2016/09/27/lets-make-a-dqn-theory/
 # Note: In original paper's code the epsilon is not annealed and annealing is not implemented in this code either
@@ -64,7 +62,7 @@ class DQNAgent:
         model = Sequential()
         model.add(Dense(self.hidden_size, input_dim=self.state_size, activation='relu'))
         model.add(Dense(self.num_actions, activation='linear'))
-        model.compile(loss='mse', optimizer=Adam(lr=self.lr),metrics=['accuracy'])
+        model.compile(loss='mse', optimizer=Adam(lr=self.lr))
         return model
 
     def reset(self):
@@ -235,13 +233,7 @@ class DQNAgent:
         """Returns true if the memory is full."""
 
         return len(self.memory) == self.max_memory_size
-    # learning rate decay
-    def step_decay(epoch):
-        initial_lrate = LR
-        drop = 0.9
-        epochs_drop = 1
-        lrate = initial_lrate * math.pow(drop,math.floor((1+epoch)/epochs_drop))
-        return lrate
+
     def train(self):
         """
         Trains the agent by improving the behavior model given the memory tuples.
@@ -279,12 +271,7 @@ class DQNAgent:
 
                 inputs[i] = s
                 targets[i] = t
-#             initial_lrate = self.lr
-#             drop = 0.9
-#             epochs_drop = 1
-#             lrate = initial_lrate * math.pow(drop,math.floor((2)/epochs_drop))
-#             lrate = LearningRateScheduler(lrate)
-#             callback_list = [lrate]
+
             self.beh_model.fit(inputs, targets, epochs=1, verbose=0)
 
     def copy(self):

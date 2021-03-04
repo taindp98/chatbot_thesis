@@ -1,9 +1,9 @@
-from dqn.user_simulator import UserSimulator
-from dqn.error_model_controller import ErrorModelController
-from dqn.dqn_agent import DQNAgent
-from dqn.state_tracker import StateTracker
+from user_simulator import UserSimulator
+from error_model_controller import ErrorModelController
+from dqn_agent import DQNAgent
+from state_tracker import StateTracker
 import pickle, argparse, json
-from dqn.user import User
+from user import User
 from utils import remove_empty_slots
 
 
@@ -35,8 +35,7 @@ if __name__ == "__main__":
     # Load run constants
     run_dict = constants['run']
     USE_USERSIM = run_dict['usersim']
-    # NUM_EP_TEST = run_dict['num_ep_run']
-    NUM_EP_TEST = 100
+    NUM_EP_TEST = run_dict['num_ep_run']
     MAX_ROUND_NUM = run_dict['max_round_num']
 
     # Load movie DB
@@ -83,11 +82,8 @@ def test_run():
         done = False
         # Get initial state from state tracker
         state = state_tracker.get_state()
-        # print('history',state_tracker.print_history())
         while not done:
             # Agent takes action given state tracker's representation of dialogue
-            # print('dqn action {}'.format(dqn_agent.beh_model.predict(state)))
-            # print('rule action {}'.format(dqn_agent._rule_action()))
             agent_action_index, agent_action = dqn_agent.get_action(state)
             # Update state tracker with the agent's action
             state_tracker.update_state_agent(agent_action)
@@ -122,5 +118,6 @@ def episode_reset():
     state_tracker.update_state_user(user_action)
     # Finally, reset agent
     dqn_agent.reset()
+
 
 test_run()

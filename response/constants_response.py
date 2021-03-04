@@ -64,6 +64,26 @@ REQUEST['year'] = [
     '*year* bao nhiêu vậy bạn?'
 ]
 
+REQUEST['case'] = [
+    'Bạn cho mình xin *case* cụ thể bạn muốn tìm nha!',
+    '*case* bạn cần tìm là gì vậy ạ?'
+]
+
+REQUEST['criteria'] = [
+    'Bạn cho mình xin *criteria* cụ thể bạn muốn tìm nha!',
+    '*criteria* bạn cần tìm là gì vậy ạ?'
+]
+
+REQUEST['object'] = [
+    'Bạn cho mình xin *object* cụ thể bạn muốn tìm nha!',
+    # '*criteria* bạn cần tìm là gì vậy ạ?'
+]
+
+REQUEST['register'] = [
+    'Bạn cho mình xin *register* cụ thể bạn muốn tìm nha!',
+    # '*criteria* bạn cần tìm là gì vậy ạ?'
+]
+
 REQUEST_REPEAT = [
     'Thông tin *request_key* bạn nhập vào chưa rõ ràng, bạn cung cấp lại giúp mình thông tin này nhé! ',
     'Rất tiếc, thông tin *request_key* bạn nhập vào mình vẫn chưa rõ, bạn vui lòng cung cấp lại thông tin này giúp mình nhé!',
@@ -127,12 +147,29 @@ INFORM['subject'] = [
 INFORM['tuition'] = [
     '*tuition_instance* là mức học phí trên một tín chỉ của ngành bạn cần tìm'
 ]
-INFORM['satisfy'] = [
-    '*satisfy_instance* là *satisfy* của sinh viên đang theo học ngành bạn cần tìm'
-]
+# INFORM['satisfy'] = [
+#     '*satisfy_instance* là *satisfy* của sinh viên đang theo học ngành bạn cần tìm'
+# ]
 INFORM['major'] = [
     'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *major_instance*'
 ]
+
+INFORM['case'] = [
+    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *case_instance*'
+]
+
+INFORM['criteria'] = [
+    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *criteria_instance*'
+]
+
+INFORM['object'] = [
+    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *object_instance*'
+]
+
+INFORM['register'] = [
+    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *register_instance*'
+]
+
 """
 # sửa lại dialogue train
 'major_code',
@@ -153,7 +190,11 @@ AGENT_REQUEST_OBJECT = {
     "subject_group": "tổ hợp khối",
     "subject": "môn thi",
     "year":"năm",
-    "career": "cơ hội nghề nghiệp"
+    "career": "cơ hội nghề nghiệp",
+    "case": "phương thức tuyển sinh",
+    "criteria": "chỉ tiêu tuyển sinh",
+    "object" : "đối tượng tuyển sinh",
+    "register": "cách thức đăng ký"
 }
 """
 # sửa lại dialogue train
@@ -188,7 +229,13 @@ AGENT_INFORM_OBJECT = {
     "career": "cơ hội nghề nghiệp",
     "subject": "môn thi",
     "tuition": "giá học phí một tín chỉ",
-    "satisfy": "mức độ hài lòng"
+    # "satisfy": "mức độ hài lòng"
+
+    "case": "phương thức tuyển sinh",
+    "criteria": "chỉ tiêu tuyển sinh",
+    "object" : "đối tượng tuyển sinh",
+    "register": "cách thức đăng ký"
+
 }
 list_map_key = ["major_name", "point", "subject_group","year"]
 GREETING = [

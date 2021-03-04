@@ -79,7 +79,7 @@ def clean_mess(mess):
     # input: câu nhập vào của người dùng
     # return: câu đã loại bỏ special token
     mess_unic = convert_unicode(mess).lower()
-    mess_rmspectoken = re.findall(r'(?i)\b[a-záàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđ0-9]+\b', mess_unic)
+    mess_rmspectoken = re.findall(r'(?i)\b[a-záàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđ0-9\/\-]+\b', mess_unic)
     mess_norm = ' '.join(mess_rmspectoken)
     return mess_norm
 
@@ -160,9 +160,9 @@ def find_entity_longest_common(sentence,list_entity,entity_name):
 
     for k,v in dict_max_len.items():
         if v['longest_common_length']==max_longest_common_length:
-            if entity_name in ['register','reward','works']:
-                result.append({"longest_common_entity_index":int(k),"longest_common_length":v['max_length_in_sentence'],"end_common_index":v['end_common_index']})
-            else:
+            # if entity_name in ['register','reward','works']:
+                # result.append({"longest_common_entity_index":int(k),"longest_common_length":v['max_length_in_sentence'],"end_common_index":v['end_common_index']})
+            # else:
                 result.append({"longest_common_entity_index":int(k),"longest_common_length":v['longest_common_length'],"end_common_index":v['end_common_index']})
     return result
 

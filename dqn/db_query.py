@@ -1,7 +1,7 @@
 from collections import defaultdict
 from dqn.dialogue_config import no_query_keys, usersim_default_key
 import copy
-from response.constants_response import list_map_key
+
 
 class DBQuery:
     """Queries the database for the state tracker."""
@@ -49,12 +49,12 @@ class DBQuery:
 
         # db_results is a dict of dict in the same exact format as the db, it is just a subset of the db
         db_results = self.get_db_results(current_informs)
-#         print("current informs: {}".format(current_informs))
+        # print("current informs: {}".format(current_informs))
 
         filled_inform = {}
         values_dict = self._count_slot_values(key, db_results)
-#         print("key: {}".format(key))
-#         print("db results: {}".format(db_results))
+        # print("key: {}".format(key))
+        # print("db results: {}".format(db_results))
 
         if values_dict:
             # Get key with max value (ie slot value with highest count of available results)
@@ -85,9 +85,9 @@ class DBQuery:
                 slot_value = current_option_dict[key]
                 # print(slot_value)
                 if any(isinstance(i,list) for i in slot_value):
-                    slot_value = [value for sub_list in slot_value for value in sub_list]
+                  slot_value = [value for sub_list in slot_value for value in sub_list]
 
-
+          
                 tp_slot_value = tuple(slot_value)
                 # print(type(tp_slot_value))
                 # This will add 1 to 0 if this is the first time this value has been encountered, or it will add 1
@@ -107,7 +107,7 @@ class DBQuery:
             # print("match sublist")
             return True
         return False
-
+            
 
 
 
@@ -132,10 +132,10 @@ class DBQuery:
         # print(tuple_new_constraint)
         inform_items ={k:tuple(v) for k,v in tuple_new_constraint.items()}.items()
         inform_items = frozenset(inform_items)
-
+ 
         # inform_items = frozenset(new_constraints.items())
         cache_return = self.cached_db[inform_items]
-
+ 
         if cache_return == None:
             # If it is none then no matches fit with the constraints so return an empty dict
             return {}
@@ -159,19 +159,19 @@ class DBQuery:
                 self.cached_db[inform_items].update({str(i): data})
             i+=1
 
-
+        
 
         # for result in results:
         #     available_options.update({str(result['_id']):result})
         #     self.cached_db[inform_items].update({str(result['_id']): result})
 
         if not available_options:
-            self.cached_db[inform_items] = None
+          self.cached_db[inform_items] = None
 
         #   print("no match: ")
           # print(new_constraints)
 
-
+ 
         return available_options
 
     def get_db_results_for_slots(self, current_informs):
@@ -197,7 +197,7 @@ class DBQuery:
         # temp_current_informs=copy.deepcopy(current_informs)
         if cache_return:
             return cache_return
-
+ 
         # If it made it down here then a new query was made and it must add it to cached_db_slot and return it
         # Init all key values with 0
         db_results = {key: 0 for key in current_informs.keys()}

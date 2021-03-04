@@ -6,7 +6,7 @@ from flask_pymongo import PyMongo
 from flask import Flask, request,render_template,jsonify
 from flask_cors import CORS
 from fastai import *
-from fastai.text import *
+# from fastai.text import *
 from response.user_request import *
 from dqn.state_tracker import StateTracker
 from dqn.dqn_agent import DQNAgent
