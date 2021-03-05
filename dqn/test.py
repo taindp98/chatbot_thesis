@@ -1,9 +1,9 @@
-from user_simulator import UserSimulator
-from error_model_controller import ErrorModelController
-from dqn_agent import DQNAgent
-from state_tracker import StateTracker
+from dqn.user_simulator import UserSimulator
+from dqn.error_model_controller import ErrorModelController
+from dqn.dqn_agent import DQNAgent
+from dqn.state_tracker import StateTracker
 import pickle, argparse, json
-from user import User
+from dqn.user import User
 from utils import remove_empty_slots
 
 
@@ -35,7 +35,8 @@ if __name__ == "__main__":
     # Load run constants
     run_dict = constants['run']
     USE_USERSIM = run_dict['usersim']
-    NUM_EP_TEST = run_dict['num_ep_run']
+    # NUM_EP_TEST = run_dict['num_ep_run']
+    NUM_EP_TEST = 200
     MAX_ROUND_NUM = run_dict['max_round_num']
 
     # Load movie DB
