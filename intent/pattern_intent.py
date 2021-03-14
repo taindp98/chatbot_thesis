@@ -24,14 +24,20 @@ dict_business_intent["subject"] = ["môn thi","mon thi","môn nào","mon nao","t
 
 dict_business_intent['object'] = ['đối tượng','doi tuong','thí sinh','thi sinh', 'đôi tuong','doi tượng']
 
-dict_business_intent['register'] = ['đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
+#dict_business_intent['register'] = ['đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
 
 dict_random_intent = {}
 
-dict_random_intent["anything"] = ["không phải","khong phai","sai","nào cũng được","bất kỳ","bất kì","bất kể","sao cũng được","sao cung duoc","anything","gì cũng được","nào cũng được","không biết","j cung dc","nao cung dc","sao cung dc","nào cũng được","cũng được","cung dc","cung duoc","sao cũng đc"]
-
+dict_random_intent["anything"] = ["sao cũng được","gì cũng được","anything","s cũng được",'j cũng được',"không biết","k biết","ko biết","không nhớ","ko nhớ","k nhớ","không rõ","k rõ","ko rõ","cũng được","cũng ok","cũng không sao","cũng dc","cũng k sao","cũng ko sao"]
 dict_random_intent["hello"] = ["chào"," xin chào","chao","xin chao","hello","chao buoi sang","chào buổi sáng","hi "]
 dict_random_intent["done"] = ["tạm biệt","bye bye","pp","tam biet","bye"]
 dict_random_intent["thanks"] = ["đúng","phải rồi","ok","ừ","ừm","oke","yes","hay quá","cảm ơn","cam on","tks","thanks","thank","thank u","thank you","cám ơn","ty","đúng rồi","tốt lắm","cảm ơn nha","vang","vâng","đúng vậy","chính xác"]
 
-
+###
+#INTENT MESSAGE SIGNALS
+list_question_signal = [" hả ","chứ","có biết","phải không","đâu","là sao","nào","khi nào","nơi nào","không ạ","k ạ","là sao","nữa vậy","chưa á","ko ạ","sao ạ","chưa ạ","sao vậy","không vậy","k vậy","ko vậy","chưa vậy","thế"," nhỉ "," ai"," ai ","ở đâu","ở mô","đi đâu","bao giờ","bao lâu","khi nào","lúc nào","hồi nào","vì sao","tại sao","thì sao","làm sao","như nào","thế nào","cái chi","gì","bao nhiêu","mấy","?"," hả ","được không","được k","được ko","vậy ạ","nào vậy","nào thế","nữa không","đúng không","đúng k","đúng ko","nữa k","nữa ko","nào ấy","nào ạ"]
+list_question_signal_last = ["vậy","chưa","không","sao","à","hả","nhỉ","thế"]
+list_object = ["bạn","cậu","ad","anh","chị","admin","em","mày","bot"]
+list_subject = ["mình","tôi","tớ","tao","tui","anh","em"]
+list_verb_want = ["hỏi","biết","xin"]
+list_verb_have = ["có","được"]

@@ -55,8 +55,7 @@ map_order_entity['career_inform'] = ['career']
 map_order_entity['tuition_inform'] = ['tuition']
 
 
-# entity_path = '/home/taindp/PycharmProjects/thesis/data/db_entity_jan23.json'
-entity_path = '/home/taindp/PycharmProjects/thesis/data/check_entity.json'
+entity_path = './data/check_entity.json'
 with open(entity_path,'r') as jsonfile:
     dict_entity = json.load(jsonfile)[0]
 

@@ -31,7 +31,7 @@ class StateTracker:
         self.max_round_num = constants['run']['max_round_num']
         self.none_state = np.zeros(self.get_state_size())
         self.reset()
-
+        self.current_request_slots = []
     def get_state_size(self):
         """Returns the state size of the state representation used by the agent."""
 
@@ -44,7 +44,7 @@ class StateTracker:
         # A list of the dialogues (dicts) by the agent and user so far in the conversation
         self.history = []
         self.round_num = 0
-
+        self.current_request_slots = []
     def print_history(self):
         """Helper function if you want to see the current history action by action."""
 
@@ -85,7 +85,9 @@ class StateTracker:
 
         # Create bag of request slots representation to represent the current user action
         user_request_slots_rep = np.zeros((self.num_slots,))
-        for key in user_action['request_slots'].keys():
+        # for key in user_action['request_slots'].keys():
+        #     user_request_slots_rep[self.slots_dict[key]] = 1.0
+        for key in self.current_request_slots:
             user_request_slots_rep[self.slots_dict[key]] = 1.0
 
         # Create bag of filled_in slots based on the current_slots
@@ -170,7 +172,18 @@ class StateTracker:
             db_results = self.db_helper.get_db_results(self.current_informs)
             if db_results:
                 # Arbitrarily pick the first value of the dict
-                key, value = list(db_results.items())[0]
+                db_results_no_empty = {}
+                if self.current_request_slots[0] != usersim_default_key:
+                    for key, value in db_results.items():
+                        if isinstance(value[self.current_request_slots[0]], list) and len(value[self.current_request_slots[0]]) > 0:
+                            db_results_no_empty[key] = copy.deepcopy(value)
+                if db_results_no_empty:
+                    key, value = list(db_results_no_empty.items())[0]
+                    value = list(db_results_no_empty.values())
+                else:
+
+                    key, value = list(db_results.items())[0]
+                    value = list(db_results.values())
                 agent_action['inform_slots'] = copy.deepcopy(value)
                 agent_action['inform_slots'][self.match_key] = str(key)
             else:
@@ -193,7 +206,9 @@ class StateTracker:
         """
 
         for key, value in user_action['inform_slots'].items():
-            self.current_informs[key] = value
+            # self.current_informs[key] = value
+            if key not in self.current_request_slots:
+                self.current_request_slots.append(key)
         user_action.update({'round': self.round_num, 'speaker': 'User'})
         self.history.append(user_action)
         self.round_num += 1

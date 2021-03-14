@@ -84,6 +84,21 @@ REQUEST['register'] = [
     # '*criteria* bạn cần tìm là gì vậy ạ?'
 ]
 
+REQUEST['major_code'] = [
+    'Bạn cho mình xin *major_code* cụ thể bạn muốn tìm nha!',
+    '*major_code* bạn cần tìm là bao nhiêu vậy ạ?'
+]
+
+REQUEST['tuition'] = [
+    'Bạn cho mình xin mức *tuition* cụ thể bạn muốn tìm nha!',
+    # '*major_code* bạn cần tìm là bao nhiêu vậy ạ?'
+]
+
+REQUEST['career'] = [
+    # 'Bạn cho mình xin mức *tuition* cụ thể bạn muốn tìm nha!',
+    '*career* bạn cần tìm là gì vậy ạ?'
+]
+
 REQUEST_REPEAT = [
     'Thông tin *request_key* bạn nhập vào chưa rõ ràng, bạn cung cấp lại giúp mình thông tin này nhé! ',
     'Rất tiếc, thông tin *request_key* bạn nhập vào mình vẫn chưa rõ, bạn vui lòng cung cấp lại thông tin này giúp mình nhé!',
@@ -194,7 +209,9 @@ AGENT_REQUEST_OBJECT = {
     "case": "phương thức tuyển sinh",
     "criteria": "chỉ tiêu tuyển sinh",
     "object" : "đối tượng tuyển sinh",
-    "register": "cách thức đăng ký"
+    "register": "cách thức đăng ký",
+    "major_code": "mã ngành",
+    "tuition":"học phí"
 }
 """
 # sửa lại dialogue train
@@ -220,20 +237,19 @@ AGENT_REQUEST_OBJECT = {
 'foreign_lang_min'
 """
 AGENT_INFORM_OBJECT = {
-    "major_code": "mã ngành",
     "major_name": "tên ngành",
     "type_edu": "chương trình đào tạo",
     "point": "điểm chuẩn",
-    "subject_group": "khối thi",
+    "subject_group": "tổ hợp khối",
+    "subject": "môn thi",
     "year":"năm",
     "career": "cơ hội nghề nghiệp",
-    "subject": "môn thi",
-    "tuition": "giá học phí một tín chỉ",
-    # "satisfy": "mức độ hài lòng"
-
     "case": "phương thức tuyển sinh",
     "criteria": "chỉ tiêu tuyển sinh",
     "object" : "đối tượng tuyển sinh",
+    "register": "cách thức đăng ký",
+    "major_code": "mã ngành",
+    "tuition":"học phí",
     "register": "cách thức đăng ký"
 
 }

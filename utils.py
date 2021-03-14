@@ -1,6 +1,5 @@
 from datetime import date
 import string
-import torch
 import numpy as np
 from pyvi import ViTokenizer
 # import regex as re
@@ -12,21 +11,21 @@ import pandas as pd
 import pickle
 # path = '/home/taindp/Database/intent/'
 # path = 'data/'
-path = '/home/taindp/PycharmProjects/thesis/data/'
-def check_question(mess):
-    # input: câu nhập vào người dùng
-    # return: nếu là câu hỏi True
-    list_quest = []
-    with open(os.path.join(path,'check_question.txt'),'r') as infile:
-        lines = infile.readlines()
-        for line in lines:
-            line = str(line).replace('\n','')
-            words = line.split(',')
-            for word in words:
-                list_quest.append(word)
-    for ele in list_quest:
-        if (mess.lower().find(ele) != -1):
-            return True
+path = './data'
+# def check_question(mess):
+#     # input: câu nhập vào người dùng
+#     # return: nếu là câu hỏi True
+#     list_quest = []
+#     with open(os.path.join(path,'check_question.txt'),'r') as infile:
+#         lines = infile.readlines()
+#         for line in lines:
+#             line = str(line).replace('\n','')
+#             words = line.split(',')
+#             for word in words:
+#                 list_quest.append(word)
+#     for ele in list_quest:
+#         if (mess.lower().find(ele) != -1):
+#             return True
 
 def create_token(mess):
     # input: câu nhập vào của người dùng
