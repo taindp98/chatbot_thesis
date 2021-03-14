@@ -171,6 +171,49 @@ def predict_lstm(mess):
     dict_pred = pred.json()
     return dict_pred['intent'],dict_pred['probability'],dict_pred['message']
 
+def clasify_business_random_intent(message):
+
+    for notification in dict_business_intent['subject_group']:
+        if message.lower().find(notification)!=-1:
+            return 'subject_group',1.0,message
+
+    for notification in dict_business_intent['tuition']:
+        if message.lower().find(notification)!=-1:
+            return 'tuition',1.0,message
+
+    for notification in dict_business_intent['point']:
+        if message.lower().find(notification)!=-1:
+            return 'point',1.0,message
+
+    for notification in dict_business_intent['major_code']:
+        if message.lower().find(notification)!=-1:
+            return 'major_code',1.0,message
+
+    for notification in dict_business_intent['subject']:
+        if message.lower().find(notification)!=-1:
+            return 'subject',1.0,message
+
+    for notification in dict_business_intent['major_name']:
+        if message.lower().find(notification)!=-1:
+            return 'major_name',1.0,message
+
+    for notification in dict_business_intent['object']:
+        if message.lower().find(notification)!=-1:
+            return 'object',1.0,message
+
+    for notification in dict_business_intent['register']:
+        if message.lower().find(notification)!=-1:
+            return 'register',1.0,message
+
+    for notification in dict_business_intent['criteria']:
+        if message.lower().find(notification)!=-1:
+            return 'criteria',1.0,message
+
+    for notification in dict_business_intent['year']:
+        if message.lower().find(notification)!=-1:
+            return 'year',1.0,message
+
+    return predict_lstm(message)
 
 def catch_intent(mess):
     # input: câu nhập vào của người dùng
@@ -178,24 +221,24 @@ def catch_intent(mess):
     # quy trình xử lý: chuẩn hóa kiểu gõ,check question ,check intent
     mess_unic = convert_unicode(mess)
     mess_clean = clean_mess(mess_unic)
+    for notification in list_anything_notification:
+        if mess_clean.lower().find(notification)!=-1:
+            return 'anything',1.0,mess_clean
 
     if check_question(mess_clean):
-        for index1,item in enumerate(list(dict_business_intent.keys())):
-            list_intent = dict_business_intent[item]
-            for index2,notifi in enumerate(list_intent):
-                if mess_clean.find(notifi)!=-1:
-                    return item,1.0,mess_clean
-                elif index1 == (len(list(dict_business_intent.keys()))-1) and index2 == (len(list_intent)-1):
-                    return predict_lstm(mess_clean)
-                else:
-                    pass
-    else:
-        for index1,item in enumerate(list(dict_random_intent.keys())):
-            list_intent_stm = dict_random_intent[item]
-            for index2,notifi in enumerate(list_intent_stm):
-                if mess_clean.find(notifi)!=-1:
-                    return item,1.0,mess_clean
-                elif index1 == (len(list(dict_random_intent.keys()))-1) and index2 == (len(list_intent_stm)-1):
-                    return 'not_intent',1.0,mess_clean
-                else:
-                    pass
+        return clasify_business_random_intent(mess_clean)
+
+    for notification in list_done_notification:
+        if mess_clean.lower().find(notification)!=-1:
+            return 'done',1.0,mess_clean
+
+    for notification in list_hello_notification:
+        if mess_clean.lower().find(notification)!=-1:
+            return 'hello',1.0,mess_clean
+
+    for notification in list_thanks_notification:
+        if mess_clean.lower().find(notification)!=-1:
+            return 'thanks',1.0,mess_clean
+
+    return 'not_intent',1.0,mess_clean
+# print(catch_intent("đúng rồi"))

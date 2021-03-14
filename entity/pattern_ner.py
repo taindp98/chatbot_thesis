@@ -11,29 +11,22 @@ map_order_entity = {}
 # intent pattern matching
 # tìm ngành
 map_order_entity['major_name'] = ['point','subject_group','career','criteria','object','register','case']
-
-# xin mã ngành = tên ngành/program/khối
 map_order_entity['major_code']=['major_name','subject_group']
-# xin điểm = tên ngành/khối/program
 map_order_entity['point']=['major_name','subject_group','year','type_edu','case']
-# xin khối = subject/tên ngành
 map_order_entity['subject_group']=['major_name','subject']
-
 map_order_entity['subject']=['major_name','subject_group']
 map_order_entity['tuition']=['major_name','type_edu']
-
 map_order_entity['year'] = ['major_name','subject_group','point','subject']
-map_order_entity['career']=['major_name','subject','subject_group']
-map_order_entity['criteria'] = ['major_name','case','object','register','subject_group','subject','type_edu','year']
-# intent deep learning
-
-map_order_entity['type_edu']=['major_name','subject_group','subject','case','object','register','criteria']
-
-map_order_entity['case']=['major_name','criteria','subject','subject_group','case','register','criteria']
 map_order_entity['object'] = ['case','type_edu','major_name','register']
 map_order_entity['register'] = ['case','type_edu','major_name','object']
+map_order_entity['criteria'] = ['major_name','case','object','register','subject_group','subject','type_edu','year']
+# intent deep learning
+# label = ['other','type_edu','case','career']
+map_order_entity['type_edu']=['major_name','subject_group','subject','case','object','register','criteria']
+map_order_entity['case']=['major_name','criteria','subject','subject_group','case','register','criteria']
+map_order_entity['career']=['major_name','subject','subject_group']
 
-map_order_entity['other_intent']=['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
+# map_order_entity['other']=['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
 
 
 

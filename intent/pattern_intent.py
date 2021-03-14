@@ -1,8 +1,8 @@
 dict_business_intent = {}
 
-dict_business_intent["duration"] = ["mấy năm","chừng nào","tới chừng nào","tới mấy năm","bao lâu","may nam","chung nao","học có lâu không","có lâu không","bốn năm","4 năm","5 năm","năm năm","bao nhiêu năm","bao lau","bao nhieu nam","bao nhiêu học kỳ","bao nhiêu học kì","mấy học kì","mấy học kỳ","may hoc ky","may hoc ki","có lâu","lâu"]
+# dict_business_intent["duration"] = ["mấy năm","chừng nào","tới chừng nào","tới mấy năm","bao lâu","may nam","chung nao","học có lâu không","có lâu không","bốn năm","4 năm","5 năm","năm năm","bao nhiêu năm","bao lau","bao nhieu nam","bao nhiêu học kỳ","bao nhiêu học kì","mấy học kì","mấy học kỳ","may hoc ky","may hoc ki","có lâu","lâu"]
 
-dict_business_intent["location"] = ["học ở đâu","học ở chỗ nào","học ở cs nào","học ở cơ sở nào","hoc o cho nao","hoc o cs nao","học ở cơ sở 1","học ở cở sở 2","học ở cs1","học ở cs2","học ở nước ngoài","nước nào","nuoc ngoai","nuoc nao","học ở mỹ","học ở nhật"]
+# dict_business_intent["location"] = ["học ở đâu","học ở chỗ nào","học ở cs nào","học ở cơ sở nào","hoc o cho nao","hoc o cs nao","học ở cơ sở 1","học ở cở sở 2","học ở cs1","học ở cs2","học ở nước ngoài","nước nào","nuoc ngoai","nuoc nao","học ở mỹ","học ở nhật"]
 
 # dict_business_intent["public_transport"] = ["buýt","xe buýt","bus","xe buyt","buyt","tuyến xe","xe số","xe bus","xe số mấy","xe so may","bus so may","xe buýt nào","xe buyt nao","xe nao","xe nào","tuyến nào","tuyen nao","tuyến số mấy","số mấy","tuyen so may","so may","trạm xe buýt","trạm xe số mấy","tram bus","trạm bus","trạm nào","trạm dừng","trạm","tram"]
 
@@ -24,14 +24,20 @@ dict_business_intent["subject"] = ["môn thi","mon thi","môn nào","mon nao","t
 
 dict_business_intent['object'] = ['đối tượng','doi tuong','thí sinh','thi sinh', 'đôi tuong','doi tượng']
 
-#dict_business_intent['register'] = ['đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
+dict_business_intent['major_name'] = ['ngành nào','tên ngành','nganh nao']
+
+dict_business_intent['register'] = ['đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
+
+dict_business_intent['criteria'] = ['chỉ tiêu','chi tieu']
+
+dict_business_intent['year'] = ['năm','năm nào','năm nay']
 
 dict_random_intent = {}
 
-dict_random_intent["anything"] = ["sao cũng được","gì cũng được","anything","s cũng được",'j cũng được',"không biết","k biết","ko biết","không nhớ","ko nhớ","k nhớ","không rõ","k rõ","ko rõ","cũng được","cũng ok","cũng không sao","cũng dc","cũng k sao","cũng ko sao"]
-dict_random_intent["hello"] = ["chào"," xin chào","chao","xin chao","hello","chao buoi sang","chào buổi sáng","hi "]
-dict_random_intent["done"] = ["tạm biệt","bye bye","pp","tam biet","bye"]
-dict_random_intent["thanks"] = ["đúng","phải rồi","ok","ừ","ừm","oke","yes","hay quá","cảm ơn","cam on","tks","thanks","thank","thank u","thank you","cám ơn","ty","đúng rồi","tốt lắm","cảm ơn nha","vang","vâng","đúng vậy","chính xác"]
+# dict_random_intent["anything"] = ["sao cũng được","gì cũng được","anything","s cũng được",'j cũng được',"không biết","k biết","ko biết","không nhớ","ko nhớ","k nhớ","không rõ","k rõ","ko rõ","cũng được","cũng ok","cũng không sao","cũng dc","cũng k sao","cũng ko sao"]
+# dict_random_intent["hello"] = ["chào"," xin chào","chao","xin chao","hello","chao buoi sang","chào buổi sáng","hi "]
+# dict_random_intent["done"] = ["tạm biệt","bye bye","pp","tam biet","bye"]
+# dict_random_intent["thanks"] = ["đúng","phải rồi","ok","ừ","ừm","oke","yes","hay quá","cảm ơn","cam on","tks","thanks","thank","thank u","thank you","cám ơn","ty","đúng rồi","tốt lắm","cảm ơn nha","vang","vâng","đúng vậy","chính xác"]
 
 ###
 #INTENT MESSAGE SIGNALS
@@ -41,3 +47,11 @@ list_object = ["bạn","cậu","ad","anh","chị","admin","em","mày","bot"]
 list_subject = ["mình","tôi","tớ","tao","tui","anh","em"]
 list_verb_want = ["hỏi","biết","xin"]
 list_verb_have = ["có","được"]
+
+#intent not want information
+list_hello_notification = ["hi","hello","chào","helo"]
+list_done_notification = ["bye","tạm biệt","bai","gặp lại",'pp']
+list_thanks_notification = ["cảm ơn","tks","thanks",'thank']
+list_anything_notification = ["sao cũng được","gì cũng được","anything","s cũng được",\
+    'j cũng được',"không biết","k biết","ko biết","không nhớ","ko nhớ","k nhớ","không rõ",\
+        "k rõ","ko rõ","cũng được","cũng ok","cũng không sao","cũng dc","cũng k sao","cũng ko sao"]
