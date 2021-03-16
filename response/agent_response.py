@@ -52,20 +52,21 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
         print('>'*50)
         print('match_found')
         inform_slot = state_tracker.current_request_slots[0]
+        # inform_slot = user_action['request_slots']
         print('inf_slot',inform_slot)
         if agent_action['inform_slots']['major'] == "no match available":
             sentence_pattern = random.choice(MATCH_FOUND['not_found'])
             sentence = sentence_pattern.replace("*found_slot*", AGENT_INFORM_OBJECT[inform_slot])
         else:
             key = agent_action['inform_slots']['major']
-            # first_result_data = agent_action['inform_slots'][key][0]
-            first_result_data = agent_action['inform_slots']
+            first_result_data = agent_action['inform_slots'][key][0]
+            # first_result_data = agent_action['inform_slots']
 
             # #nếu là câu hỏi intent confirm thì cần response lại mà match hay không
             # print("-------------------------------inform slot :{}".format(inform_slot))
             # print("---------------------------------confirm obj: {}".format(confirm_obj))
             response_match = ''
-            print('confirm_obj',confirm_obj)
+            # print('confirm_obj',confirm_obj)
             if confirm_obj != None:
                 if inform_slot not in list_map_key:
                     check_match = check_match_sublist_and_substring(confirm_obj[inform_slot],first_result_data[inform_slot])
@@ -97,7 +98,6 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
 
             sentence += "\n" + response_obj + response_match
             print("-----------------------------match sentence")
-            # print(sentence)
-    return sentence
-
-# print(response_craft({'intent': 'inform', 'inform_slots': {'major_name': ['điện tử']}, 'request_slots': {}, 'round': 1, 'speaker': 'Agent'}))
+            print(sentence)
+    sentence_res = sentence.replace(r'"',r'')
+    return sentence_res

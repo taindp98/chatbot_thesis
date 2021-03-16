@@ -5,7 +5,6 @@ from dqn.dialogue_config import all_intents, all_slots, usersim_default_key,agen
 import copy
 import time
 
-
 class StateTracker:
     """Tracks the state of the episode/conversation and prepares the state representation for the agent."""
 
@@ -87,9 +86,10 @@ class StateTracker:
         user_request_slots_rep = np.zeros((self.num_slots,))
         # for key in user_action['request_slots'].keys():
         #     user_request_slots_rep[self.slots_dict[key]] = 1.0
+
         for key in self.current_request_slots:
             user_request_slots_rep[self.slots_dict[key]] = 1.0
-
+        #
         # Create bag of filled_in slots based on the current_slots
         current_slots_rep = np.zeros((self.num_slots,))
         for key in self.current_informs:
@@ -134,6 +134,25 @@ class StateTracker:
             if key in self.slots_dict:
                 kb_binary_rep[self.slots_dict[key]] = np.sum(db_results_dict[key] > 0.)
 
+
+        ########################
+        # represent current slot has value in db result
+        db_binary_slot_rep = np.zeros((self.num_slots + 1,))
+        db_results = self.db_helper.get_db_results(self.current_informs)
+        if db_results:
+            # Arbitrarily pick the first value of the dict
+            key, data = list(db_results.items())[0]
+            # print("size state: {} ".format(self.num_slots + 1))
+            # print("first value:   {}".format(data))
+            for slot, value in data.items():
+                if slot in self.slots_dict and isinstance(value, list) and len(value) > 0:
+                    # if slot not in self.current_request_slots:
+                    db_binary_slot_rep[self.slots_dict[slot]] = 1.0
+
+
+        ########################
+
+
         state_representation = np.hstack(
             [user_act_rep, user_inform_slots_rep, user_request_slots_rep, agent_act_rep, agent_inform_slots_rep,
              agent_request_slots_rep, current_slots_rep, turn_rep, turn_onehot_rep, kb_binary_rep,
@@ -159,6 +178,8 @@ class StateTracker:
 
         if agent_action['intent'] == 'inform':
             assert agent_action['inform_slots']
+            # print('$'*50)
+            # print('current_informs upd state agent',self.current_informs)
             inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs)
             agent_action['inform_slots'] = inform_slots
             assert agent_action['inform_slots']
@@ -166,9 +187,17 @@ class StateTracker:
             assert key != 'match_found'
             assert value != 'PLACEHOLDER', 'KEY: {}'.format(key)
             self.current_informs[key] = value
+
+            # print('%'*50)
+            # print('current_informs upd state agent',self.current_informs)
         # If intent is match_found then fill the action informs with the matches informs (if there is a match)
         elif agent_action['intent'] == 'match_found':
             assert not agent_action['inform_slots'], 'Cannot inform and have intent of match found!'
+
+            print('>'*50)
+            print('match_found',self.match_key,agent_action['inform_slots'])
+            print('>'*50)
+
             db_results = self.db_helper.get_db_results(self.current_informs)
             if db_results:
                 # Arbitrarily pick the first value of the dict
@@ -184,7 +213,8 @@ class StateTracker:
 
                     key, value = list(db_results.items())[0]
                     value = list(db_results.values())
-                agent_action['inform_slots'] = copy.deepcopy(value)
+
+                agent_action['inform_slots'] = {key: copy.deepcopy(value)}
                 agent_action['inform_slots'][self.match_key] = str(key)
             else:
                 agent_action['inform_slots'][self.match_key] = 'no match available'
@@ -206,7 +236,9 @@ class StateTracker:
         """
 
         for key, value in user_action['inform_slots'].items():
-            # self.current_informs[key] = value
+            self.current_informs[key] = value
+
+        for key, value in user_action['request_slots'].items():
             if key not in self.current_request_slots:
                 self.current_request_slots.append(key)
         user_action.update({'round': self.round_num, 'speaker': 'User'})

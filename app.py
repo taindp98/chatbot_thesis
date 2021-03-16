@@ -23,7 +23,7 @@ from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 # app.config["MONGO_URI"] = "mongodb://localhost:27017"
-# os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
+os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
 app.config['MONGO_URI'] = os.environ.get('MONGOLAB_URI')
 mongo = PyMongo(app)
 FOLDER_PATH = './dqn'
@@ -86,7 +86,9 @@ def process_conversation_POST(state_tracker_id, message):
         print('========================')
         print('agent action',agent_act)
         print('========================')
+
         StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
+        # print('state_tracker.current_request_slots[0]',state_tracker.current_request_slots[0])
         agent_message = response_craft(agent_act, state_tracker,confirm_obj)
     else:
         # to prevent key error

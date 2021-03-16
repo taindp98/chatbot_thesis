@@ -157,7 +157,7 @@ INFORM['career'] = [
     '*career_instance* là *career* của ngành bạn cần tìm'
 ]
 INFORM['subject'] = [
-    '*subject_instance* thuộc *subject_group* cho ngành bạn cần tìm'
+    '*subject_instance* thuộc tổ hợp *subject* cho ngành bạn cần tìm phải không ?'
 ]
 INFORM['tuition'] = [
     '*tuition_instance* là mức học phí trên một tín chỉ của ngành bạn cần tìm'

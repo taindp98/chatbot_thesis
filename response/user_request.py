@@ -42,7 +42,8 @@ def user_request(mess,state_tracker):
         elif intent_catched == 'not_intent' or intent_catched == 'other':
             if state_tracker.history:
                 last_agent_action = state_tracker.history[-1]
-                # print(last_agent_action)
+
+                print(last_agent_action)
                 #nếu agent request 1 key thì user trả lời key đó
                 user_inform_key = None
                 slot_inform = None
@@ -67,8 +68,15 @@ def user_request(mess,state_tracker):
                 user_action['request_slots'] = {}
 
         elif intent_catched == 'anything':
+            anything_key = None
+            last_agent_action = state_tracker.history[-1]
+            if len(list(last_agent_action['request_slots'].keys())) > 0:
+                anything_key = list(last_agent_action['request_slots'].keys())[0]
+            elif len(list(last_agent_action['inform_slots'].keys())) > 0:
+                anything_key = list(last_agent_action['inform_slots'].keys())[0]
             # mac dinh de tranh crash server
-            anything_key = "major_name"
+            if not anything_key:
+                anything_key = "major_name"
             user_action['intent'] = 'inform'
             user_action['inform_slots'] = {anything_key:'anything'}
             user_action['request_slots'] = {}

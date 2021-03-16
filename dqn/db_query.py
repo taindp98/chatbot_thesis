@@ -45,16 +45,16 @@ class DBQuery:
         # This removes the inform we want to fill from the current informs if it is present in the current informs
         # so it can be re-queried
         current_informs = copy.deepcopy(current_inform_slots)
-        current_informs.pop(key, None)
+        # current_informs.pop(key, None)
 
         # db_results is a dict of dict in the same exact format as the db, it is just a subset of the db
         db_results = self.get_db_results(current_informs)
-        # print("current informs: {}".format(current_informs))
+        print("current informs: {}".format(current_informs))
 
         filled_inform = {}
         values_dict = self._count_slot_values(key, db_results)
         # print("key: {}".format(key))
-        # print("db results: {}".format(db_results))
+        print("db results: {}".format(db_results))
 
         if values_dict:
             # Get key with max value (ie slot value with highest count of available results)
@@ -127,7 +127,9 @@ class DBQuery:
 
         # Filter non-queryable items and keys with the value 'anything' since those are inconsequential to the constraints
         new_constraints = {k: v for k, v in constraints.items() if k not in self.no_query and v is not 'anything'}
-        # print(new_constraints)
+        # print('>'*50)
+        # print(constraints)
+        # print('>'*50)
         tuple_new_constraint=copy.deepcopy(new_constraints)
         # print(tuple_new_constraint)
         inform_items ={k:tuple(v) for k,v in tuple_new_constraint.items()}.items()

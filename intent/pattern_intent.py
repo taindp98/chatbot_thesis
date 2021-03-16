@@ -49,7 +49,7 @@ list_verb_want = ["hỏi","biết","xin"]
 list_verb_have = ["có","được"]
 
 #intent not want information
-list_hello_notification = ["hi","hello","chào","helo"]
+list_hello_notification = ["hello","chào","helo"]
 list_done_notification = ["bye","tạm biệt","bai","gặp lại",'pp']
 list_thanks_notification = ["cảm ơn","tks","thanks",'thank']
 list_anything_notification = ["sao cũng được","gì cũng được","anything","s cũng được",\
