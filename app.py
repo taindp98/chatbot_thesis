@@ -16,6 +16,7 @@ from response.agent_action import get_agent_action
 from response.agent_response import response_craft
 from response.default_response import response_to_user_free_style
 import random
+from datetime import datetime
 
 import os
 from bs4 import BeautifulSoup
@@ -37,6 +38,9 @@ collection = db['general'].find({})
 # collection = db['general']
 database = []
 for item in collection:
+    bad_id = item['_id']
+    good_id = str(bad_id)
+    item['_id'] = good_id
     database.append(item)
 
 # khoi tao app
@@ -59,8 +63,16 @@ def get_new_id():
             return _id
 
 def process_conversation_POST(state_tracker_id, message):
+    now = datetime.now()
+    date_time = now.strftime("%m_%d_%Y_%H_%M_%S")
+    dict_investigate = {}
     state_tracker = None
-    print('tracker_id',state_tracker_id)
+    # print('tracker_id',state_tracker_id)
+
+    dict_investigate['time'] = date_time
+    dict_investigate['state_tracker_id'] = state_tracker_id
+
+
     if state_tracker_id in StateTracker_Container.keys():
         state_tracker = StateTracker_Container[state_tracker_id][0]
         confirm_obj = StateTracker_Container[state_tracker_id][1]
@@ -72,36 +84,51 @@ def process_conversation_POST(state_tracker_id, message):
 
 #
     user_action, new_confirm_obj = user_request(message,state_tracker)
-    print("-----------------------------------user action")
+    print("-------------user action-----------")
     print(user_action)
+    print('-----------------------------------')
+    dict_investigate['user_action'] = user_action
+
     if user_action['request_slots'] != {}:
         state_tracker.reset()
         confirm_obj = None
 
     if new_confirm_obj != None:
         confirm_obj = new_confirm_obj
-    if user_action['intent'] not in ["hello","other","done"] :
-        dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
-        agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
-        print('========================')
-        print('agent action',agent_act)
-        print('========================')
 
-        StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
-        # print('state_tracker.current_request_slots[0]',state_tracker.current_request_slots[0])
-        agent_message = response_craft(agent_act, state_tracker,confirm_obj)
-    else:
-        # to prevent key error
-        agent_act = {'intent':user_action['intent'],'request_slots':[],'inform_slots':[]}
-        print('========================')
-        print('agent action',agent_act)
-        print('========================')
-        agent_message = random.choice(response_to_user_free_style[user_action['intent']])
-        #nếu là done thì reset và cho confirm về None
-        if user_action['intent'] == "done":
-            state_tracker.reset()
-            StateTracker_Container[state_tracker_id] = (state_tracker,None)
-    return agent_message,agent_act
+    try:
+        if user_action['intent'] not in ["hello","other","done"] :
+            dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
+            agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
+            print('========================')
+            print('agent action',agent_act)
+            print('========================')
+
+            StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
+            # print('state_tracker.current_request_slots[0]',state_tracker.current_request_slots[0])
+            agent_message = response_craft(agent_act, state_tracker,confirm_obj)
+        else:
+            # to prevent key error
+            agent_act = {'intent':user_action['intent'],'request_slots':[],'inform_slots':[]}
+            # print('========================')
+            # print('agent action',agent_act)
+            # print('========================')
+            agent_message = random.choice(response_to_user_free_style[user_action['intent']])
+            #nếu là done thì reset và cho confirm về None
+            if user_action['intent'] == "done":
+                state_tracker.reset()
+                StateTracker_Container[state_tracker_id] = (state_tracker,None)
+
+        dict_investigate['agent_action'] = agent_act
+        dict_investigate['fail_pattern'] = 'success'
+
+
+        return agent_message,agent_act
+    except Exception as e:
+        dict_investigate['fail_pattern'] = str(e)
+        print('dict_investigate')
+        print(dict_investigate)
+        print('>'*50)
 
 # @app.route('/')
 # def index():
@@ -149,8 +176,20 @@ def post_api_cse_assistant():
     if agent_action['intent'] in ["match_found","inform"]:
         current_informs = StateTracker_Container[state_tracker_id][0].current_informs
     K.clear_session()
-    return jsonify({"code": 200, "message": agent_message,"state_tracker_id":state_tracker_id,"agent_action":agent_action,"current_informs":current_informs})
 
+
+    res_dict = {}
+    res_dict["code"] = 200
+    res_dict["message"] = agent_message
+    res_dict["state_tracker_id"] = state_tracker_id
+
+    res_dict['agent_action'] = agent_action
+    res_dict['current_informs'] = current_informs
+
+    print('======================')
+    print(res_dict)
+    # return jsonify({"code": 200, "message": agent_message,"state_tracker_id":state_tracker_id,"agent_action":agent_action,"current_informs":current_informs})
+    return jsonify(res_dict)
 @app.route('/api/cse-assistant-conversation-manager/reset-state-tracker', methods=['POST'])
 def post_api_cse_assistant_reset_state_tracker():
     input_data = request.json

@@ -174,6 +174,7 @@ class StateTracker:
                                  'request_slots': dict) and changed to dict('intent': '', 'inform_slots': {},
                                  'request_slots': {}, 'round': int, 'speaker': 'Agent')
 
+        chỉ query khi có có current inform khi agent action là inform
         """
 
         if agent_action['intent'] == 'inform':
@@ -181,9 +182,11 @@ class StateTracker:
             # print('$'*50)
             # print('current_informs upd state agent',self.current_informs)
             inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs)
+            # print('inform_slots',inform_slots)
             agent_action['inform_slots'] = inform_slots
             assert agent_action['inform_slots']
             key, value = list(agent_action['inform_slots'].items())[0]  # Only one
+            # print(list(agent_action['inform_slots'].items()))
             assert key != 'match_found'
             assert value != 'PLACEHOLDER', 'KEY: {}'.format(key)
             self.current_informs[key] = value
@@ -194,9 +197,9 @@ class StateTracker:
         elif agent_action['intent'] == 'match_found':
             assert not agent_action['inform_slots'], 'Cannot inform and have intent of match found!'
 
-            print('>'*50)
-            print('match_found',self.match_key,agent_action['inform_slots'])
-            print('>'*50)
+            # print('>'*50)
+            # print('match_found',self.match_key,agent_action['inform_slots'])
+            # print('>'*50)
 
             db_results = self.db_helper.get_db_results(self.current_informs)
             if db_results:

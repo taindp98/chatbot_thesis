@@ -49,16 +49,18 @@ class DBQuery:
 
         # db_results is a dict of dict in the same exact format as the db, it is just a subset of the db
         db_results = self.get_db_results(current_informs)
-        print("current informs: {}".format(current_informs))
+        # print("current informs: {}".format(current_informs))
 
         filled_inform = {}
         values_dict = self._count_slot_values(key, db_results)
         # print("key: {}".format(key))
-        print("db results: {}".format(db_results))
-
-        if values_dict:
+        # print("db results: {}".format(db_results))
+        if key == usersim_default_key:
+            filled_inform[key] = list(db_results)[0]
+        elif values_dict:
             # Get key with max value (ie slot value with highest count of available results)
-            filled_inform[key] = max(values_dict, key=values_dict.get)
+            # filled_inform[key] = max(values_dict, key=values_dict.get)
+            filled_inform[key] = list(max(values_dict, key=values_dict.get))
         else:
             filled_inform[key] = 'no match available'
 

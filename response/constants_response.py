@@ -170,19 +170,19 @@ INFORM['major'] = [
 ]
 
 INFORM['case'] = [
-    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *case_instance*'
+    '*case* bạn cần tìm là *case_instance* phải không ạ ?'
 ]
 
 INFORM['criteria'] = [
-    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *criteria_instance*'
+    '*criteria* hiện tại cho chương trình đào tạo bạn cần tìm là *criteria_instance*'
 ]
 
 INFORM['object'] = [
-    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *object_instance*'
+    'Bạn có phải thuộc *object* là *object_instance* không ?'
 ]
 
 INFORM['register'] = [
-    'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *register_instance*'
+    '*register_instance* có phải là *register* bạn đang tìm kiếm không ?'
 ]
 
 """
