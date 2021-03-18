@@ -42,10 +42,13 @@ class DBQuery:
 
         key = list(inform_slot_to_fill.keys())[0]
 
+        print('>'*50)
+        print(key)
+        print('>'*50)
         # This removes the inform we want to fill from the current informs if it is present in the current informs
         # so it can be re-queried
         current_informs = copy.deepcopy(current_inform_slots)
-        # current_informs.pop(key, None)
+        current_informs.pop(key, None)
 
         # db_results is a dict of dict in the same exact format as the db, it is just a subset of the db
         db_results = self.get_db_results(current_informs)
