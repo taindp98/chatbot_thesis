@@ -26,13 +26,10 @@ usersim_required_init_inform_keys = ['major_name']
 #######################################
 
 # Possible inform and request slots for the agent
-# agent_inform_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year',usersim_default_key]
-agent_inform_slots = ['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object',usersim_default_key]
-
-# agent_request_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year']
-agent_request_slots = ['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object']
-# agent_request_slots = ['major_name', 'type_edu','subject_group', 'year','case','object']
-
+# agent_inform_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','point','major_code','year','satisfy',usersim_default_key]
+agent_inform_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object',usersim_default_key]
+agent_request_slots = ['major_name', 'type_edu','subject_group', 'year']
+# agent_request_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object']
 
 # Possible actions for agent
 agent_actions = [
@@ -49,14 +46,12 @@ for slot in agent_request_slots:
 
 # Rule-based policy request list
 
-#rule_requests = ['major_code','major_name','type_edu','point','subject_group','year']
-rule_requests = ['major_name', 'type_edu','subject_group', 'year','case','object']
+rule_requests = ['major_name', 'type_edu','subject_group', 'year']
 # rule_requests =['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object']
 
 
 # These are possible inform slot keys that cannot be used to query
 no_query_keys = [usersim_default_key,'_id']
-# no_query_keys = ['numberofpeople',usersim_default_key]
 
 #######################################
 # Global config
@@ -72,5 +67,5 @@ UNSUITABLE = -2
 all_intents = ['inform', 'request', 'done', 'match_found', 'thanks', 'reject']
 
 # All possible slots (for one-hot conversion in ST.get_state())
-all_slots = ['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object',usersim_default_key]
-# all_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','satisfy', 'point','major_code','year',usersim_default_key]
+all_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object',usersim_default_key]
+# all_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','point','major_code','year','satisfy',usersim_default_key]

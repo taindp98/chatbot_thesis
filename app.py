@@ -96,39 +96,39 @@ def process_conversation_POST(state_tracker_id, message):
     if new_confirm_obj != None:
         confirm_obj = new_confirm_obj
 
-    try:
-        if user_action['intent'] not in ["hello","other","done"] :
-            dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
-            agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
-            print('========================')
-            print('agent action',agent_act)
-            print('========================')
+    # try:
+    if user_action['intent'] not in ["hello","other","done"] :
+        dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
+        agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
+        print('========================')
+        print('agent action',agent_act)
+        print('========================')
 
-            StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
-            # print('state_tracker.current_request_slots[0]',state_tracker.current_request_slots[0])
-            agent_message = response_craft(agent_act, state_tracker,confirm_obj)
-        else:
-            # to prevent key error
-            agent_act = {'intent':user_action['intent'],'request_slots':[],'inform_slots':[]}
-            # print('========================')
-            # print('agent action',agent_act)
-            # print('========================')
-            agent_message = random.choice(response_to_user_free_style[user_action['intent']])
-            #nếu là done thì reset và cho confirm về None
-            if user_action['intent'] == "done":
-                state_tracker.reset()
-                StateTracker_Container[state_tracker_id] = (state_tracker,None)
+        StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
+        # print('state_tracker.current_request_slots[0]',state_tracker.current_request_slots[0])
+        agent_message = response_craft(agent_act, state_tracker,confirm_obj)
+    else:
+        # to prevent key error
+        agent_act = {'intent':user_action['intent'],'request_slots':[],'inform_slots':[]}
+        # print('========================')
+        # print('agent action',agent_act)
+        # print('========================')
+        agent_message = random.choice(response_to_user_free_style[user_action['intent']])
+        #nếu là done thì reset và cho confirm về None
+        if user_action['intent'] == "done":
+            state_tracker.reset()
+            StateTracker_Container[state_tracker_id] = (state_tracker,None)
 
-        dict_investigate['agent_action'] = agent_act
-        dict_investigate['fail_pattern'] = 'success'
+    dict_investigate['agent_action'] = agent_act
+    dict_investigate['fail_pattern'] = 'success'
 
 
-        return agent_message,agent_act
-    except Exception as e:
-        dict_investigate['fail_pattern'] = str(e)
-        print('dict_investigate')
-        print(dict_investigate)
-        print('>'*50)
+    return agent_message,agent_act
+    # except Exception as e:
+    #     dict_investigate['fail_pattern'] = str(e)
+    #     print('dict_investigate')
+    #     print(dict_investigate)
+    #     print('>'*50)
 
 # @app.route('/')
 # def index():
