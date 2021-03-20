@@ -5,7 +5,7 @@ import pymongo
 from flask_pymongo import PyMongo
 from flask import Flask, request,render_template,jsonify
 from flask_cors import CORS
-from response.user_request import *
+# from response.user_request import *
 from dqn.state_tracker import StateTracker
 from dqn.dqn_agent import DQNAgent
 
@@ -24,7 +24,7 @@ from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 # app.config["MONGO_URI"] = "mongodb://localhost:27017"
-os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
+# os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
 app.config['MONGO_URI'] = os.environ.get('MONGOLAB_URI')
 mongo = PyMongo(app)
 FOLDER_PATH = './dqn'
@@ -97,7 +97,7 @@ def process_conversation_POST(state_tracker_id, message):
         confirm_obj = new_confirm_obj
 
     # try:
-    if user_action['intent'] not in ["hello","other","done"] :
+    if user_action['intent'] not in ["hello","other","done"]:
         dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
         agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
         print('========================')

@@ -241,4 +241,5 @@ def catch_intent(mess):
             return 'thanks',1.0,mess_clean
 
     return 'not_intent',1.0,mess_clean
-# print(catch_intent("Điện tử ạ"))
+
+# print(catch_intent("thank ad"))

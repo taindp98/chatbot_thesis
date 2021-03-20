@@ -272,5 +272,5 @@ NOT_FOUND = [
     'Mình không tìm thấy ngành nào thỏa mãn các thông tin bạn đã cung cấp, vui lòng điều chỉnh lại giúp mình nhé!'
 ]
 EMPTY_SLOT = [
-    'Thông tin về ngành thỏa mãn điều kiện của bạn nhưng nó không đề cập đến thông tin *request_slot*'
+    'Thông tin bạn cần tìm là hợp lệ nhưng nó không đề cập đến *request_slot* nên tụi mình không thể xử lý yêu cầu của bạn, bạn vui lòng thử lại nhé!'
 ]

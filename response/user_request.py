@@ -39,7 +39,7 @@ def user_request(mess,state_tracker):
             user_action['inform_slots'],confirm_obj=find_all_entity(intent_catched,mess)
             user_action['request_slots'] = {intent_catched:'UNK'}
 
-        elif intent_catched == 'not_intent' or intent_catched == 'other':
+        elif intent_catched == 'not_intent' or intent_catched == 'other' or intent_catched == 'thanks':
             if state_tracker.history:
                 last_agent_action = state_tracker.history[-1]
 

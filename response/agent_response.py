@@ -39,7 +39,7 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
             sentence = sentence.replace("*{}_instance*".format(inform_slot), "\"{}\"".format(inform_value))
         else:
             sentence_pattern = random.choice(EMPTY_SLOT)
-            sentence = sentence_pattern.replace("*request_slot*", inform_slot)
+            sentence = sentence_pattern.replace("*request_slot*", AGENT_REQUEST_OBJECT[inform_slot])
 
     elif agent_intent == "request":
         request_slot = list(agent_action['request_slots'].keys())[0]
