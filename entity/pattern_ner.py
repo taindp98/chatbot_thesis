@@ -2,64 +2,22 @@ from utils import *
 import json
 from intent.intent_regconize import *
 from collections import OrderedDict
+
+from entity.constants_ner import map_order_entity,list_entity
 """
     
     label = ['other_intent','type_edu','case','career']
 """
-map_order_entity = {}
+dict_entity = list_entity[0]
 
-# intent pattern matching
-# tìm ngành
-map_order_entity['major_name'] = ['point','subject_group','career','criteria','object','register','case']
-map_order_entity['major_code']=['major_name','subject_group']
-map_order_entity['point']=['major_name','subject_group','year','type_edu','case']
-map_order_entity['subject_group']=['major_name','subject']
-map_order_entity['subject']=['major_name','subject_group']
-map_order_entity['tuition']=['major_name','type_edu']
-map_order_entity['year'] = ['major_name','subject_group','point','subject']
-map_order_entity['object'] = ['case','type_edu','major_name','register']
-map_order_entity['register'] = ['case','type_edu','major_name','object']
-map_order_entity['criteria'] = ['major_name','case','object','register','subject_group','subject','type_edu','year']
-# intent deep learning
-# label = ['other','type_edu','case','career']
-map_order_entity['type_edu']=['major_name','subject_group','subject','case','object','register','criteria']
-map_order_entity['case']=['major_name','criteria','subject','subject_group','case','register','criteria']
-map_order_entity['career']=['major_name','subject','subject_group']
-
-# map_order_entity['other']=['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
-
-
-
-# bổ sung intent là INFORM cho user_request:
-map_order_entity['not_intent']=['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
-map_order_entity['major_name_inform'] = ['major_name']
-map_order_entity['major_code_inform'] = ['major_code']
-map_order_entity['subject_group_inform'] = ['subject_group']
-map_order_entity['point_inform'] = ['point']
-map_order_entity['type_edu_inform'] = ['type_edu']
-map_order_entity['year_inform'] = ['year']
-
-map_order_entity['case_inform'] = ['case']
-map_order_entity['criteria_inform'] = ['criteria']
-map_order_entity['object_inform'] = ['object']
-map_order_entity['register_inform'] = ['register']
-map_order_entity['subject_inform'] = ['subject']
-map_order_entity['career_inform'] = ['career']
-map_order_entity['tuition_inform'] = ['tuition']
-
-
-entity_path = './data/check_entity.json'
-with open(entity_path,'r') as jsonfile:
-    dict_entity = json.load(jsonfile)[0]
-
-# print(dict_entity['type_edu'])
-def find_all_entity(intent,input_sentence):
-    # with open(entity_path,'r') as jsonfile:
-    #     dict_entity = json.load(jsonfile)
-    normalized_input_sentence = convert_unicode(input_sentence)
+# entity_path = './data/check_entity.json'
+# with open(entity_path,'r') as jsonfile:
+#     dict_entity = json.load(jsonfile)[0]
+# print(dict_entity)
+def find_all_entity(intent,mess_clean):
+    normalized_input_sentence = mess_clean
     result_entity_dict={}
     list_order_entity_name=map_order_entity[intent]
-    # print(list_order_entity_name)
     map_entity_name_to_threshold={}
     for entity_name in list_order_entity_name:
         # threshold wordnumber
@@ -81,7 +39,7 @@ def find_all_entity(intent,input_sentence):
         elif entity_name == 'subject':
             matching_threshold = 0.55
         else:
-            matching_threshold = 0.3
+            matching_threshold = 0.15
         catch_entity_threshold_loop = 0
         while True:
             if catch_entity_threshold_loop > 3:
@@ -129,7 +87,7 @@ def find_all_entity(intent,input_sentence):
         confirm_obj = {intent:value}
     return result_entity_dict,confirm_obj
 
-# mess = 'cho em hỏi ngành kỹ thật điện điện tử thì có cơ hội việc làm ra sao ạ'
+# mess = 'cho em hỏi về ưu tiên của trường mình với ạ'
 # # intent_catched, prob,mess_clean = catch_intent(mess)
-# entity_dict,confirm = find_all_entity('review',mess)
+# entity_dict,confirm = find_all_entity('register',mess)
 # print(entity_dict)
