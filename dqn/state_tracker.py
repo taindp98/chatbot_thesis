@@ -50,7 +50,9 @@ class StateTracker:
         for action in self.history:
             print(action)
 
-    def get_state(self, done=False):
+    # def get_state(self, done=False,user_action):
+    def get_state(self, done):
+
         """
         Returns the state representation as a numpy array which is fed into the agent's neural network.
 
@@ -70,7 +72,7 @@ class StateTracker:
             return self.none_state
 
         user_action = self.history[-1]
-        db_results_dict = self.db_helper.get_db_results_for_slots(self.current_informs)
+        db_results_dict = self.db_helper.get_db_results_for_slots(self.current_informs,user_action)
         last_agent_action = self.history[-2] if len(self.history) > 1 else None
 
         # Create one-hot of intents to represent the current user action
@@ -138,7 +140,7 @@ class StateTracker:
         ########################
         # represent current slot has value in db result
         db_binary_slot_rep = np.zeros((self.num_slots + 1,))
-        db_results = self.db_helper.get_db_results(self.current_informs)
+        db_results = self.db_helper.get_db_results(self.current_informs,user_action)
         if db_results:
             # Arbitrarily pick the first value of the dict
             key, data = list(db_results.items())[0]
@@ -162,7 +164,7 @@ class StateTracker:
         # time.sleep(0.5)
         return state_representation
 
-    def update_state_agent(self, agent_action):
+    def update_state_agent(self, agent_action,user_action):
         """
         Updates the dialogue history with the agent's action and augments the agent's action.
 
@@ -181,7 +183,7 @@ class StateTracker:
             assert agent_action['inform_slots']
             # print('$'*50)
             # print('current_informs upd state agent',self.current_informs)
-            inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs)
+            inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs,user_action)
             # print('inform_slots',inform_slots)
             agent_action['inform_slots'] = inform_slots
             assert agent_action['inform_slots']

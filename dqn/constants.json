@@ -1,20 +1,20 @@
 {
   "db_file_paths": {
-    "database": "data/db_hcmut_50_mar20.json",
-    "dict": "data/dict_entity_mar19.json",
-    "user_goals": "data/goal_hcmut_50_mar20.json.json"
+    "database": "data/db_hcmut_60_mar22.json",
+    "dict": "data/dict_entity_mar22.json",
+    "user_goals": "data/goal_hcmut_60_mar22.json"
   },
   "run": {
     "usersim": true,
     "warmup_mem": 6400,
     "num_ep_run": 80000,
     "train_freq": 100,
-    "max_round_num": 17,
+    "max_round_num": 18,
     "success_rate_threshold": 0.2
   },
   "agent": {
     "save_weights_file_path": "",
-    "load_weights_file_path": "dqn/weight/20_03_2021_100000_100_17.h5",
+    "load_weights_file_path": "dqn/weight/22_03_2021_100000_100_18.h5",
     "vanilla": true,
     "learning_rate": 1e-3,
     "batch_size": 64,

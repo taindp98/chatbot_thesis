@@ -27,8 +27,8 @@ usersim_required_init_inform_keys = ['major_name']
 
 # Possible inform and request slots for the agent
 # agent_inform_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','point','major_code','year','satisfy',usersim_default_key]
-agent_inform_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object',usersim_default_key]
-agent_request_slots = ['major_name', 'type_edu','subject_group', 'year']
+agent_inform_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object','register',usersim_default_key]
+agent_request_slots = ['major_name', 'type_edu','subject_group', 'year','case']
 # agent_request_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object']
 
 # Possible actions for agent
@@ -46,7 +46,7 @@ for slot in agent_request_slots:
 
 # Rule-based policy request list
 
-rule_requests = ['major_name', 'type_edu','subject_group', 'year']
+rule_requests = ['major_name', 'type_edu','subject_group', 'year','case']
 # rule_requests =['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object']
 
 
@@ -67,5 +67,5 @@ UNSUITABLE = -2
 all_intents = ['inform', 'request', 'done', 'match_found', 'thanks', 'reject']
 
 # All possible slots (for one-hot conversion in ST.get_state())
-all_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object',usersim_default_key]
+all_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object','register',usersim_default_key]
 # all_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','point','major_code','year','satisfy',usersim_default_key]

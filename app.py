@@ -33,15 +33,15 @@ CONSTANTS_FILE_PATH = f'{FOLDER_PATH}/constants.json'
 with open(CONSTANTS_FILE_PATH) as f:
     constants = json.load(f)
 client = pymongo.MongoClient(os.environ.get('MONGOLAB_URI'))
-db = client.hcmut
-collection = db['general'].find({})
+database = client.hcmut
+# collection = db['general'].find({})
 # collection = db['general']
-database = []
-for item in collection:
-    bad_id = item['_id']
-    good_id = str(bad_id)
-    item['_id'] = good_id
-    database.append(item)
+# database = []
+# for item in collection:
+#     bad_id = item['_id']
+#     good_id = str(bad_id)
+#     item['_id'] = good_id
+#     database.append(item)
 
 # khoi tao app
 app = Flask(__name__)

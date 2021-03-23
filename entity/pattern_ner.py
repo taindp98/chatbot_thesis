@@ -10,10 +10,6 @@ from entity.constants_ner import map_order_entity,list_entity
 """
 dict_entity = list_entity[0]
 
-# entity_path = './data/check_entity.json'
-# with open(entity_path,'r') as jsonfile:
-#     dict_entity = json.load(jsonfile)[0]
-# print(dict_entity)
 def find_all_entity(intent,mess_clean):
     normalized_input_sentence = mess_clean
     result_entity_dict={}

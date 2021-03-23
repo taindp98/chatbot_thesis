@@ -182,7 +182,7 @@ INFORM['object'] = [
 ]
 
 INFORM['register'] = [
-    '*register_instance* có phải là *register* bạn đang tìm kiếm không ?'
+    '*register_instance* có phải là *register* mà bạn lựa chọn không ạ ?'
 ]
 
 """

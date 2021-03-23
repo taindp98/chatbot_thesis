@@ -17,7 +17,7 @@ def get_agent_action(state_tracker,dqn_agent,user_action,done=False):
     print('-----get agent action')
     print(agent_action)
     print('-----get agent action')
-    state_tracker.update_state_agent(agent_action)
+    state_tracker.update_state_agent(agent_action,user_action)
     print('-----update agent action')
     print(agent_action)
     print('-----update agent action')

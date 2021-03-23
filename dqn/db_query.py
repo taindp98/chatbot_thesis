@@ -1,6 +1,7 @@
 from collections import defaultdict
 from dqn.dialogue_config import no_query_keys, usersim_default_key
 import copy
+import re
 
 
 class DBQuery:
@@ -22,7 +23,7 @@ class DBQuery:
         self.no_query = no_query_keys
         self.match_key = usersim_default_key
 
-    def fill_inform_slot(self, inform_slot_to_fill, current_inform_slots):
+    def fill_inform_slot(self, inform_slot_to_fill, current_inform_slots,user_action):
         """
         Given the current informs/constraints fill the informs that need to be filled with values from the database.
 
@@ -51,7 +52,7 @@ class DBQuery:
         current_informs.pop(key, None)
 
         # db_results is a dict of dict in the same exact format as the db, it is just a subset of the db
-        db_results = self.get_db_results(current_informs)
+        db_results = self.get_db_results(current_informs,user_action)
         # print("current informs: {}".format(current_informs))
 
         filled_inform = {}
@@ -113,10 +114,49 @@ class DBQuery:
             return True
         return False
             
+    def convert_to_regex_constraint(self,key,values):
+        or_list = []
+        final_list = []
+        or_dict = {}
+        if key != 'point':
+            if len(values) > 1:
+                for value in values:
+                    all_dict = {}
+                    all_dict[key] = {"$all":[re.compile(value)]}
+                    or_list.append(all_dict)
+                or_dict["$or"] = or_list
+                final_list.append(or_dict)
+            else:
+                all_dict = {}
+                all_dict[key] = {"$all":[re.compile(values[0])]}
+                final_list.append(all_dict)
+        else:
+            all_dict = {}
+            all_dict["point"] = {"$gte":values[0],"$lte":values[1]}
+            final_list.append(all_dict)
+        return final_list[0]
 
 
+    def convert_constraint(self,constraints,user_action):
+        """
+        input dict các thực thể theo từng slot {entity_slot:[entity_mess]}
+        return câu query mongodb
+        form của câu query: { "$and": [{entity_slot:{"$all":[re.compile("entity_mess")]}},{},{}] }
+        """
+        global listkeys
+        if user_action["intent"] == "request":
+            listkeys = list(constraints.keys())
+        and_list = []
+        and_dict = {}
+        if listkeys:
+            for key in listkeys:
+                values = constraints[key]
+                and_list.append(self.convert_to_regex_constraint(key,values))
+            and_dict["$and"] = and_list
+        return and_dict
 
-    def get_db_results(self, constraints):
+
+    def get_db_results(self, constraints,user_action):
         """
         Get all items in the database that fit the current constraints.
 
@@ -133,7 +173,7 @@ class DBQuery:
         # Filter non-queryable items and keys with the value 'anything' since those are inconsequential to the constraints
         new_constraints = {k: v for k, v in constraints.items() if k not in self.no_query and v is not 'anything'}
         # print('>'*50)
-        # print(constraints)
+        # print(new_constraints)
         # print('>'*50)
         tuple_new_constraint=copy.deepcopy(new_constraints)
         # print(tuple_new_constraint)
@@ -153,18 +193,28 @@ class DBQuery:
 
         available_options = {}
         # results=[]
-        i=0
-        for data in self.database:
-            check_match=True
-            for constraint_key in list(new_constraints.keys()):
-                if not self.check_match_sublist_and_substring(new_constraints[constraint_key],data[constraint_key]): #check not sublist and substring
-                    check_match=False
-            if check_match:
-                # print("have match result")
-                # results.append(data)
-                available_options.update({str(i):data})
-                self.cached_db[inform_items].update({str(i): data})
-            i+=1
+
+
+        regex_constraint = self.convert_constraint(new_constraints, user_action)
+        results = self.database.general.find(regex_constraint)
+        for result in results:
+            #đổi từ object id sang string và dùng id đó làm key (thay vì dùng index của mảng để làm key vì không xác định đc index)
+            result["_id"] = str(result["_id"])
+            available_options.update({result['_id']:result})
+            self.cached_db[inform_items].update({result['_id']: result})
+
+        # i=0
+        # for data in self.database:
+        #     check_match=True
+        #     for constraint_key in list(new_constraints.keys()):
+        #         if not self.check_match_sublist_and_substring(new_constraints[constraint_key],data[constraint_key]): #check not sublist and substring
+        #             check_match=False
+        #     if check_match:
+        #         # print("have match result")
+        #         # results.append(data)
+        #         available_options.update({str(i):data})
+        #         self.cached_db[inform_items].update({str(i): data})
+        #     i+=1
 
         
 
@@ -173,7 +223,7 @@ class DBQuery:
         #     self.cached_db[inform_items].update({str(result['_id']): result})
 
         if not available_options:
-          self.cached_db[inform_items] = None
+            self.cached_db[inform_items] = None
 
         #   print("no match: ")
           # print(new_constraints)
@@ -181,7 +231,7 @@ class DBQuery:
  
         return available_options
 
-    def get_db_results_for_slots(self, current_informs):
+    def get_db_results_for_slots(self, current_informs,user_action):
         """
         Counts occurrences of each current inform slot (key and value) in the database items.
 
@@ -201,7 +251,8 @@ class DBQuery:
         inform_items = frozenset(inform_items)
         # # A dict of the inform keys and their counts as stored (or not stored) in the cached_db_slot
         cache_return = self.cached_db_slot[inform_items]
-        # temp_current_informs=copy.deepcopy(current_informs)
+
+        temp_current_informs=copy.deepcopy(current_informs)
         if cache_return:
             return cache_return
  
@@ -212,31 +263,45 @@ class DBQuery:
 
 
 
-        for data in self.database:
-            all_slots_match = True
-            for CI_key, CI_value in current_informs.items():
-                # Skip if a no query item and all_slots_match stays true
-                if CI_key in self.no_query:
-                    continue
-                # If anything all_slots_match stays true AND the specific key slot gets a +1
-                if CI_value == 'anything':
-                    db_results[CI_key] += 1
-                    continue
-                if CI_key in list(data.keys()):
-                    # print("-----------------CI_value")
-                    # print(type(CI_value))
-                    # print("-----------------data[CI_key]")
-                    # print(type(data[CI_key]))
-                    if self.check_match_sublist_and_substring(CI_value,data[CI_key]):
-                        db_results[CI_key] += 1
-                    else:
-                        all_slots_match = False
-                else:
-                    all_slots_match = False
-            if all_slots_match: db_results['matching_all_constraints'] += 1
+        # for data in self.database:
+        #     all_slots_match = True
+        #     for CI_key, CI_value in current_informs.items():
+        #         # Skip if a no query item and all_slots_match stays true
+        #         if CI_key in self.no_query:
+        #             continue
+        #         # If anything all_slots_match stays true AND the specific key slot gets a +1
+        #         if CI_value == 'anything':
+        #             db_results[CI_key] += 1
+        #             continue
+        #         if CI_key in list(data.keys()):
+        #             # print("-----------------CI_value")
+        #             # print(type(CI_value))
+        #             # print("-----------------data[CI_key]")
+        #             # print(type(data[CI_key]))
+        #             if self.check_match_sublist_and_substring(CI_value,data[CI_key]):
+        #                 db_results[CI_key] += 1
+        #             else:
+        #                 all_slots_match = False
+        #         else:
+        #             all_slots_match = False
+        #     if all_slots_match: db_results['matching_all_constraints'] += 1
 
-
-
+        for CI_key, CI_value in current_informs.items():
+        # Skip if a no query item and all_slots_match stays true
+            if CI_key in self.no_query:
+                continue
+            # If anything all_slots_match stays true AND the specific key slot gets a +1
+            if CI_value == 'anything':
+                db_results[CI_key] = self.database.general.count()
+                del temp_current_informs[CI_key]
+                continue
+            db_results[CI_key]=self.database.general.count(self.convert_constraint({CI_key:CI_value},user_action))
+            # print(CI_key)
+            # print(db_results[CI_key])
+           
+        # current_informs_constraint={k:v.lower() for k,v in temp_current_informs.items()}
+        print('temp_current_informs,user_action',temp_current_informs,user_action)
+        db_results['matching_all_constraints'] = self.database.general.count(self.convert_constraint(temp_current_informs,user_action))
         # update cache (set the empty dict)
         self.cached_db_slot[inform_items].update(db_results)
         assert self.cached_db_slot[inform_items] == db_results
