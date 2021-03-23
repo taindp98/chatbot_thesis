@@ -119,7 +119,9 @@ class DBQuery:
         final_list = []
         or_dict = {}
         if key != 'point':
+            print(values)
             if len(values) > 1:
+
                 for value in values:
                     all_dict = {}
                     all_dict[key] = {"$all":[re.compile(value)]}
@@ -143,18 +145,31 @@ class DBQuery:
         return câu query mongodb
         form của câu query: { "$and": [{entity_slot:{"$all":[re.compile("entity_mess")]}},{},{}] }
         """
-        global listkeys
-        if user_action["intent"] == "request":
-            listkeys = list(constraints.keys())
-        and_list = []
-        and_dict = {}
-        if listkeys:
-            for key in listkeys:
-                values = constraints[key]
-                and_list.append(self.convert_to_regex_constraint(key,values))
-            and_dict["$and"] = and_list
-        return and_dict
+        # global listkeys
+        # listkeys = []
+        # if user_action["intent"] == "request":
 
+        list_and_out = []
+        list_and_in = []
+        regex_constraint_dict = {}
+        # print(constraints)
+        for keys,values in constraints.items():
+            # print(keys)
+            for value in values:
+                list_and_in.append({
+                        "$or" : [
+                                    {
+                                        keys: {
+                                            "$all": [re.compile(".*{0}.*".format(value))]
+                                        }
+                                    }
+                            ]
+                })
+        if list_and_in:
+            list_and_out.append({"$and": list_and_in})
+        if list_and_out:
+            regex_constraint_dict = {"$and":list_and_out}
+        return regex_constraint_dict
 
     def get_db_results(self, constraints,user_action):
         """
@@ -285,24 +300,30 @@ class DBQuery:
         #         else:
         #             all_slots_match = False
         #     if all_slots_match: db_results['matching_all_constraints'] += 1
-
+        ################
+        # """
         for CI_key, CI_value in current_informs.items():
         # Skip if a no query item and all_slots_match stays true
             if CI_key in self.no_query:
                 continue
             # If anything all_slots_match stays true AND the specific key slot gets a +1
             if CI_value == 'anything':
-                db_results[CI_key] = self.database.general.count()
+                # db_results[CI_key] = self.database.general.count()
+                # db_results[CI_key] += 1
                 del temp_current_informs[CI_key]
                 continue
+            # print()
             db_results[CI_key]=self.database.general.count(self.convert_constraint({CI_key:CI_value},user_action))
             # print(CI_key)
             # print(db_results[CI_key])
-           
+       
         # current_informs_constraint={k:v.lower() for k,v in temp_current_informs.items()}
-        print('temp_current_informs,user_action',temp_current_informs,user_action)
+        # print('temp_current_informs,user_action',temp_current_informs,user_action)
         db_results['matching_all_constraints'] = self.database.general.count(self.convert_constraint(temp_current_informs,user_action))
         # update cache (set the empty dict)
+        
+        # """
+
         self.cached_db_slot[inform_items].update(db_results)
         assert self.cached_db_slot[inform_items] == db_results
         return db_results

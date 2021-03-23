@@ -72,7 +72,9 @@ class StateTracker:
             return self.none_state
 
         user_action = self.history[-1]
+        print('current_informs',self.current_informs)
         db_results_dict = self.db_helper.get_db_results_for_slots(self.current_informs,user_action)
+        print('db_results_dict',db_results_dict)
         last_agent_action = self.history[-2] if len(self.history) > 1 else None
 
         # Create one-hot of intents to represent the current user action
@@ -140,7 +142,12 @@ class StateTracker:
         ########################
         # represent current slot has value in db result
         db_binary_slot_rep = np.zeros((self.num_slots + 1,))
+
+        # print('>'*50,self.current_informs,user_action)
         db_results = self.db_helper.get_db_results(self.current_informs,user_action)
+        # print('>'*50)
+        # print('dbquery',db_results)
+        # print('>'*50)
         if db_results:
             # Arbitrarily pick the first value of the dict
             key, data = list(db_results.items())[0]

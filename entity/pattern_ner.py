@@ -32,10 +32,12 @@ def find_all_entity(intent,mess_clean):
         # phân biệt cho từng order
         if entity_name in ["major_name",'type_edu']:
             matching_threshold = 0.2
+        elif entity_name == 'case':
+            matching_threshold = 0.15
         elif entity_name == 'subject':
             matching_threshold = 0.55
         else:
-            matching_threshold = 0.15
+            matching_threshold = 0.1
         catch_entity_threshold_loop = 0
         while True:
             if catch_entity_threshold_loop > 3:
@@ -83,7 +85,8 @@ def find_all_entity(intent,mess_clean):
         confirm_obj = {intent:value}
     return result_entity_dict,confirm_obj
 
-# mess = 'cho em hỏi về ưu tiên của trường mình với ạ'
-# # intent_catched, prob,mess_clean = catch_intent(mess)
-# entity_dict,confirm = find_all_entity('register',mess)
+# mess = 'tuyển thẳng'
+# intent_catched, prob,mess_clean = catch_intent(mess)
+# entity_dict,confirm = find_all_entity('object_inform',mess)
 # print(entity_dict)
+# print(list_entity[0]['object'])

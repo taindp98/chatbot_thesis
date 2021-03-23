@@ -39,7 +39,7 @@ REQUEST['major_name'] = [
     'Bạn cần thông tin về *major_name* nào?'
 ]
 REQUEST['type_edu'] = [
-    '*type_edu* bạn cần tìm là gì vậy ạ?',
+    '*type_edu* bạn cần tìm là gì vậy ạ? (đại trà,chất lượng cao, tiên tiến)',
     'Bạn muốn tìm thông tin về *type_edu* nào?'
 ]
 REQUEST['point'] = [
@@ -66,7 +66,7 @@ REQUEST['year'] = [
 
 REQUEST['case'] = [
     'Bạn cho mình xin *case* cụ thể bạn muốn tìm nha!',
-    '*case* bạn cần tìm là gì vậy ạ?'
+    '*case* bạn cần tìm là gì vậy ạ? (thi tốt nghiệp,đánh giá năng lực, ưu tiên xét tuyển)'
 ]
 
 REQUEST['criteria'] = [
@@ -75,27 +75,23 @@ REQUEST['criteria'] = [
 ]
 
 REQUEST['object'] = [
-    'Bạn cho mình xin *object* cụ thể bạn muốn tìm nha!',
-    # '*criteria* bạn cần tìm là gì vậy ạ?'
+    'Bạn thuộc *object* nào vậy ạ? (thi tốt nghiệp, trường chuyên, học sinh giỏi quốc gia,...)'
 ]
 
 REQUEST['register'] = [
-    'Bạn cho mình xin *register* cụ thể bạn muốn tìm nha!',
-    # '*criteria* bạn cần tìm là gì vậy ạ?'
+    'Bạn muốn *register* theo hình thức nào vậy ạ?',
+    'Bạn muốn lựa chọn hình thức *register* như thế nào vậy ạ? (đăng ký thi tốt nghiệp, đăng ký ưu tiên xét tuyển,...)'
 ]
-
 REQUEST['major_code'] = [
     'Bạn cho mình xin *major_code* cụ thể bạn muốn tìm nha!',
     '*major_code* bạn cần tìm là bao nhiêu vậy ạ?'
 ]
 
 REQUEST['tuition'] = [
-    'Bạn cho mình xin mức *tuition* cụ thể bạn muốn tìm nha!',
-    # '*major_code* bạn cần tìm là bao nhiêu vậy ạ?'
+    'Bạn cho mình xin mức *tuition* cụ thể bạn muốn tìm nha!'
 ]
 
 REQUEST['career'] = [
-    # 'Bạn cho mình xin mức *tuition* cụ thể bạn muốn tìm nha!',
     '*career* bạn cần tìm là gì vậy ạ?'
 ]
 
@@ -105,44 +101,21 @@ REQUEST_REPEAT = [
     'Bạn cung cấp lại thông tin *request_key* giúp mình với nhé!'
 ]
 ################################################################################
-"""
-# sửa lại dialogue train
-'major_code',
-'major_name',
-'type_edu',
-'point',
-'subject_group',
-'university_code',
-'university_name',
-'year',
-'typical_group',
 
-
-'rate',
-'career',
-'company',
-'subject',
-'tuition_one_credit',
-'tuition_avg_one_sem',
-'duration_std',
-'credits',
-'foreign_lang_min'
-"""
 INFORM = {}
+
 INFORM['major_code'] = [
-    '*major_code_instance* là mã của ngành bạn cần tìm phải không ?',
     '*major_code_instance* có phải là *major_code* bạn muốn tìm không?'
 ]
 INFORM['major_name'] = [
-    'ngành *major_name_instance* có phải là *major_name* bạn đang tìm kiếm không ?',
-    '*major_name_instance* có phải là *major_name* bạn muốn tìm không ?'
+    '*major_name_instance* có phải là *major_name* bạn đang tìm kiếm không ?'
 ]
 INFORM['type_edu'] = [
     'có phải bạn muốn hỏi về chương trình *type_edu_instance* không?',
     '*type_edu_instance* có phải là *type_edu* bạn muốn tìm không?'
 ]
 INFORM['point'] = [
-    '*point_instance* điểm đó bạn'
+    '*point_instance* có phải mức *point* cho ngành bạn đang tìm kiếm không ?'
 ]
 INFORM['subject_group'] = [
     'có phải bạn muốn hỏi về *subject_group_instance* không?',
@@ -154,17 +127,15 @@ INFORM['year'] = [
 ]
 
 INFORM['career'] = [
-    '*career_instance* là *career* của ngành bạn cần tìm'
+    '*career_instance* có phải là *career* của ngành bạn cần tìm ?'
 ]
 INFORM['subject'] = [
     '*subject_instance* thuộc tổ hợp *subject* cho ngành bạn cần tìm phải không ?'
 ]
 INFORM['tuition'] = [
-    '*tuition_instance* là mức học phí trên một tín chỉ của ngành bạn cần tìm'
+    '*tuition_instance* là *tuition* cho chương trình đào tạo bạn cần tìm phải không ?'
 ]
-# INFORM['satisfy'] = [
-#     '*satisfy_instance* là *satisfy* của sinh viên đang theo học ngành bạn cần tìm'
-# ]
+
 INFORM['major'] = [
     'Đây là ngành mình tìm được với yêu cầu hiện tại của bạn: *major_instance*'
 ]
@@ -174,7 +145,7 @@ INFORM['case'] = [
 ]
 
 INFORM['criteria'] = [
-    '*criteria* hiện tại cho chương trình đào tạo bạn cần tìm là *criteria_instance*'
+    '*criteria* hiện tại cho chương trình đào tạo bạn cần tìm có phải là *criteria_instance* không ?'
 ]
 
 INFORM['object'] = [
@@ -185,20 +156,24 @@ INFORM['register'] = [
     '*register_instance* có phải là *register* mà bạn lựa chọn không ạ ?'
 ]
 
-"""
-# sửa lại dialogue train
-'major_code',
-'major_name',
-'type_edu',
-'point',
-'subject_group',
-'university_code',
-'university_name',
-'year',
-'typical_group'
-"""
-user_known = ['major_name', 'type_edu','subject','subject_group', 'year']
+# user_known = ['major_name', 'type_edu','subject','subject_group', 'year']
 AGENT_REQUEST_OBJECT = {
+    "major_name": "tên ngành",
+    "type_edu": "chương trình đào tạo",
+    "point": "điểm chuẩn",
+    "subject_group": "tổ hợp khối",
+    "subject": "môn thi",
+    "year":"năm",
+    "career": "cơ hội nghề nghiệp",
+    "case": "phương thức tuyển sinh",
+    "criteria": "chỉ tiêu tuyển sinh",
+    "object" : "đối tượng xét tuyển",
+    "register": "cách thức đăng ký",
+    "major_code": "mã ngành",
+    "tuition":"học phí"
+}
+
+AGENT_INFORM_OBJECT = {
     "major_name": "tên ngành",
     "type_edu": "chương trình đào tạo",
     "point": "điểm chuẩn",
@@ -213,47 +188,7 @@ AGENT_REQUEST_OBJECT = {
     "major_code": "mã ngành",
     "tuition":"học phí"
 }
-"""
-# sửa lại dialogue train
-'major_code',
-'major_name',
-'type_edu',
-'point',
-'subject_group',
-'university_code',
-'university_name',
-'year',
-'typical_group',
-
-
-'rate',
-'career',
-'company',
-'subject',
-'tuition_one_credit',
-'tuition_avg_one_sem',
-'duration_std',
-'credits',
-'foreign_lang_min'
-"""
-AGENT_INFORM_OBJECT = {
-    "major_name": "tên ngành",
-    "type_edu": "chương trình đào tạo",
-    "point": "điểm chuẩn",
-    "subject_group": "tổ hợp khối",
-    "subject": "môn thi",
-    "year":"năm",
-    "career": "cơ hội nghề nghiệp",
-    "case": "phương thức tuyển sinh",
-    "criteria": "chỉ tiêu tuyển sinh",
-    "object" : "đối tượng tuyển sinh",
-    "register": "cách thức đăng ký",
-    "major_code": "mã ngành",
-    "tuition":"học phí",
-    "register": "cách thức đăng ký"
-
-}
-list_map_key = ["major_name", "point", "subject_group","year"]
+# list_map_key = ["major_name", "point", "subject_group","year"]
 GREETING = [
     'Xin chào! Mình là BK Assistant. Mình có thể giúp gì được bạn?',
     'Hi! BK Assistant có thể giúp gì được bạn đây?'
