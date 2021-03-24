@@ -61,8 +61,13 @@ class DQNAgent:
 
         model = Sequential()
         model.add(Dense(self.hidden_size, input_dim=self.state_size, activation='relu'))
+        
+        model.add(Dense(self.hidden_size//2, input_dim=self.hidden_size, activation='relu'))
+        
         model.add(Dense(self.num_actions, activation='linear'))
+        
         model.compile(loss='mse', optimizer=Adam(lr=self.lr))
+        
         # model.summary()
         return model
 

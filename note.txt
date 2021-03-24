@@ -1,2 +1,3 @@
 edit dictionary entity
 thanks --> confirm inform
+check tao constraint khi user intent thay doi

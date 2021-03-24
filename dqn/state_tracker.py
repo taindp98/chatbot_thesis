@@ -188,10 +188,10 @@ class StateTracker:
 
         if agent_action['intent'] == 'inform':
             assert agent_action['inform_slots']
-            # print('$'*50)
-            # print('current_informs upd state agent',self.current_informs)
+            print('$'*50)
+            print('current_informs upd state agent',self.current_informs)
             inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs,user_action)
-            # print('inform_slots',inform_slots)
+            print('inform_slots after fill',inform_slots)
             agent_action['inform_slots'] = inform_slots
             assert agent_action['inform_slots']
             key, value = list(agent_action['inform_slots'].items())[0]  # Only one
@@ -210,7 +210,7 @@ class StateTracker:
             # print('match_found',self.match_key,agent_action['inform_slots'])
             # print('>'*50)
 
-            db_results = self.db_helper.get_db_results(self.current_informs)
+            db_results = self.db_helper.get_db_results(self.current_informs,user_action)
             if db_results:
                 # Arbitrarily pick the first value of the dict
                 db_results_no_empty = {}

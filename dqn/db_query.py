@@ -57,6 +57,7 @@ class DBQuery:
 
         filled_inform = {}
         values_dict = self._count_slot_values(key, db_results)
+        print('values_dict',values_dict)
         # print("key: {}".format(key))
         # print("db results: {}".format(db_results))
         if key == usersim_default_key:
@@ -64,7 +65,18 @@ class DBQuery:
         elif values_dict:
             # Get key with max value (ie slot value with highest count of available results)
             # filled_inform[key] = max(values_dict, key=values_dict.get)
-            filled_inform[key] = list(max(values_dict, key=values_dict.get))
+            values_dict_sort = {k: v for k, v in sorted(values_dict.items(), key=lambda item: item[1])}
+            key_sort = list(values_dict_sort.keys())
+            key_vote = None
+            if len(key_sort) > 1:
+                if key_sort[-1]:
+                    key_vote = key_sort[-1]
+                else:
+                    key_vote = key_sort[-2]
+            else:
+                key_vote = key_sort[0]
+            # filled_inform[key] = list(max(values_dict, key=values_dict.get))
+            filled_inform[key] = key_vote
         else:
             filled_inform[key] = 'no match available'
 
@@ -152,10 +164,17 @@ class DBQuery:
         list_and_out = []
         list_and_in = []
         regex_constraint_dict = {}
+        # print('----')
         # print(constraints)
         for keys,values in constraints.items():
-            # print(keys)
+            # print(values)
+            if not type(values) is list:
+                values = []
             for value in values:
+                # print(value)
+                # if not type(value) is list:
+                    # value = []
+
                 list_and_in.append({
                         "$or" : [
                                     {
@@ -302,13 +321,14 @@ class DBQuery:
         #     if all_slots_match: db_results['matching_all_constraints'] += 1
         ################
         # """
+        # print(current_informs)
         for CI_key, CI_value in current_informs.items():
         # Skip if a no query item and all_slots_match stays true
             if CI_key in self.no_query:
                 continue
             # If anything all_slots_match stays true AND the specific key slot gets a +1
             if CI_value == 'anything':
-                # db_results[CI_key] = self.database.general.count()
+                db_results[CI_key] = self.database.general.count()
                 # db_results[CI_key] += 1
                 del temp_current_informs[CI_key]
                 continue
