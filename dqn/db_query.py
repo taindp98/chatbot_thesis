@@ -43,9 +43,9 @@ class DBQuery:
 
         key = list(inform_slot_to_fill.keys())[0]
 
-        print('>'*50)
-        print(key)
-        print('>'*50)
+        # print('>'*50)
+        # print(key)
+        # print('>'*50)
         # This removes the inform we want to fill from the current informs if it is present in the current informs
         # so it can be re-queried
         current_informs = copy.deepcopy(current_inform_slots)
@@ -57,26 +57,27 @@ class DBQuery:
 
         filled_inform = {}
         values_dict = self._count_slot_values(key, db_results)
-        print('values_dict',values_dict)
+        # print('values_dict',values_dict)
         # print("key: {}".format(key))
         # print("db results: {}".format(db_results))
         if key == usersim_default_key:
             filled_inform[key] = list(db_results)[0]
         elif values_dict:
-            # Get key with max value (ie slot value with highest count of available results)
-            # filled_inform[key] = max(values_dict, key=values_dict.get)
-            values_dict_sort = {k: v for k, v in sorted(values_dict.items(), key=lambda item: item[1])}
-            key_sort = list(values_dict_sort.keys())
-            key_vote = None
-            if len(key_sort) > 1:
-                if key_sort[-1]:
-                    key_vote = key_sort[-1]
-                else:
-                    key_vote = key_sort[-2]
-            else:
-                key_vote = key_sort[0]
-            # filled_inform[key] = list(max(values_dict, key=values_dict.get))
-            filled_inform[key] = key_vote
+            # # Get key with max value (ie slot value with highest count of available results)
+            # # filled_inform[key] = max(values_dict, key=values_dict.get)
+            # values_dict_sort = {k: v for k, v in sorted(values_dict.items(), key=lambda item: item[1])}
+            # key_sort = list(values_dict_sort.keys())
+            # key_vote = None
+            # if len(key_sort) > 1:
+            #     if key_sort[-1]:
+            #         key_vote = key_sort[-1]
+            #     else:
+            #         key_vote = key_sort[-2]
+            # else:
+            #     key_vote = key_sort[0]
+            # filled_inform[key] = key_vote
+            filled_inform[key] = list(max(values_dict, key=values_dict.get))
+
         else:
             filled_inform[key] = 'no match available'
 

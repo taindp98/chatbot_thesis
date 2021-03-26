@@ -118,3 +118,5 @@
     # print(agent_action)
     # print(response_craft(agent_action, state_tracker,confirm_obj))
 
+from dqn.dialogue_config import all_intents
+print(all_intents)

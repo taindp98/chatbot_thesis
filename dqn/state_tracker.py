@@ -89,8 +89,10 @@ class StateTracker:
         # Create bag of request slots representation to represent the current user action
         user_request_slots_rep = np.zeros((self.num_slots,))
         # for key in user_action['request_slots'].keys():
-        #     user_request_slots_rep[self.slots_dict[key]] = 1.0
+            # user_request_slots_rep[self.slots_dict[key]] = 1.0
 
+        # print('current_request_slots new', self.current_request_slots)
+        # print('current_request_slots old', user_action['request_slots'])
         for key in self.current_request_slots:
             user_request_slots_rep[self.slots_dict[key]] = 1.0
         #
@@ -127,10 +129,10 @@ class StateTracker:
         turn_onehot_rep[self.round_num - 1] = 1.0
 
         # Representation of DB query results (scaled counts)
-        kb_count_rep = np.zeros((self.num_slots + 1,)) + db_results_dict['matching_all_constraints'] / 100.
+        kb_count_rep = np.zeros((self.num_slots + 1,)) + db_results_dict['matching_all_constraints'] / 1000.
         for key in db_results_dict.keys():
             if key in self.slots_dict:
-                kb_count_rep[self.slots_dict[key]] = db_results_dict[key] / 100.
+                kb_count_rep[self.slots_dict[key]] = db_results_dict[key] / 1000.
 
         # Representation of DB query results (binary)
         kb_binary_rep = np.zeros((self.num_slots + 1,)) + np.sum(db_results_dict['matching_all_constraints'] > 0.)
@@ -188,10 +190,10 @@ class StateTracker:
 
         if agent_action['intent'] == 'inform':
             assert agent_action['inform_slots']
-            print('$'*50)
-            print('current_informs upd state agent',self.current_informs)
+            # print('$'*50)
+            # print('current_informs upd state agent',self.current_informs)
             inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs,user_action)
-            print('inform_slots after fill',inform_slots)
+            print('slot predict and suggest',inform_slots)
             agent_action['inform_slots'] = inform_slots
             assert agent_action['inform_slots']
             key, value = list(agent_action['inform_slots'].items())[0]  # Only one

@@ -188,7 +188,8 @@ AGENT_INFORM_OBJECT = {
     "major_code": "mã ngành",
     "tuition":"học phí"
 }
-# list_map_key = ["major_name", "point", "subject_group","year"]
+list_map_key = ["major_name", "point", "subject_group","year"]
+
 GREETING = [
     'Xin chào! Mình là BK Assistant. Mình có thể giúp gì được bạn?',
     'Hi! BK Assistant có thể giúp gì được bạn đây?'
@@ -207,5 +208,5 @@ NOT_FOUND = [
     'Mình không tìm thấy ngành nào thỏa mãn các thông tin bạn đã cung cấp, vui lòng điều chỉnh lại giúp mình nhé!'
 ]
 EMPTY_SLOT = [
-    'Thông tin bạn cần tìm là hợp lệ nhưng nó không đề cập đến *request_slot* nên tụi mình không thể xử lý yêu cầu của bạn, bạn vui lòng thử lại nhé!'
+    'Thông tin bạn tìm có thể không yêu cầu về *request_slot*'
 ]

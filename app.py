@@ -163,13 +163,13 @@ def post_api_cse_assistant():
         return msg(400, "Message cannot be None")
     else:
         message = input_data["message"]
-    print("-------------------------message")
-    print(message)
+    # print("-------------------------message")
+    # print(message)
     if "state_tracker_id" not in input_data.keys():
         state_tracker_id = get_new_id()
     else:
         state_tracker_id = input_data["state_tracker_id"]
-    print('StateTracker_Container',StateTracker_Container)
+    # print('StateTracker_Container',StateTracker_Container)
     K.clear_session()
     current_informs = 'null'
     agent_message , agent_action = process_conversation_POST(state_tracker_id, message)
@@ -186,8 +186,8 @@ def post_api_cse_assistant():
     res_dict['agent_action'] = agent_action
     res_dict['current_informs'] = current_informs
 
-    print('======================')
-    print(res_dict)
+    # print('======================')
+    # print(res_dict)
     # return jsonify({"code": 200, "message": agent_message,"state_tracker_id":state_tracker_id,"agent_action":agent_action,"current_informs":current_informs})
     return jsonify(res_dict)
 @app.route('/api/cse-assistant-conversation-manager/reset-state-tracker', methods=['POST'])
