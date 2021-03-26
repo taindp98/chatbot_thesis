@@ -82,7 +82,7 @@ def test_run():
         ep_reward = 0
         done = False
         # Get initial state from state tracker
-        state = state_tracker.get_state()
+        state = state_tracker.get_state(False)
         while not done:
             # Agent takes action given state tracker's representation of dialogue
             agent_action_index, agent_action = dqn_agent.get_action(state)
