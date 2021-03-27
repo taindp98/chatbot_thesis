@@ -1,6 +1,6 @@
 from utils import *
-import json
-from intent.intent_regconize import *
+# import json
+# from intent.intent_regconize import *
 from collections import OrderedDict
 
 from entity.constants_ner import map_order_entity,list_entity

@@ -6,9 +6,9 @@ import re
 import sys
 from datetime import datetime
 import csv
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.support.wait import WebDriverWait
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support import expected_conditions as EC
 def init_browser(url):
     # options = Options()
     global browser
@@ -164,6 +164,7 @@ if __name__== '__main__':
     # url = 'https://www.facebook.com/groups/huongnghieptuvantuyensinh/'
     #url="https://www.facebook.com/groups/huongnghieptuvantuyensinh/"
     # url="https://www.facebook.com/groups/HuongNghiepThongMinh/"
-    url="https://www.facebook.com/groups/533625860900876/"
+    # url="https://www.facebook.com/groups/533625860900876/"
+    url = 'https://www.facebook.com/groups/BKTPHCM'
     get_post(time_scroll,url)
     browser.close()

@@ -99,6 +99,7 @@ def process_conversation_POST(state_tracker_id, message):
     # try:
     if user_action['intent'] not in ["hello","other","done"]:
         dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
+        
         agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
         print('========================')
         print('agent action',agent_act)
