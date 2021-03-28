@@ -28,8 +28,8 @@ usersim_required_init_inform_keys = ['major_name']
 # Possible inform and request slots for the agent
 # agent_inform_slots = ['major_name', 'type_edu', 'career', 'subject','tuition', 'subject_group','point','major_code','year','satisfy',usersim_default_key]
 agent_inform_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object','register',usersim_default_key]
-agent_request_slots = ['major_name', 'type_edu','subject_group', 'year','case']
-# agent_request_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object']
+# agent_request_slots = ['major_name', 'type_edu','subject_group', 'year','case']
+agent_request_slots = ['major_name','type_edu','subject_group','year','case','point','career','subject','tuition','major_code','criteria','object','register']
 
 # Possible actions for agent
 agent_actions = [

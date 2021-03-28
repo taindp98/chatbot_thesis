@@ -191,7 +191,8 @@ class StateTracker:
         if agent_action['intent'] == 'inform':
             assert agent_action['inform_slots']
             # print('$'*50)
-            # print('current_informs upd state agent',self.current_informs)
+            print('current_informs upd state agent',self.current_informs)
+            print('agent action',agent_action['inform_slots'])
             inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs,user_action)
             print('slot predict and suggest',inform_slots)
             agent_action['inform_slots'] = inform_slots
