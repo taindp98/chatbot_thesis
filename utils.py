@@ -12,20 +12,6 @@ import pickle
 # path = '/home/taindp/Database/intent/'
 # path = 'data/'
 path = './data'
-# def check_question(mess):
-#     # input: câu nhập vào người dùng
-#     # return: nếu là câu hỏi True
-#     list_quest = []
-#     with open(os.path.join(path,'check_question.txt'),'r') as infile:
-#         lines = infile.readlines()
-#         for line in lines:
-#             line = str(line).replace('\n','')
-#             words = line.split(',')
-#             for word in words:
-#                 list_quest.append(word)
-#     for ele in list_quest:
-#         if (mess.lower().find(ele) != -1):
-#             return True
 
 def create_token(mess):
     # input: câu nhập vào của người dùng
@@ -200,76 +186,7 @@ def clean_mess_point(mess):
     # mess_rmspectoken = ' '.join(re.findall('[a-záàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđA-ZÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬÉÈẺẼẸÊẾỀỂỄỆÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÍÌỈĨỊÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴĐ0-9\,\.]+', mess_unic))
     mess_norm = ' '.join(mess_rmspectoken)
     return mess_norm
-def load_csvfile(path):
-    df = pd.read_csv(open(path, 'r'))
-    dict_data = {}
-    keys = df['compare'].tolist()
-    values = df['keywords'].tolist()
-    # list_value = []
-    for index in range(len(values)):
-        value = values[index].split(',')
-        dict_data[keys[index]] = value
-        # list_value.append(value)
-    return dict_data
-def catch_point(mess):
-    # bắt thực thể là điểm
-    # return list điểm
-    mess_clean = clean_mess_point(mess)
-    dict_compare = load_csvfile(os.path.join(path,'compare_point.csv'))
 
-    # mặc định luôn tìm điểm nhỏ hơn
-    compare = 'lte'
-    for key in list(dict_compare.keys()):
-        for value in dict_compare[key]:
-            if (mess_clean.find(value) != -1):
-                compare = key
-            else:
-                continue
-    # print(dict_compare)
-    years = re.findall('\d+[k0]\d+',mess_clean)
-    times = re.findall('\d+[/-]\d+[/-]*\d*',mess_clean)
-    if years:
-        for year in years:
-            mess_clean = mess_clean.replace(year,'')
-    if times:
-        for time in times:
-            mess_clean = mess_clean.replace(time,'')
-    points = re.findall('\d+[., ]\d*[điểm đ d diem]+',mess_clean)
-    # print(points)
-    list_point = []
-    ignore_list = [' ','điểm','đ','d','diem']
-    for point in points:
-        point_str = str(point).replace(',','.')
-        point_clean = point_str
-        for item in ignore_list:
-            point_clean = point_clean.replace(item,'')
-            # print(point_clean)
-        # print(point_clean)
-        if float(point_clean) > 1000:
-            point_float = float(point_clean)/100
-        elif float(point_clean) > 100:
-            point_float = float(point_clean)/10
-        else:
-            point_float = float(point_clean)
-        list_point.append(point_float)
-    res = []
-    if len(list_point) == 1:
-        if compare == 'lte':
-            res.append(float(0))
-            res.append(list_point[0])
-        else:
-            res.append(list_point[0])
-            res.append(float(30))
-    elif len(list_point) == 2:
-        res = list_point.sort()
-    """
-    return có dạng [cận dưới,cận trên]
-    * nếu chỉ có 1 point bắt được: xét compare
-        -compare lte: [0,point]
-        -compare gte: [point,30]
-    * nếu có 2 point bắt được: sort asc
-    """
-    return res
 def export_pickle_file(data_dict,path):
     with open(path, 'wb') as handle:
         pickle.dump(data_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)

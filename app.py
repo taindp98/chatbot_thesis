@@ -1,17 +1,13 @@
-import flask
-import io
-import sys
 import pymongo
 from flask_pymongo import PyMongo
-from flask import Flask, request,render_template,jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-# from response.user_request import *
 from dqn.state_tracker import StateTracker
 from dqn.dqn_agent import DQNAgent
 
 from keras import backend as K
 from intent.intent_regconize import *
-from response.user_request import user_request
+from user_request.user_action import get_user_request
 from response.agent_action import get_agent_action
 from response.agent_response import response_craft
 from response.default_response import response_to_user_free_style
@@ -19,12 +15,12 @@ import random
 from datetime import datetime
 
 import os
-from bs4 import BeautifulSoup
+
 # from mongoengine import connect
 
 app = Flask(__name__)
 # app.config["MONGO_URI"] = "mongodb://localhost:27017"
-# os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
+os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
 app.config['MONGO_URI'] = os.environ.get('MONGOLAB_URI')
 
 mongo = PyMongo(app)
@@ -85,9 +81,9 @@ def process_conversation_POST(state_tracker_id, message):
         StateTracker_Container[state_tracker_id] = (state_tracker, confirm_obj)
 
 #
-    user_action, new_confirm_obj = user_request(message,state_tracker)
+    user_action, new_confirm_obj = get_user_request(message,state_tracker)
     print("-------------user action-----------")
-    print(user_action)
+    print(user_action,new_confirm_obj)
     print('-----------------------------------')
     dict_investigate['user_action'] = user_action
 
@@ -189,7 +185,8 @@ def post_api_cse_assistant():
     res_dict['agent_action'] = agent_action
     res_dict['current_informs'] = current_informs
 
-    # print('======================')
+    print('======================')
+    print('current_informs',current_informs)
     # print(res_dict)
     # return jsonify({"code": 200, "message": agent_message,"state_tracker_id":state_tracker_id,"agent_action":agent_action,"current_informs":current_informs})
     return jsonify(res_dict)

@@ -1,6 +1,7 @@
 from utils import *
 # import json
 # from intent.intent_regconize import *
+from entity.confirm_object import catch_point
 from collections import OrderedDict
 
 from entity.constants_ner import map_order_entity,list_entity
@@ -79,14 +80,18 @@ def find_all_entity(intent,mess_clean):
             catch_entity_threshold_loop = catch_entity_threshold_loop + 1
     # if intent == 'point':
     #     result_entity_dict['point'] = catch_point(input_sentence)
+    point_entity = catch_point(mess_clean)
+    if point_entity:
+        result_entity_dict['point'] = point_entity
     confirm_obj = None
     if intent in result_entity_dict:
         value = result_entity_dict.pop(intent)
         confirm_obj = {intent:value}
     return result_entity_dict,confirm_obj
 
-# mess = 'tuyển thẳng'
-# intent_catched, prob,mess_clean = catch_intent(mess)
-# entity_dict,confirm = find_all_entity('object_inform',mess)
+# mess = 'có ngành nào điểm chuẩn tầm 25 điểm không ạ'
+# # intent_catched, prob,mess_clean = catch_intent(mess)
+# entity_dict,confirm = find_all_entity('point',mess)
 # print(entity_dict)
+# print(confirm)
 # print(list_entity[0]['object'])

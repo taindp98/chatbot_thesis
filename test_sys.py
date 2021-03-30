@@ -12,7 +12,9 @@ def get_bot_response(userText):
     mess_response = chatbot_respose['message'].replace('\n', r'').replace(r'"',r'')
     return mess_response
 
-file_input = open('/home/taindp/PycharmProjects/thesis/test_case/case2.txt','r').readlines()
+case = "case4"
+
+file_input = open('/home/taindp/PycharmProjects/thesis/test_case/{}.txt'.format(case),'r').readlines()
 list_text = []
 for text in file_input:
     text_input = text.replace('\n','')

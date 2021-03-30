@@ -1,6 +1,7 @@
 from utils import *
 from intent.intent_regconize import *
 from entity.pattern_ner import *
+from constant_general import list_map_key
 from response.constants_response import *
 """
 LIST INTENT PATTERN MATCHING
@@ -23,7 +24,7 @@ LIST INTENT FASTAI
 'general_company',
 'general_major'
 """
-def user_request(mess,state_tracker):
+def get_user_request(mess,state_tracker):
     confirm_obj = None
     if isinstance(mess, str):
         user_action = {}
@@ -43,7 +44,7 @@ def user_request(mess,state_tracker):
             if state_tracker.history:
                 last_agent_action = state_tracker.history[-1]
 
-                print(last_agent_action)
+                # print(last_agent_action)
                 #nếu agent request 1 key thì user trả lời key đó
                 user_inform_key = None
                 slot_inform = None
@@ -67,6 +68,13 @@ def user_request(mess,state_tracker):
                 user_action['inform_slots'] = {other_key_avoid_crash:'anything'}
                 user_action['request_slots'] = {}
 
+            if user_inform_key in list_map_key:
+                for key in list_map_key:
+                    if key ==  user_inform_key:
+                        user_action['list_match_obj'][0][key] = result_entity_dict[user_inform_key]
+                    else:
+                        user_action['list_match_obj'][0][key] = ''
+
         elif intent_catched == 'anything':
             anything_key = None
             last_agent_action = state_tracker.history[-1]
@@ -85,20 +93,7 @@ def user_request(mess,state_tracker):
             user_action['intent'] = intent_catched
             user_action['inform_slots'] = {}
             user_action['request_slots'] = {}
+
     else:
         user_action = mess
     return user_action,confirm_obj
-
-# if __name__=='__main__':
-#     FOLDER_PATH = '/home/taindp/PycharmProjects/thesis/deep_q_learning_chatbot'
-#     CONSTANTS_FILE_PATH = f'{FOLDER_PATH}/constants.json'
-#     constants_file = CONSTANTS_FILE_PATH
-#     with open(constants_file) as f:
-#         constants = json.load(f)
-#     file_path_dict = constants['db_file_paths']
-#     DATABASE_FILE_PATH = file_path_dict['database']
-#     database= json.load(open(DATABASE_FILE_PATH,encoding='utf-8'))
-#     state_tracker = StateTracker(database, constants)
-#     mess1 = 'em dự định thi khối d7 thì nên học ngành nào ạ'
-#     dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
-#     print(user_request(mess1,state_tracker))
