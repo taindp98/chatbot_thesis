@@ -173,6 +173,10 @@ def predict_lstm(mess):
 
 def clasify_business_random_intent(message):
 
+    for notification in dict_business_intent['major_name']:
+        if message.lower().find(notification)!=-1:
+            return 'major_name',1.0,message
+
     for notification in dict_business_intent['subject_group']:
         if message.lower().find(notification)!=-1:
             return 'subject_group',1.0,message
@@ -193,9 +197,7 @@ def clasify_business_random_intent(message):
         if message.lower().find(notification)!=-1:
             return 'subject',1.0,message
 
-    for notification in dict_business_intent['major_name']:
-        if message.lower().find(notification)!=-1:
-            return 'major_name',1.0,message
+
 
     for notification in dict_business_intent['object']:
         if message.lower().find(notification)!=-1:

@@ -18,7 +18,7 @@ def find_all_entity(intent,mess_clean):
     map_entity_name_to_threshold={}
     for entity_name in list_order_entity_name:
         # threshold wordnumber
-        if entity_name in ['type_edu', 'career', 'subject','tuition', 'subject_group','point','major_code','year']:
+        if entity_name in ['type_edu', 'subject','tuition', 'subject_group','major_code','year']:
             map_entity_name_to_threshold[entity_name]=1
         else:
             map_entity_name_to_threshold[entity_name]=2
@@ -90,8 +90,8 @@ def find_all_entity(intent,mess_clean):
     return result_entity_dict,confirm_obj
 
 # mess = 'có ngành nào điểm chuẩn tầm 25 điểm không ạ'
-# # intent_catched, prob,mess_clean = catch_intent(mess)
-# entity_dict,confirm = find_all_entity('point',mess)
+# intent_catched, prob,mess_clean = catch_intent(mess)
+# entity_dict,confirm = find_all_entity('major_name',mess)
 # print(entity_dict)
 # print(confirm)
 # print(list_entity[0]['object'])

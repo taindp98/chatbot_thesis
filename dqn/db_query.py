@@ -169,26 +169,31 @@ class DBQuery:
         # print(constraints)
         for keys,values in constraints.items():
             # print(values)
-            if not type(values) is list:
-                values = []
-            for value in values:
-                # print(value)
-                # if not type(value) is list:
-                    # value = []
+            if keys != 'point':
+                if not type(values) is list:
+                    values = []
+                for value in values:
+                    # print("value",value)
+                    # print("keys",keys)
+                    # if not type(value) is list:
+                        # value = []
 
-                list_and_in.append({
-                        "$or" : [
-                                    {
-                                        keys: {
-                                            "$all": [re.compile(".*{0}.*".format(value))]
+                    list_and_in.append({
+                            "$or" : [
+                                        {
+                                            keys: {
+                                                "$all": [re.compile(".*{0}.*".format(value))]
+                                            }
                                         }
-                                    }
-                            ]
-                })
+                                ]
+                    })
+            else:
+                list_and_in.append({"point":{"$gte":values[0],"$lte":values[1]}})
         if list_and_in:
             list_and_out.append({"$and": list_and_in})
         if list_and_out:
             regex_constraint_dict = {"$and":list_and_out}
+        # print("regex_constraint_dict",regex_constraint_dict)
         return regex_constraint_dict
 
     def get_db_results(self, constraints,user_action):

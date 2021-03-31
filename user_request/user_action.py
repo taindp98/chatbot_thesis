@@ -68,12 +68,12 @@ def get_user_request(mess,state_tracker):
                 user_action['inform_slots'] = {other_key_avoid_crash:'anything'}
                 user_action['request_slots'] = {}
 
-            if user_inform_key in list_map_key:
-                for key in list_map_key:
-                    if key ==  user_inform_key:
-                        user_action['list_match_obj'][0][key] = result_entity_dict[user_inform_key]
-                    else:
-                        user_action['list_match_obj'][0][key] = ''
+            # if user_inform_key in list_map_key:
+            #     for key in list_map_key:
+            #         if key ==  user_inform_key:
+            #             user_action['list_match_obj'][0][key] = result_entity_dict[user_inform_key]
+            #         else:
+            #             user_action['list_match_obj'][0][key] = ''
 
         elif intent_catched == 'anything':
             anything_key = None
