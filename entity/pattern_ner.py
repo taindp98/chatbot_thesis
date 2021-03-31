@@ -18,12 +18,14 @@ def find_all_entity(intent,mess_clean):
     map_entity_name_to_threshold={}
     for entity_name in list_order_entity_name:
         # threshold wordnumber
-        if entity_name in ['type_edu', 'subject','tuition', 'subject_group','major_code','year']:
+        if entity_name in ['subject','tuition', 'subject_group','major_code','year']:
             map_entity_name_to_threshold[entity_name]=1
-        else:
+        elif entity_name in ['major_name','type_edu']:
             map_entity_name_to_threshold[entity_name]=2
-        # else:
-            # map_entity_name_to_threshold[entity_name]=4
+        elif entity_name in ['case']:
+            map_entity_name_to_threshold[entity_name]=3
+        else:
+            map_entity_name_to_threshold[entity_name]=4
 
     ordered_real_dict = OrderedDict()
     for entity_name in map_order_entity[intent]:
@@ -34,7 +36,7 @@ def find_all_entity(intent,mess_clean):
         if entity_name in ["major_name",'type_edu']:
             matching_threshold = 0.2
         elif entity_name == 'case':
-            matching_threshold = 0.15
+            matching_threshold = 0.4
         elif entity_name == 'subject':
             matching_threshold = 0.55
         else:
@@ -94,4 +96,4 @@ def find_all_entity(intent,mess_clean):
 # entity_dict,confirm = find_all_entity('major_name',mess)
 # print(entity_dict)
 # print(confirm)
-# print(list_entity[0]['object'])
+# print(list_entity[0]['type_edu'])
