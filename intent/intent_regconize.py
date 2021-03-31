@@ -2,6 +2,7 @@ from utils import *
 import os
 import pandas as pd
 import requests
+from pyvi import ViTokenizer
 from intent.pattern_intent import *
 #
 # def predict_fastai(mess):
@@ -48,7 +49,7 @@ def check_question(message):
     #bắt WH question
     for signal in list_question_signal:
         if signal in message.lower():
-            # #print(signal)
+            # print(signal)
             return True
 
     for verb in list_verb_have:
@@ -163,15 +164,17 @@ def check_question(message):
                 #print("8")
                 return True
 
-
     return False
+
 def predict_lstm(mess):
     url = 'https://api-intent.herokuapp.com/predict'
     pred = requests.post(url,json={'message':mess})
     dict_pred = pred.json()
     return dict_pred['intent'],dict_pred['probability'],dict_pred['message']
 
-def clasify_business_random_intent(message):
+def clasify_business_random_intent(message,signal):
+
+
 
     for notification in dict_business_intent['major_name']:
         if message.lower().find(notification)!=-1:
@@ -181,13 +184,9 @@ def clasify_business_random_intent(message):
         if message.lower().find(notification)!=-1:
             return 'subject_group',1.0,message
 
-    for notification in dict_business_intent['tuition']:
-        if message.lower().find(notification)!=-1:
-            return 'tuition',1.0,message
-
-    for notification in dict_business_intent['point']:
-        if message.lower().find(notification)!=-1:
-            return 'point',1.0,message
+    # for notification in dict_business_intent['tuition']:
+    #     if message.lower().find(notification)!=-1:
+    #         return 'tuition',1.0,message
 
     for notification in dict_business_intent['major_code']:
         if message.lower().find(notification)!=-1:
@@ -207,28 +206,88 @@ def clasify_business_random_intent(message):
         if message.lower().find(notification)!=-1:
             return 'register',1.0,message
 
-    for notification in dict_business_intent['criteria']:
-        if message.lower().find(notification)!=-1:
-            return 'criteria',1.0,message
+    ## confuse
+    if signal:
+        signal_token = ViTokenizer.tokenize(signal)
+        # print(signal_token)
+        message_token = ViTokenizer.tokenize(message)
+        list_confuse = []
+        key_confuse = []
 
-    for notification in dict_business_intent['year']:
-        if message.lower().find(notification)!=-1:
-            return 'year',1.0,message
+        for notification in dict_business_intent['tuition']:
+            if message.lower().find(notification)!=-1:
+                list_confuse.append(notification)
+                key_confuse.append('tuition')
+                # return 'tuition',1.0,message
+
+        for notification in dict_business_intent['point']:
+            if message.lower().find(notification)!=-1:
+                list_confuse.append(notification)
+                key_confuse.append('point')
+                # return 'point',1.0,message
+
+        for notification in dict_business_intent['criteria']:
+            if message.lower().find(notification)!=-1:
+                list_confuse.append(notification)
+                key_confuse.append('criteria')
+                # return 'criteria',1.0,message
+
+        for notification in dict_business_intent['year']:
+            if message.lower().find(notification)!=-1:
+                list_confuse.append(notification)
+                key_confuse.append('year')
+                # return 'year',1.0,message
+
+        list_confuse_token = [ViTokenizer.tokenize(item) for item in list_confuse]
+        dict_define_confuse = dict(zip(list_confuse_token,key_confuse))
+        # print(dict_define_confuse)
+        dict_compare_dist = {}
+        for confuse_token in list_confuse_token:
+            dist = distance(message_token,signal_token,confuse_token)
+            dict_compare_dist[confuse_token] = dist
+
+        dict_compare_dist_sort = {k: v for k, v in sorted(dict_compare_dist.items(), key=lambda item: item[1])}
+        vote_token = list(dict_compare_dist_sort.keys())[0]
+        # print(dict_compare_dist)
+        return dict_define_confuse[vote_token],1.0,message
+
+    else:
+        for notification in dict_business_intent['tuition']:
+            if message.lower().find(notification)!=-1:
+                return 'tuition',1.0,message
+
+        for notification in dict_business_intent['point']:
+            if message.lower().find(notification)!=-1:
+                return 'point',1.0,message
+
+        for notification in dict_business_intent['criteria']:
+            if message.lower().find(notification)!=-1:
+                return 'criteria',1.0,message
+
+        for notification in dict_business_intent['year']:
+            if message.lower().find(notification)!=-1:
+                return 'year',1.0,message
 
     return predict_lstm(message)
+
+def catch_how_many(mess):
+    for signal in list_question_signal:
+        if signal in mess.lower():
+            return signal
 
 def catch_intent(mess):
     # input: câu nhập vào của người dùng
     # return: intent,probability,messcleaned
     # quy trình xử lý: chuẩn hóa kiểu gõ,check question ,check intent
-    mess_unic = convert_unicode(mess)
-    mess_clean = clean_mess(mess_unic)
+    # mess_unic = convert_unicode(mess)
+    mess_clean = clean_mess(mess)
     for notification in list_anything_notification:
         if mess_clean.lower().find(notification)!=-1:
             return 'anything',1.0,mess_clean
 
     if check_question(mess_clean):
-        return clasify_business_random_intent(mess_clean)
+        signal = catch_how_many(mess_clean)
+        return clasify_business_random_intent(mess_clean,signal)
 
     for notification in list_done_notification:
         if mess_clean.lower().find(notification)!=-1:
@@ -244,4 +303,10 @@ def catch_intent(mess):
 
     return 'not_intent',1.0,mess_clean
 
-# print(catch_intent("thank ad"))
+# print(catch_intent("Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?"))
+
+# s = "cho em xin Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?"
+# s = 'Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?'
+# print(catch_intent(s))
+
+

@@ -29,7 +29,7 @@ def catch_point(mess):
             elif list_point_sort[0] < 1000 and list_point_sort[0] >= 100:
                 list_point_res.append(float(100))
                 list_point_res.append(list_point_sort[0])
-            else:
+            elif list_point_sort[0] < 30:
                 list_point_res.append(float(0))
                 list_point_res.append(list_point_sort[0])
         else:
@@ -40,7 +40,7 @@ def catch_point(mess):
             elif list_point_sort[0] < 1000 and list_point_sort[0] >= 100:
                 list_point_res.append(list_point_sort[0])
                 list_point_res.append(float(1000))
-            else:
+            elif list_point_sort[0] < 30:
                 list_point_res.append(list_point_sort[0])
                 list_point_res.append(float(30))
 

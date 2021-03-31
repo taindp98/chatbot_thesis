@@ -1,3 +1,5 @@
 opt cho từng field:
 state1: major_name
 state2: register
+
+--- trả về nhiều kết quả

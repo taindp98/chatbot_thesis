@@ -1,5 +1,5 @@
 from utils import *
-from intent.intent_regconize import *
+from intent.intent_regconize import catch_intent
 from entity.pattern_ner import *
 from constant_general import list_map_key
 from response.constants_response import *
@@ -30,6 +30,7 @@ def get_user_request(mess,state_tracker):
         user_action = {}
         # clean câu nhập vào
         intent_catched, prob,mess_clean = catch_intent(mess)
+        print("intent_catched",intent_catched)
         # kiểm tra câu nhập vào có phải câu hỏi
         # check_ques = check_question(mess_clean)
         ignore_intent = ['hello','done','other','anything','thanks','not_intent']
