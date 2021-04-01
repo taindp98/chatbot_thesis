@@ -63,7 +63,7 @@ class UserSimulator:
         The initial action has an intent of request, required init. inform slots and a single request slot.
 
         Returns:
-            dict: Initial user response
+            dict: Initial user nlg
         """
 
         # Always request
@@ -101,16 +101,16 @@ class UserSimulator:
 
     def step(self, agent_action):
         """
-        Return the response of the user sim. to the agent by using rules that simulate a user.
+        Return the nlg of the user sim. to the agent by using rules that simulate a user.
 
-        Given the agent action craft a response by using deterministic rules that simulate (to some extent) a user.
+        Given the agent action craft a nlg by using deterministic rules that simulate (to some extent) a user.
         Some parts of the rules are stochastic. Check if the agent has succeeded or lost or still going.
 
         Parameters:
             agent_action (dict): The agent action that the user sim. responds to
 
         Returns:
-            dict: User sim. response
+            dict: User sim. nlg
             int: Reward
             bool: Done flag
             int: Success: -1, 0 or 1 for loss, neither win nor loss, win
@@ -190,7 +190,7 @@ class UserSimulator:
 
     def _response_to_request(self, agent_action):
         """
-        Augments the state in response to the agent action having an intent of request.
+        Augments the state in nlg to the agent action having an intent of request.
 
         There are 4 main cases for responding.
 
@@ -240,7 +240,7 @@ class UserSimulator:
 
     def _response_to_inform(self, agent_action):
         """
-        Augments the state in response to the agent action having an intent of inform.
+        Augments the state in nlg to the agent action having an intent of inform.
 
         There are 2 main cases for responding. Add the agent inform slots to history slots,
         and remove the agent inform slots from the rest and request slots.
@@ -300,7 +300,7 @@ class UserSimulator:
 
     def _response_to_match_found(self, agent_action):
         """
-        Augments the state in response to the agent action having an intent of match_found.
+        Augments the state in nlg to the agent action having an intent of match_found.
 
         Check if there is a match in the agent action that works with the current goal.
 
@@ -308,7 +308,7 @@ class UserSimulator:
             agent_action (dict): Intent of match_found with standard action format (including 'speaker': 'Agent' and
                                  'round_num': int)
         """
-        # print("response match found")
+        # print("nlg match found")
         agent_informs = agent_action['inform_slots']
 
         self.state['intent'] = 'thanks'
@@ -344,7 +344,7 @@ class UserSimulator:
         #     print("match found, success: {}".format(self.constraint_check))
     def _response_to_done(self):
         """
-        Augments the state in response to the agent action having an intent of done.
+        Augments the state in nlg to the agent action having an intent of done.
 
         If the constraint_check is SUCCESS and both the rest and request slots of the state are empty for the agent
         to succeed in this episode/conversation.

@@ -3,12 +3,12 @@
 # # import random
 # # import pymongo
 # # import warnings
-# # from response.user_request import *
+# # from nlg.user_request import *
 # # from intent.intent_regconize import *
 # # from pyvi import ViTokenizer, ViPosTagger
 # # from tqdm import tqdm
-# # from response.agent_response import *
-# # from response.agent_action import *
+# # from nlg.agent_response import *
+# # from nlg.agent_action import *
 # # from entity.pattern_ner import *
 # # from datetime import datetime
 # import re
@@ -19,16 +19,16 @@
 # from flask_pymongo import PyMongo
 # from flask import Flask, request,render_template,jsonify
 # from flask_cors import CORS
-# from response.user_request import *
+# from nlg.user_request import *
 # from dqn.state_tracker import StateTracker
 # from dqn.dqn_agent import DQNAgent
 #
 # from keras import backend as K
 # from intent.intent_regconize import *
-# from response.user_request import user_request
-# from response.agent_action import get_agent_action
-# from response.agent_response import response_craft
-# from response.default_response import response_to_user_free_style
+# from nlg.user_request import user_request
+# from nlg.agent_action import get_agent_action
+# from nlg.agent_response import response_craft
+# from nlg.default_response import response_to_user_free_style
 # import random
 # from datetime import datetime
 #

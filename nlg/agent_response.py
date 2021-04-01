@@ -5,7 +5,7 @@ import warnings
 from utils import check_match_sublist_and_substring
 warnings.filterwarnings('ignore')
 
-from response.constants_response import *
+from nlg.constants_response import *
 
 def get_greeting_statement():
     return random.choice(GREETING)
@@ -62,7 +62,7 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
             first_result_data = agent_action['inform_slots'][key][0]
             # first_result_data = agent_action['inform_slots']
 
-            # #nếu là câu hỏi intent confirm thì cần response lại mà match hay không
+            # #nếu là câu hỏi intent confirm thì cần nlg lại mà match hay không
             # print("-------------------------------inform slot :{}".format(inform_slot))
             # print("---------------------------------confirm obj: {}".format(confirm_obj))
             response_match = ''

@@ -8,9 +8,9 @@ from dqn.dqn_agent import DQNAgent
 from keras import backend as K
 from intent.intent_regconize import *
 from user_request.user_action import get_user_request
-from response.agent_action import get_agent_action
-from response.agent_response import response_craft
-from response.default_response import response_to_user_free_style
+from agent_response.agent_action import get_agent_action
+from nlg.agent_response import response_craft
+from nlg.default_response import response_to_user_free_style
 import random
 from datetime import datetime
 

@@ -5,7 +5,7 @@ from dqn.state_tracker import StateTracker
 # import pickle, argparse, json
 # from dqn.user import User
 # from dqn.utils import remove_empty_slots
-from response.agent_response import *
+from nlg.agent_response import *
 # import pymongo
 def get_agent_action(state_tracker,dqn_agent,user_action,done=False):
     state_tracker.update_state_user(user_action)
@@ -13,14 +13,14 @@ def get_agent_action(state_tracker,dqn_agent,user_action,done=False):
     # print(user_action)
     # print('-----update state user')
     current_state = state_tracker.get_state(done)
-    print('-----get current_state')
-    print(current_state)
+    # print('-----get current_state')
+    # print(current_state)
     _, agent_action = dqn_agent.get_action(current_state)
     # print('-----get agent action')
     # print(agent_action)
     # print('-----get agent action')
     state_tracker.update_state_agent(agent_action,user_action)
-    # print('-----update agent action')
-    # print(agent_action)
-    # print('-----update agent action')
+    print('-----update agent action')
+    print(agent_action)
+    print('-----update agent action')
     return agent_action

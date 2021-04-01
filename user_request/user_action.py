@@ -2,7 +2,7 @@ from utils import *
 from intent.intent_regconize import catch_intent
 from entity.pattern_ner import *
 from constant_general import list_map_key
-from response.constants_response import *
+from nlg.constants_response import *
 """
 LIST INTENT PATTERN MATCHING
 'major_code',

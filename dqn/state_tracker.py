@@ -191,10 +191,10 @@ class StateTracker:
         if agent_action['intent'] == 'inform':
             assert agent_action['inform_slots']
             # print('$'*50)
-            print('current_informs upd state agent',self.current_informs)
-            print('agent action',agent_action['inform_slots'])
+            # print('current_informs upd state agent',self.current_informs)
+            # print('agent action',agent_action['inform_slots'])
             inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs,user_action)
-            print('slot predict and suggest',inform_slots)
+            # print('slot predict and suggest',inform_slots)
             agent_action['inform_slots'] = inform_slots
             assert agent_action['inform_slots']
             key, value = list(agent_action['inform_slots'].items())[0]  # Only one
@@ -226,6 +226,7 @@ class StateTracker:
                     value = list(db_results_no_empty.values())
                 else:
 
+                    ## lấy key đầu tiên trong list db query được
                     key, value = list(db_results.items())[0]
                     value = list(db_results.values())
 

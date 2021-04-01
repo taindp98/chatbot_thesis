@@ -19,14 +19,14 @@ class User:
         Reset the user.
 
         Returns:
-            dict: The user response
+            dict: The user nlg
         """
 
         return self._return_response()
 
     def _return_response(self):
         """
-        Asks user in console for response then receives a response as input.
+        Asks user in console for nlg then receives a nlg as input.
 
         Format must be like this: request/moviename: room, date: friday/starttime, city, theater
         or inform/moviename: zootopia/
@@ -35,7 +35,7 @@ class User:
         intents, informs keys and values, and request keys and values cannot contain / , :
 
         Returns:
-            dict: The response of the user
+            dict: The nlg of the user
         """
 
         response = {'intent': '', 'inform_slots': {}, 'request_slots': {}}
@@ -93,13 +93,13 @@ class User:
 
     def step(self, agent_action):
         """
-        Return the user's response, reward, done and success.
+        Return the user's nlg, reward, done and success.
 
         Parameters:
             agent_action (dict): The current action of the agent
 
         Returns:
-            dict: User response
+            dict: User nlg
             int: Reward
             bool: Done flag
             int: Success: -1, 0 or 1 for loss, neither win nor loss, win

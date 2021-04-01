@@ -32,7 +32,7 @@ list_num_case = [int(item.split('/')[-1].replace('.txt','').replace('case','')) 
 list_num_case_sort = sorted(list_num_case)
 
 for case_num in list_num_case_sort:
-    if case_num >= 0:
+    if case_num == 0:
         print('='*50)
         current_case = os.path.join(case_path,str('case'+str(case_num)+'.txt'))
         # case_num = case.split('/')[-1].replace('.txt','')

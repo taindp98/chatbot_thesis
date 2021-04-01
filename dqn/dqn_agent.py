@@ -91,7 +91,7 @@ class DQNAgent:
 
         Returns:
             int: The index of the action in the possible actions
-            dict: The action/response itself
+            dict: The action/nlg itself
 
         """
 
@@ -113,7 +113,7 @@ class DQNAgent:
 
         Returns:
             int: The index of the action in the possible actions
-            dict: The action/response itself
+            dict: The action/nlg itself
 
         """
 
@@ -157,7 +157,7 @@ class DQNAgent:
 
         Returns:
             int: The index of the action in the possible actions
-            dict: The action/response itself
+            dict: The action/nlg itself
         """
 
         index = np.argmax(self._dqn_predict_one(state))
