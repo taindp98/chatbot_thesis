@@ -22,8 +22,9 @@ def get_bot_response(userText,user_id):
     input_data['state_tracker_id'] = user_id
     r = requests.post(url=api_url, json=input_data)
     chatbot_respose = r.json()
-    mess_response = chatbot_respose['message'].replace('\n', r'').replace(r'"',r'')
-    return mess_response
+    list_mess_response = chatbot_respose['message']
+    list_mess_response = [item.replace('\n', r'').replace(r'"',r'') for item in list_mess_response]
+    return list_mess_response
 
 # list_case = [0,1,2,3,4]
 case_path = './test_case/{}'.format(path_weight)
