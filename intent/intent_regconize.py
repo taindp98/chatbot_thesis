@@ -240,16 +240,18 @@ def clasify_business_random_intent(message,signal):
 
         list_confuse_token = [ViTokenizer.tokenize(item) for item in list_confuse]
         dict_define_confuse = dict(zip(list_confuse_token,key_confuse))
-        # print(dict_define_confuse)
+        # print("dict_define_confuse",dict_define_confuse)
         dict_compare_dist = {}
         for confuse_token in list_confuse_token:
             dist = distance(message_token,signal_token,confuse_token)
             dict_compare_dist[confuse_token] = dist
 
         dict_compare_dist_sort = {k: v for k, v in sorted(dict_compare_dist.items(), key=lambda item: item[1])}
-        vote_token = list(dict_compare_dist_sort.keys())[0]
-        # print(dict_compare_dist)
-        return dict_define_confuse[vote_token],1.0,message
+        if dict_compare_dist_sort:
+            vote_token = list(dict_compare_dist_sort.keys())[0]
+            # print(dict_compare_dist)
+
+            return dict_define_confuse[vote_token],1.0,message
 
     else:
         for notification in dict_business_intent['tuition']:
