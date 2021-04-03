@@ -97,18 +97,25 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
             response_match = ''
             # print('confirm_obj',confirm_obj)
             if confirm_obj != None:
-                if inform_slot not in list_map_key:
-                    check_match = check_match_sublist_and_substring(confirm_obj[inform_slot],first_result_data[inform_slot])
+                # if inform_slot not in list_map_key:
+                # print('999999999')
+                # print(confirm_obj[inform_slot],list_unique_slot_in_record_match)
 
+                for item in list_unique_slot_in_record_match:
+                    check_match = check_match_sublist_and_substring(confirm_obj[inform_slot],item)
+                    if check_match:
+                        break
                 value_match = ''
                 if len(confirm_obj[inform_slot]) > 1:
                     value_match = ',\n'.join(confirm_obj[inform_slot])
                 else:
                     value_match = confirm_obj[inform_slot][0]
                 if check_match:
-                    response_match = "\n \n Đúng rồi! {0} là {1}".format(AGENT_INFORM_OBJECT[inform_slot],value_match)
+                    response_match = "\n\nĐúng rồi! {0} là {1}".format(AGENT_INFORM_OBJECT[inform_slot],value_match)
                 else:
-                    response_match = "\n \n Sai rồi! {0} không là {1}".format(AGENT_INFORM_OBJECT[inform_slot],value_match)
+                    response_match = "\n\nSai rồi! {0} không là {1}".format(AGENT_INFORM_OBJECT[inform_slot],value_match)
+                ## add list_sentence
+                list_sentence.append(response_match)
             if inform_slot != "major":
                 # sentence_pattern = random.choice(MATCH_FOUND['found'])
                 # sentence = sentence_pattern.replace("*found_slot*", AGENT_INFORM_OBJECT[inform_slot])

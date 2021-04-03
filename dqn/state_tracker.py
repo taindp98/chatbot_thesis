@@ -58,6 +58,15 @@ class StateTracker:
         self.history = []
         self.round_num = 0
         self.current_request_slots = []
+
+        self.list_state_tracker = ['initial']
+        self.list_request = []
+        self.list_input = []
+        self.list_target = []
+        self.all_slot = []
+        self.pattern_target = []
+        self.recursion_success = False
+
     def print_history(self):
         """Helper function if you want to see the current history action by action."""
 
@@ -269,6 +278,11 @@ class StateTracker:
 
         """
 
+        # if user_action['intent'] == 'request':
+        #
+        #     print('9999999999999999')
+        #     self.reset()
+
         for key, value in user_action['inform_slots'].items():
             self.current_informs[key] = value
 
@@ -277,7 +291,7 @@ class StateTracker:
                 self.current_request_slots.append(key)
         user_action.update({'round': self.round_num, 'speaker': 'User'})
         self.history.append(user_action)
-        if self.round_num == 0:
+        if self.round_num == 0 or user_action['intent'] == 'request':
             self.all_slot = self.current_request_slots + list(self.current_informs.keys())
             self.pattern_target = self.all_slot + map_order_entity[self.current_request_slots[0]].copy()
             self.list_state_tracker += self.all_slot

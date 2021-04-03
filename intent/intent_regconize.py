@@ -174,45 +174,64 @@ def predict_lstm(mess):
 
 def clasify_business_random_intent(message,signal):
 
-
-
-    for notification in dict_business_intent['major_name']:
-        if message.lower().find(notification)!=-1:
-            return 'major_name',1.0,message
-
-    for notification in dict_business_intent['subject_group']:
-        if message.lower().find(notification)!=-1:
-            return 'subject_group',1.0,message
-
-    # for notification in dict_business_intent['tuition']:
-    #     if message.lower().find(notification)!=-1:
-    #         return 'tuition',1.0,message
-
-    for notification in dict_business_intent['major_code']:
-        if message.lower().find(notification)!=-1:
-            return 'major_code',1.0,message
-
-    for notification in dict_business_intent['subject']:
-        if message.lower().find(notification)!=-1:
-            return 'subject',1.0,message
-
-
-
-    for notification in dict_business_intent['object']:
-        if message.lower().find(notification)!=-1:
-            return 'object',1.0,message
-
-    for notification in dict_business_intent['register']:
-        if message.lower().find(notification)!=-1:
-            return 'register',1.0,message
-
-    ## confuse
     if signal:
-        signal_token = ViTokenizer.tokenize(signal)
-        # print(signal_token)
+        signal_token = ViTokenizer.tokenize(signal).split(' ')[0]
+
+        # signal_first_word = signal_token.split(' ')[0]
+        # print(signal_first_word)
         message_token = ViTokenizer.tokenize(message)
         list_confuse = []
         key_confuse = []
+
+        for notification in dict_business_intent['major_name']:
+            if message.lower().find(notification)!=-1:
+                # return 'major_name',1.0,message
+                list_confuse.append(notification)
+                key_confuse.append('major_name')
+
+        for notification in dict_business_intent['subject_group']:
+            if message.lower().find(notification)!=-1:
+                # return 'subject_group',1.0,message
+                list_confuse.append(notification)
+                key_confuse.append('subject_group')
+
+        # for notification in dict_business_intent['tuition']:
+        #     if message.lower().find(notification)!=-1:
+        #         return 'tuition',1.0,message
+
+        for notification in dict_business_intent['major_code']:
+            if message.lower().find(notification)!=-1:
+                # return 'major_code',1.0,message
+                list_confuse.append(notification)
+                key_confuse.append('major_code')
+
+        for notification in dict_business_intent['subject']:
+            if message.lower().find(notification)!=-1:
+                # return 'subject',1.0,message
+                list_confuse.append(notification)
+                key_confuse.append('subject')
+
+
+
+        for notification in dict_business_intent['object']:
+            if message.lower().find(notification)!=-1:
+                # return 'object',1.0,message
+                list_confuse.append(notification)
+                key_confuse.append('object')
+
+        for notification in dict_business_intent['register']:
+            if message.lower().find(notification)!=-1:
+                # return 'register',1.0,message
+                list_confuse.append(notification)
+                key_confuse.append('register')
+        ## confuse
+        # print('signal ne',signal)
+        # if signal:
+        #     signal_token = ViTokenizer.tokenize(signal)
+        #     print(signal_token)
+        #     message_token = ViTokenizer.tokenize(message)
+        #     list_confuse = []
+        #     key_confuse = []
 
         for notification in dict_business_intent['tuition']:
             if message.lower().find(notification)!=-1:
@@ -249,11 +268,53 @@ def clasify_business_random_intent(message,signal):
         dict_compare_dist_sort = {k: v for k, v in sorted(dict_compare_dist.items(), key=lambda item: item[1])}
         if dict_compare_dist_sort:
             vote_token = list(dict_compare_dist_sort.keys())[0]
-            # print(dict_compare_dist)
+            # print("dict_compare_dist",dict_compare_dist)
 
             return dict_define_confuse[vote_token],1.0,message
 
     else:
+        for notification in dict_business_intent['major_name']:
+            if message.lower().find(notification)!=-1:
+                return 'major_name',1.0,message
+                # list_confuse.append(notification)
+                # key_confuse.append('major_name')
+
+        for notification in dict_business_intent['subject_group']:
+            if message.lower().find(notification)!=-1:
+                return 'subject_group',1.0,message
+                # list_confuse.append(notification)
+                # key_confuse.append('subject_group')
+
+        # for notification in dict_business_intent['tuition']:
+        #     if message.lower().find(notification)!=-1:
+        #         return 'tuition',1.0,message
+
+        for notification in dict_business_intent['major_code']:
+            if message.lower().find(notification)!=-1:
+                return 'major_code',1.0,message
+                # list_confuse.append(notification)
+                # key_confuse.append('major_code')
+
+        for notification in dict_business_intent['subject']:
+            if message.lower().find(notification)!=-1:
+                return 'subject',1.0,message
+                # list_confuse.append(notification)
+                # key_confuse.append('subject')
+
+
+
+        for notification in dict_business_intent['object']:
+            if message.lower().find(notification)!=-1:
+                return 'object',1.0,message
+                # list_confuse.append(notification)
+                # key_confuse.append('object')
+
+        for notification in dict_business_intent['register']:
+            if message.lower().find(notification)!=-1:
+                return 'register',1.0,message
+                # list_confuse.append(notification)
+                # key_confuse.append('register')
+
         for notification in dict_business_intent['tuition']:
             if message.lower().find(notification)!=-1:
                 return 'tuition',1.0,message
@@ -291,6 +352,7 @@ def catch_intent(mess):
 
     if check_question(mess_clean):
         signal = catch_how_many(mess_clean)
+        # print('signal',signal)
         return clasify_business_random_intent(mess_clean,signal)
 
     else:
@@ -321,7 +383,7 @@ def catch_intent(mess):
 
 # print(catch_intent("phải không ạ"))
 
-# s = "cho em xin Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?"
+# s = "cho em hỏi ngành kỹ thuật hóa học phải thi khối b đúng không ạ"
 # s = 'Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?'
 # print(catch_intent(s))
 

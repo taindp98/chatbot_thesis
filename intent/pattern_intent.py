@@ -12,7 +12,7 @@ dict_business_intent = {}
 
 # dict_business_intent["out_come"] = ["yêu cầu đầu ra","chuẩn đầu ra","đầu ra","dau ra","yeu cau dau ra","chuan dau ra","chuẩn ra trường","chuẩn tốt nghiệp","yêu cầu tốt nghiệp","chuan tot nghiep","chuan ra truong","chuẩn tiếng anh","chuan tieng anh","chuẩn ngoại ngữ","chuan ngoai ngu","yêu cầu tiếng anh","yêu cầu ngoại ngữ","yeu cau ngoai ngu"]
 
-dict_business_intent["subject_group"] = ["khối nào","thi khối nào","khoi nao","khoi nào","khói nào","khối nao","khói nao","có khối nào","co khoi nao","những khối nào","gồm khối nào","gom khoi nao"]
+dict_business_intent["subject_group"] = ['khối',"khối nào","thi khối nào","khoi nao","khoi nào","khói nào","khối nao","khói nao","có khối nào","co khoi nao","những khối nào","gồm khối nào","gom khoi nao"]
 
 dict_business_intent["tuition"] = ["học phí","hoc phí","học phi","hoc phi","mắc","có mắc","rẻ","có rẻ","đắt","có đắt","đắc","có đắc","học phí là bao nhiêu","học phí bao nhiêu","tiền học","tiền","tien hoc","giá","giá tín chỉ","giá tiền","gia tien","giá tiền của"]
 
@@ -24,7 +24,7 @@ dict_business_intent["subject"] = ["môn thi","mon thi","môn nào","mon nao","t
 
 dict_business_intent['object'] = ['đối tượng','doi tuong','thí sinh','thi sinh', 'đôi tuong','doi tượng']
 
-dict_business_intent['major_name'] = ['ngành nào','tên ngành','nganh nao']
+dict_business_intent['major_name'] = ['ngành','ngành nào','tên ngành','nganh nao']
 
 dict_business_intent['register'] = ['đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
 

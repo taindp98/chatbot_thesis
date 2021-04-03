@@ -1,6 +1,6 @@
 from utils import *
 # import json
-# from intent.intent_regconize import *
+from intent.intent_regconize import catch_intent
 from entity.confirm_object import catch_point
 from collections import OrderedDict
 
@@ -10,6 +10,14 @@ from entity.constants_ner import map_order_entity,list_entity
     label = ['other_intent','type_edu','case','career']
 """
 dict_entity = list_entity[0]
+
+## add key --> list value to matching confirm object
+# count = 0
+for key,value in map_order_entity.items():
+    if not key.endswith('inform') and key != 'not_intent':
+        map_order_entity[key] = map_order_entity[key] + [key]
+
+# print(map_order_entity)
 
 def find_all_entity(intent,mess_clean):
     normalized_input_sentence = mess_clean
@@ -33,12 +41,15 @@ def find_all_entity(intent,mess_clean):
         ordered_real_dict[entity_name] = dict_entity[entity_name]
     for entity_name, list_entity in ordered_real_dict.items():
         # phân biệt cho từng order
-        if entity_name in ["major_name",'type_edu']:
+        if entity_name == 'type_edu':
             matching_threshold = 0.2
-        elif entity_name == 'case':
-            matching_threshold = 0.4
         elif entity_name == 'subject':
             matching_threshold = 0.55
+        elif entity_name == 'major_name':
+            matching_threshold = 0.5
+        elif entity_name == 'case':
+            matching_threshold = 0.4
+
         else:
             matching_threshold = 0.1
         catch_entity_threshold_loop = 0
@@ -82,21 +93,35 @@ def find_all_entity(intent,mess_clean):
             catch_entity_threshold_loop = catch_entity_threshold_loop + 1
     # if intent == 'point':
     #     result_entity_dict['point'] = catch_point(input_sentence)
-    point_entity = catch_point(mess_clean)
-    if point_entity:
-        result_entity_dict['point'] = point_entity
+    point_entity,list_point_regex = catch_point(mess_clean)
+    list_entity_found = list(result_entity_dict.values())
     confirm_obj = None
+
+    for p in list_point_regex:
+        for sublist_entity in list_entity_found:
+
+            for e in sublist_entity:
+                if p not in e and point_entity:
+                    # if point_entity:
+                    # print('Trueeeee')
+                    result_entity_dict['point'] = point_entity
+
+                    if intent in result_entity_dict:
+                        value = result_entity_dict.pop(intent)
+                        confirm_obj = {intent:value}
+
     if intent in result_entity_dict:
         value = result_entity_dict.pop(intent)
         confirm_obj = {intent:value}
+
     return result_entity_dict,confirm_obj
 
-# mess1 = 'hoá học'
-# mess2 = 'chính quy'
-# print(convert_unicode(mess1)==mess2)
+# mess1 = 'cho em hỏi khối nào thi môn hoá học'
+# mess2 = 'd07'
 #
-# # # intent_catched, prob,mess_clean = catch_intent(mess)
-# entity_dict,confirm = find_all_entity('point',mess2)
-# print(entity_dict)
-# print(confirm)
+# # intent_catched, prob,mess_clean = catch_intent(mess2)
+# # print('intent',intent_catched)
+# entity_dict,confirm = find_all_entity("subject_group",mess2)
+# print('entity_dict',entity_dict)
+# print("confirm",confirm)
 # print(list_entity[0]['type_edu'])

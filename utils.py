@@ -9,6 +9,7 @@ import json
 # from fastai.text import *
 import pandas as pd
 import pickle
+from preprocess.normalize_typing import chuan_hoa_dau_cau_tieng_viet
 # path = '/home/taindp/Database/intent/'
 # path = 'data/'
 path = './data'
@@ -63,9 +64,9 @@ def convert_unicode(txt):
 def clean_mess(mess):
     # input: câu nhập vào của người dùng
     # return: câu đã loại bỏ special token
-    mess_unic = convert_unicode(mess).lower()
+    mess_unic = chuan_hoa_dau_cau_tieng_viet(convert_unicode(mess)).lower()
     mess_norm = norm_special(mess_unic)
-    mess_rmspectoken = re.findall(r'(?i)\b[a-záàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđ0-9\/\-]+\b', mess_unic)
+    mess_rmspectoken = re.findall(r'(?i)\b[a-záàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđ0-9\/\-]+\b', mess_norm)
     mess_norm = ' '.join(mess_rmspectoken)
     return mess_norm
 
@@ -251,3 +252,5 @@ def norm_special(string):
             string = string.replace(p,f' {p} ')
 #     string = string.replace('/','-')
     return string
+
+print(check_match_sublist_and_substring(['b'],['b00', 'b']))

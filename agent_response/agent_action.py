@@ -12,6 +12,8 @@ def get_agent_action(state_tracker,dqn_agent,user_action,done=False):
     # print(user_action)
 
     ## define target
+    if user_action['intent'] == 'request':
+        state_tracker.reset()
 
     state_tracker.define_target()
 
@@ -34,10 +36,10 @@ def get_agent_action(state_tracker,dqn_agent,user_action,done=False):
     _,agent_action = dqn_agent.get_action(last_action_state_traker,recursion_success,done)
 
     # print('-----get agent action')
-    print(agent_action)
+    # print(agent_action)
     # print('-----get agent action')
     state_tracker.update_state_agent(agent_action,user_action)
     # print('-----update agent action')
-    print(agent_action)
+    # print(agent_action)
     # print('-----update agent action')
     return agent_action

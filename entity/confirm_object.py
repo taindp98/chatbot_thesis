@@ -14,8 +14,9 @@ def catch_point(mess):
             else:
                 continue
 
-    define_regex_point = r"[-+]?\d*\.\d+|\d+"
+    define_regex_point = r"\d*\.\d+|\d+"
     list_point_regex = re.findall(define_regex_point,mess)
+    # print(list_point_regex)
     list_point_float = [float(item) for item in list_point_regex]
     list_point_sort = sorted(list_point_float)
 
@@ -51,8 +52,8 @@ def catch_point(mess):
             list_point_res.append(list_point_sort[-2])
             list_point_res.append(list_point_sort[-1])
 
-    return list_point_res
+    return list_point_res,list_point_regex
 
-# mess = 'điểm ngành nào tầm điểm không ạ'
-# confirm_obj = catch_point(mess)
-# print(confirm_obj)
+# mess = 'cho em hỏi ngành kỹ thuật hóa học phải thi khối d07 đúng không ạ'
+# confirm_obj,list_point_regex = catch_point(mess)
+# print(list_point_regex)
