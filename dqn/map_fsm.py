@@ -1,6 +1,6 @@
 map_order_entity = {}
 map_order_entity['major_name'] = ['point','subject_group']
-map_order_entity['major_code']=['major_name']
+map_order_entity['major_code']=['major_name','type_edu']
 map_order_entity['point']=['major_name','subject_group','year','type_edu','case']
 map_order_entity['subject_group']=['major_name']
 map_order_entity['subject']=['major_name','subject_group']
