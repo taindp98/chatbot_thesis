@@ -26,14 +26,25 @@ def get_bot_response(userText,user_id):
     list_mess_response = [item.replace('\n', r'').replace(r'"',r'') for item in list_mess_response]
     return list_mess_response
 
+RULE_BASED = True
+
+if RULE_BASED:
+    use_case = 'rule_based'
+else:
+    use_case = path_weight
+
 # list_case = [0,1,2,3,4]
-case_path = './test_case/{}'.format(path_weight)
+case_path = './test_case/{}'.format(use_case)
 list_case = glob(os.path.join(case_path,'*.txt'))
 list_num_case = [int(item.split('/')[-1].replace('.txt','').replace('case','')) for item in list_case]
 list_num_case_sort = sorted(list_num_case)
 
+
+
+print('----',use_case,'-----')
 for case_num in list_num_case_sort:
-    if case_num == 0:
+    if case_num >= 0:
+
         print('='*50)
         current_case = os.path.join(case_path,str('case'+str(case_num)+'.txt'))
         # case_num = case.split('/')[-1].replace('.txt','')
@@ -46,6 +57,6 @@ for case_num in list_num_case_sort:
             print('User: {}'.format(text_input))
             agent = get_bot_response(text_input,user_id)
             print('Agent: {}'.format(agent))
-            if str(agent).startswith('Thông tin'):
+            if str(agent[0]).startswith('Thông tin'):
                 print('----Pass----')
                 break

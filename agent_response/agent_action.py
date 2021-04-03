@@ -8,19 +8,36 @@ from dqn.state_tracker import StateTracker
 from nlg.gen_sentence import *
 # import pymongo
 def get_agent_action(state_tracker,dqn_agent,user_action,done=False):
-    state_tracker.update_state_user(user_action)
-    # print('-----update state user')
+    # print('='*100)
     # print(user_action)
-    # print('-----update state user')
-    current_state = state_tracker.get_state(done)
+
+    ## define target
+
+    state_tracker.define_target()
+
+    state_tracker.update_state_user(user_action)
+
+    # print('all_slot',state_tracker.all_slot)
+    # print('pattern_target',state_tracker.pattern_target)
+    # print('target',state_tracker.list_input)
+    # current_state = state_tracker.get_state(done)
     # print('-----get current_state')
     # print(current_state)
-    _, agent_action = dqn_agent.get_action(current_state)
+
+    state_tracker.recursion_find_best_way()
+    last_action_state_traker = state_tracker.list_state_tracker[-1]
+    # print('last_action_state_traker',last_action_state_traker)
+
+    # current_state = None
+    # _, agent_action = dqn_agent.get_action(current_state)
+    recursion_success = state_tracker.recursion_success
+    _,agent_action = dqn_agent.get_action(last_action_state_traker,recursion_success,done)
+
     # print('-----get agent action')
-    # print(agent_action)
+    print(agent_action)
     # print('-----get agent action')
     state_tracker.update_state_agent(agent_action,user_action)
-    print('-----update agent action')
+    # print('-----update agent action')
     print(agent_action)
-    print('-----update agent action')
+    # print('-----update agent action')
     return agent_action

@@ -20,7 +20,7 @@ import os
 
 app = Flask(__name__)
 # app.config["MONGO_URI"] = "mongodb://localhost:27017"
-# os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
+os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
 app.config['MONGO_URI'] = os.environ.get('MONGOLAB_URI')
 
 mongo = PyMongo(app)
@@ -82,6 +82,12 @@ def process_conversation_POST(state_tracker_id, message):
 
 #
     user_action, new_confirm_obj = get_user_request(message,state_tracker)
+
+    ## edit
+
+    # user_request_slot,user_inform_slot = state_tracker.update_state_user(user_action)
+
+
     print("-------------user action-----------")
     print(user_action,new_confirm_obj)
     print('-----------------------------------')

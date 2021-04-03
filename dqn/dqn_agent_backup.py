@@ -5,8 +5,6 @@ import random, copy
 import numpy as np
 from dqn.dialogue_config import rule_requests, agent_actions
 import re
-import random
-from dqn.fsm_tracker import recursion_find_best_way
 
 
 # Some of the code based off of https://jaromiru.com/2016/09/27/lets-make-a-dqn-theory/
@@ -79,7 +77,7 @@ class DQNAgent:
         self.rule_current_slot_index = 0
         self.rule_phase = 'not done'
 
-    def get_action(self, last_action_state_traker,recursion_success,done,use_rule=True):
+    def get_action(self, state, use_rule=True):
         """
         Returns the action of the agent given a state.
 
@@ -97,18 +95,17 @@ class DQNAgent:
 
         """
 
-        # if self.eps > random.random():
-        #     index = random.randint(0, self.num_actions - 1)
-        #     action = self._map_index_to_action(index)
-        #     return index, action
-        # else:
-        #     if use_rule:
-        #         return self._rule_action()
-        #     else:
-        #         return self._dqn_action(state)
-        return  self._rule_action(last_action_state_traker,recursion_success,done)
-    # def _rule_action(self,list_state_tracker,pattern_target,request_slot):
-    def _rule_action(self,last_action_state_traker,recursion_success,done):
+        if self.eps > random.random():
+            index = random.randint(0, self.num_actions - 1)
+            action = self._map_index_to_action(index)
+            return index, action
+        else:
+            if use_rule:
+                return self._rule_action()
+            else:
+                return self._dqn_action(state)
+
+    def _rule_action(self):
         """
         Returns a rule-based policy action.
 
@@ -134,19 +131,10 @@ class DQNAgent:
 
         ## check
         index = 0
-        # slot = 'type_edu'
-        slot = last_action_state_traker
+        slot = 'type_edu'
+        rule_response = {'intent': 'request', 'inform_slots': {}, 'request_slots': {slot: 'UNK'}}
 
-        if recursion_success:
-            rule_response = {'intent': 'match_found', 'inform_slots': {}, 'request_slots': {}}
-        else:
-            if not done:
-                if random.randint(0,1) == 0:
-                    rule_response = {'intent': 'request', 'inform_slots': {}, 'request_slots': {slot: 'UNK'}}
-                else:
-                    rule_response = {'intent': 'inform', 'inform_slots': {slot:'PLACEHOLDER'}, 'request_slots': {}}
-            else:
-                rule_response = {'intent': 'done', 'inform_slots': {}, 'request_slots': {}}
+        # index = self._map_action_to_index(rule_response)
         return index, rule_response
 
     def _map_action_to_index(self, response):
