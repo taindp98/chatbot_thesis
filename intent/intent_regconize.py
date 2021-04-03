@@ -287,9 +287,23 @@ def catch_intent(mess):
         if mess_clean.lower().find(notification)!=-1:
             return 'anything',1.0,mess_clean
 
+
+
     if check_question(mess_clean):
         signal = catch_how_many(mess_clean)
         return clasify_business_random_intent(mess_clean,signal)
+
+    else:
+
+        ## intent agree or disagree
+        for notification in list_agree_notification:
+            if mess_clean.lower().find(notification)!=-1:
+                return 'agree',1.0,mess_clean
+
+        for notification in list_disagree_notification:
+            if mess_clean.lower().find(notification)!=-1:
+                return 'disagree',1.0,mess_clean
+        ##
 
     for notification in list_done_notification:
         if mess_clean.lower().find(notification)!=-1:
@@ -305,7 +319,7 @@ def catch_intent(mess):
 
     return 'not_intent',1.0,mess_clean
 
-# print(catch_intent("Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?"))
+# print(catch_intent("phải không ạ"))
 
 # s = "cho em xin Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?"
 # s = 'Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?'

@@ -92,7 +92,7 @@ def find_all_entity(intent,mess_clean):
     return result_entity_dict,confirm_obj
 
 # mess1 = 'hoá học'
-# mess2 = 'hóa học'
+# mess2 = 'chính quy'
 # print(convert_unicode(mess1)==mess2)
 #
 # # # intent_catched, prob,mess_clean = catch_intent(mess)

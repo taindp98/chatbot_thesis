@@ -201,14 +201,18 @@ class StateTracker:
 
         chỉ query khi có có current inform khi agent action là inform
         """
+        print('current_informs --> constraints',self.current_informs)
+        # print('agent action',agent_action['inform_slots'])
+        db_results_dict = self.db_helper.get_db_results_for_slots(self.current_informs,user_action)
+        print('db match',db_results_dict)
 
         if agent_action['intent'] == 'inform':
             assert agent_action['inform_slots']
             # print('$'*50)
-            # print('current_informs upd state agent',self.current_informs)
+            # print('current_informs --> constraints',self.current_informs)
             # print('agent action',agent_action['inform_slots'])
             inform_slots = self.db_helper.fill_inform_slot(agent_action['inform_slots'], self.current_informs,user_action)
-            # print('slot predict and suggest',inform_slots)
+            print('slot predict and suggest',inform_slots)
             agent_action['inform_slots'] = inform_slots
             assert agent_action['inform_slots']
             key, value = list(agent_action['inform_slots'].items())[0]  # Only one

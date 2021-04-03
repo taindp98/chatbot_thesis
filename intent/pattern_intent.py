@@ -55,3 +55,8 @@ list_thanks_notification = ["cảm ơn","tks","thanks",'thank']
 list_anything_notification = ["sao cũng được","gì cũng được","anything","s cũng được",\
     'j cũng được',"không biết","k biết","ko biết","không nhớ","ko nhớ","k nhớ","không rõ",\
         "k rõ","ko rõ","cũng được","cũng ok","cũng không sao","cũng dc","cũng k sao","cũng ko sao"]
+
+#intent agree or disagree
+
+list_agree_notification = ['yes','ok','đúng rồi','đúng','chắc vậy','chính xác','phải rồi']
+list_disagree_notification = ['không phải','no','sai rồi','sai']
