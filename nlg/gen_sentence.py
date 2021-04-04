@@ -7,15 +7,20 @@ warnings.filterwarnings('ignore')
 
 from nlg.constants_response import *
 
-def get_greeting_statement():
-    return random.choice(GREETING)
+# def get_greeting_statement():
+#     return random.choice(GREETING)
 def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
     sentence_pattern = None
+    list_sentence = []
+
     if isGreeting:
-        return random.choice(GREETING)
+        sentence = random.choice(GREETING)
+        # return random.choice(GREETING)
+        list_sentence.append(sentence)
+        return list_sentence
     agent_intent = agent_action['intent']
 
-    list_sentence = []
+
 
     if agent_intent == "inform":
         ############ TO DO : lấy list_match_obj ra inform cho user (dạng câu) (ok)
