@@ -14,10 +14,12 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
     list_sentence = []
 
     if isGreeting:
+        print('Treee')
         sentence = random.choice(GREETING)
         # return random.choice(GREETING)
         list_sentence.append(sentence)
         return list_sentence
+
     agent_intent = agent_action['intent']
 
 

@@ -114,11 +114,13 @@ def process_conversation_POST(state_tracker_id, message):
         agent_message = response_craft(agent_act, state_tracker,confirm_obj)
     else:
         # to prevent key error
+        # print('day ne')
         agent_act = {'intent':user_action['intent'],'request_slots':[],'inform_slots':[]}
         # print('========================')
         # print('agent action',agent_act)
         # print('========================')
-        agent_message = random.choice(response_to_user_free_style[user_action['intent']])
+        agent_message = [random.choice(response_to_user_free_style[user_action['intent']])]
+
         #nếu là done thì reset và cho confirm về None
         if user_action['intent'] == "done":
             state_tracker.reset()

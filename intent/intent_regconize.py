@@ -388,7 +388,7 @@ def clasify_business_random_intent(message,signal):
             rate_dist = float(vote_dist/len(message_token.split(' ')))
             # print("rate_dist",rate_dist)
             # print('vote_dist',vote_dist)
-            print("dict_compare_dist",dict_compare_dist)
+            # print("dict_compare_dist",dict_compare_dist)
 
             if rate_dist < THRESHOLD_DISTANCE_SIGNAL_QUESTION:
                 return dict_define_confuse[vote_token],1.0,message
@@ -515,7 +515,7 @@ def catch_intent(mess):
 # # s = 'Thi khối B cần học những môn nào?'
 # # s = 'Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?'
 # print(catch_intent(s))
-print(catch_intent('cho em hỏi ngành kỹ thuật hóa học phải thi khối b đúng không ạ'))
+# print(catch_intent('cho em hỏi ngành kỹ thuật hóa học phải thi khối b đúng không ạ'))
 #
 # print(catch_confuse('cho hỏi mã ngành của khoa máy tính là gì'))
 
