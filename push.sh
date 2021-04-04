@@ -1,4 +1,4 @@
 #!/bin/bash
 git add .
-git commit -m 'apr1'
-git push -f origin master
+git commit -m 'apr4'
+git push -f origin rule_based
