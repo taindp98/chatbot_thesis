@@ -388,7 +388,8 @@ def catch_intent(mess):
 
 # print(catch_intent("phải không ạ"))
 
-# s = "cho em hỏi ngành kỹ thuật máy tính có ưu tiên xét tuyển không ạ"
+# s = "Tên ngành đào tạo về tự động là gì?"
+# s = 'Thi khối B cần học những môn nào?'
 # s = 'Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?'
 # print(catch_intent(s))
 

@@ -1,6 +1,6 @@
 from utils import *
 from intent.intent_regconize import catch_intent
-from entity.pattern_ner import *
+from entity.pattern_ner import find_all_entity
 from constant_general import list_map_key
 from nlg.constants_response import *
 """
@@ -44,6 +44,9 @@ def get_user_request(mess,state_tracker):
         if intent_catched not in ignore_intent:
             user_action['intent'] = 'request'
             user_action['inform_slots'],confirm_obj=find_all_entity(intent_catched,mess)
+            # print('intent_catched',intent_catched)
+            # print('mess',mess)
+            # print('find_all_entity(intent_catched,mess)',find_all_entity(intent_catched,mess))
             user_action['request_slots'] = {intent_catched:'UNK'}
 
         # elif intent_catched == 'not_intent' or intent_catched == 'other':
