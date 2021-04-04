@@ -383,7 +383,7 @@ def catch_intent(mess):
 
 # print(catch_intent("phải không ạ"))
 
-# s = "cho em hỏi ngành kỹ thuật hóa học phải thi khối b đúng không ạ"
+# s = "cho em hỏi có năm nào dưới 27 điểm không ạ"
 # s = 'Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?'
 # print(catch_intent(s))
 

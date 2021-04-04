@@ -129,9 +129,11 @@
     # print(agent_inform_slots[id_record])
 
 # a = {'key':'value'}
-a = {}
-if a:
-    print('True')
-else:
-    print('False')
+# a = {}
+# if a:
+#     print('True')
+# else:
+#     print('False')
 # print(dict(a.items()))
+# import os
+# print(os.environ.get("MONGOLAB_URI"))

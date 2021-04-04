@@ -253,4 +253,4 @@ def norm_special(string):
 #     string = string.replace('/','-')
     return string
 
-print(check_match_sublist_and_substring(['b'],['b00', 'b']))
+# print(check_match_sublist_and_substring(['b'],['b00', 'b']))

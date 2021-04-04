@@ -96,19 +96,23 @@ def find_all_entity(intent,mess_clean):
     point_entity,list_point_regex = catch_point(mess_clean)
     list_entity_found = list(result_entity_dict.values())
     confirm_obj = None
+    # print('point_entity',point_entity)
+    if list_entity_found:
+        for p in list_point_regex:
+            for sublist_entity in list_entity_found:
 
-    for p in list_point_regex:
-        for sublist_entity in list_entity_found:
+                for e in sublist_entity:
 
-            for e in sublist_entity:
-                if p not in e and point_entity:
-                    # if point_entity:
-                    # print('Trueeeee')
-                    result_entity_dict['point'] = point_entity
+                    if p not in e and point_entity:
+                        # if point_entity:
+                        # print('Trueeeee')
+                        result_entity_dict['point'] = point_entity
 
-                    if intent in result_entity_dict:
-                        value = result_entity_dict.pop(intent)
-                        confirm_obj = {intent:value}
+                        if intent in result_entity_dict:
+                            value = result_entity_dict.pop(intent)
+                            confirm_obj = {intent:value}
+    else:
+        result_entity_dict['point'] = point_entity
 
     if intent in result_entity_dict:
         value = result_entity_dict.pop(intent)
@@ -117,11 +121,11 @@ def find_all_entity(intent,mess_clean):
     return result_entity_dict,confirm_obj
 
 # mess1 = 'cho em hỏi khối nào thi môn hoá học'
-# mess2 = 'd07'
-#
-# # intent_catched, prob,mess_clean = catch_intent(mess2)
-# # print('intent',intent_catched)
-# entity_dict,confirm = find_all_entity("subject_group",mess2)
+# mess2 = 'cho em hỏi có năm nào dưới 27 điểm không ạ'
+# #
+# intent_catched, prob,mess_clean = catch_intent(mess2)
+# print('intent',intent_catched)
+# entity_dict,confirm = find_all_entity(intent_catched,mess_clean)
 # print('entity_dict',entity_dict)
 # print("confirm",confirm)
 # print(list_entity[0]['type_edu'])
