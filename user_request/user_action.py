@@ -80,7 +80,7 @@ def get_user_request(mess,state_tracker):
             #nếu agent request 1 key thì user trả lời key đó
             user_inform_key = None
             slot_inform = None
-            if len(list(last_agent_action['request_slots'].keys())) >= 0:
+            if len(list(last_agent_action['request_slots'].keys())) > 0:
                 user_inform_key = list(last_agent_action['request_slots'].keys())[0]
 
             #nếu agent inform 1 key thì user cũng inform lại key đó

@@ -188,7 +188,8 @@ class DBQuery:
                                 ]
                     })
             else:
-                list_and_in.append({"point":{"$gte":values[0],"$lte":values[1]}})
+                if len(values) > 1:
+                    list_and_in.append({"point":{"$gte":values[0],"$lte":values[1]}})
         if list_and_in:
             list_and_out.append({"$and": list_and_in})
         if list_and_out:
