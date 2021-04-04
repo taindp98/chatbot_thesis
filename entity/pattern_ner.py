@@ -46,7 +46,7 @@ def find_all_entity(intent,mess_clean):
         elif entity_name == 'subject':
             matching_threshold = 0.55
         elif entity_name == 'major_name':
-            matching_threshold = 0.5
+            matching_threshold = 0.35
         elif entity_name == 'case':
             matching_threshold = 0.4
 
@@ -122,10 +122,11 @@ def find_all_entity(intent,mess_clean):
     return result_entity_dict,confirm_obj
 
 # mess1 = 'cho em hỏi khối nào thi môn hoá học'
-s = 'Thi khối B cần học những môn nào?'
-#
-intent_catched, prob,mess_clean = catch_intent(s)
-print('intent',intent_catched)
-entity_dict,confirm = find_all_entity(intent_catched,mess_clean)
-print('entity_dict',entity_dict)
-print("confirm",confirm)
+# s = 'Thi khối B cần học những môn nào?'
+# s = 'cho em xin Chỉ tiêu tuyển sinh năm 2020 của khối A1 ngành điện điện tử?'
+# #
+# intent_catched, prob,mess_clean = catch_intent(s)
+# print('intent',intent_catched)
+# entity_dict,confirm = find_all_entity(intent_catched,mess_clean)
+# print('entity_dict',entity_dict)
+# print("confirm",confirm)

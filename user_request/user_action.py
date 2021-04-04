@@ -43,10 +43,8 @@ def get_user_request(mess,state_tracker):
         # request la intent
         if intent_catched not in ignore_intent:
             user_action['intent'] = 'request'
-            user_action['inform_slots'],confirm_obj=find_all_entity(intent_catched,mess)
-            # print('intent_catched',intent_catched)
-            # print('mess',mess)
-            # print('find_all_entity(intent_catched,mess)',find_all_entity(intent_catched,mess))
+            dict_entity_inform, confirm_obj = find_all_entity(intent_catched,mess_clean)
+            user_action['inform_slots'] = dict_entity_inform
             user_action['request_slots'] = {intent_catched:'UNK'}
 
         # elif intent_catched == 'not_intent' or intent_catched == 'other':
@@ -71,7 +69,7 @@ def get_user_request(mess,state_tracker):
                         final_intent = user_inform_key + '_inform'
                     else:
                         final_intent = 'not_intent'
-                    user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess)
+                    user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess_clean)
                     user_action['intent'] = 'inform'
                     user_action['request_slots'] = {}
                 else:
@@ -100,7 +98,7 @@ def get_user_request(mess,state_tracker):
                     final_intent = user_inform_key + '_inform'
                 else:
                     final_intent = 'not_intent'
-                # user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess)
+                # user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess_clean)
                 user_action['intent'] = 'inform'
                 user_action['request_slots'] = {}
 
@@ -109,7 +107,7 @@ def get_user_request(mess,state_tracker):
                 else:
                     ## fix entity
 
-                    dict_fix_entity,confirm_obj = find_all_entity(final_intent,mess)
+                    dict_fix_entity,confirm_obj = find_all_entity(final_intent,mess_clean)
 
                     if not dict_fix_entity:
                         user_action['inform_slots'] = {}
@@ -145,4 +143,5 @@ def get_user_request(mess,state_tracker):
 
     else:
         user_action = mess
+
     return user_action,confirm_obj

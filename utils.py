@@ -217,6 +217,11 @@ def distance(s, w1, w2):
     if w1 == w2 :
        return 0
 
+    ## check tokenize
+
+    w1_tok = w1.split(' ')[0]
+    w2_tok = w2.split(' ')[0]
+
     # get individual words in a list
     words = s.split(" ")
 
@@ -227,10 +232,10 @@ def distance(s, w1, w2):
     # traverse through the entire string
     for index in range(len(words)):
 
-        if words[index] == w1:
+        if words[index] == w1_tok:
             for search in range(len(words)):
 
-                if words[search] == w2:
+                if words[search] == w2_tok:
 
                     # the distance between the words is
                     # the index of the first word - the

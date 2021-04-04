@@ -12,13 +12,13 @@ dict_business_intent = {}
 
 # dict_business_intent["out_come"] = ["yêu cầu đầu ra","chuẩn đầu ra","đầu ra","dau ra","yeu cau dau ra","chuan dau ra","chuẩn ra trường","chuẩn tốt nghiệp","yêu cầu tốt nghiệp","chuan tot nghiep","chuan ra truong","chuẩn tiếng anh","chuan tieng anh","chuẩn ngoại ngữ","chuan ngoai ngu","yêu cầu tiếng anh","yêu cầu ngoại ngữ","yeu cau ngoai ngu"]
 
-dict_business_intent["subject_group"] = ['khối',"khối nào","thi khối nào","khoi nao","khoi nào","khói nào","khối nao","khói nao","có khối nào","co khoi nao","những khối nào","gồm khối nào","gom khoi nao"]
+dict_business_intent["subject_group"] = ['khối','tổ hợp khối','khói','khoi']
 
 dict_business_intent["tuition"] = ["học phí","hoc phí","học phi","hoc phi","mắc","có mắc","rẻ","có rẻ","đắt","có đắt","đắc","có đắc","học phí là bao nhiêu","học phí bao nhiêu","tiền học","tiền","tien hoc","giá","giá tín chỉ","giá tiền","gia tien","giá tiền của"]
 
 dict_business_intent["point"] = ['điểm','điểm chuẩn',"nhiêu điểm","bao nhiêu điểm","mấy điểm","điểm bao nhiêu","điểm thi bao nhiêu","điểm đạt không","điểm tốt không","điểm thấp không","thi nhiêu điểm","điểm nhiêu","mấy điểm","được nhiêu","công bố điểm thi","điểm nhiêu","mấy điểm","điểm bao nhiêu","nhieu diem","được nhiêu điểm","mấy điểm","điểm bao nhiêu","bao nhiêu điểm","có nhiêu điểm","mấy điểm","đậu hông","may diem","điểm bao nhiêu","bao nhieu diem","kết quả thi","điểm xét tuyển bao nhiêu","bao nhieu diem","điểm bao nhiêu","nhiêu điểm","mấy điểm","bao nhiu diem","diem bao nhiu","may diem","nhiêu điểm","được nhiêu","điểm thi bao nhiêu","điểm mấy","thi nhiêu điểm","bao nhiêu điểm","mấy điểm","điểm thế nào","điểm sao rồi","điểm ổn không","điểm nhiêu","điểm thế nào","bao nhiêu điểm","bao nhieu điểm","mấy điểm đậu","bao nhiều điểm","bao nhiêu điểm","mấy điểm","điểm bao nhiêu","bao nhiêu điểm"]
 
-dict_business_intent["major_code"] = ["mã ngành","mã ngành bao nhiêu","mã ngành là gì","mã ngành","mã của ngành","mã bao nhiêu","mã ngành","mã mấy","ma nganh la","mã của ngành","mã ngành này","mã ngành","mã bao nhiêu","mã là","mã nhiêu","mã ngành nào","mã của ngành là nhiêu","mã ngành","mã ngành là gì","mã ngành","mã ngành bao nhiêu","mã ngành","mã của ngành","mã là gì","mã ngành","mã nganh","ma ngành","mã gì","mã về ngành","mã mấy","mã ngành học","ma ngành","ma đăng kí","ma ngành","ma ngành","mã ngành","mã ngành bao nhiêu","mã nào","mã của ngành","ma nganh bao nhiu","ma nganh nao","ma nganh","mã ngành nào","mã bao nhiêu","mã là gì","ma may vay","mã ngành nào","mã ngành học","mã của ngành","mã ngành","ngành này","mã xét tuyển","ma nganh","mã của ngành","mã là gì","mã bao nhiêu vậy","ma nganh"]
+dict_business_intent["major_code"] = ["mã",'ma']
 
 dict_business_intent["subject"] = ["môn thi","mon thi","môn nào","mon nao","tổ hợp","tổ hợp môn","môn"]
 

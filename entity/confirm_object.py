@@ -45,7 +45,8 @@ def catch_point(mess):
                 list_point_res.append(list_point_sort[0])
                 list_point_res.append(float(30))
 
-    elif len(list_point_sort) > 1:
+    elif len(list_point_sort) > 1 and max(list_point_sort) < 1000:
+        # print(len(list_point_sort))
         if len(list_point_sort) == 2:
             list_point_res = list_point_sort.copy()
         else:
@@ -55,5 +56,6 @@ def catch_point(mess):
     return list_point_res,list_point_regex
 
 # mess = 'cho em hỏi ngành kỹ thuật hóa học phải thi khối d07 đúng không ạ'
+# mess = 'cho em xin Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?'
 # confirm_obj,list_point_regex = catch_point(mess)
-# print(list_point_regex)
+# print(confirm_obj)
