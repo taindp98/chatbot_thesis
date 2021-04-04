@@ -268,9 +268,14 @@ def clasify_business_random_intent(message,signal):
         dict_compare_dist_sort = {k: v for k, v in sorted(dict_compare_dist.items(), key=lambda item: item[1])}
         if dict_compare_dist_sort:
             vote_token = list(dict_compare_dist_sort.keys())[0]
-            # print("dict_compare_dist",dict_compare_dist)
+            vote_dist = dict_compare_dist_sort[vote_token]
 
-            return dict_define_confuse[vote_token],1.0,message
+            rate_dist = float(vote_dist/len(message_token.split(' ')))
+            # print("rate_dist",rate_dist)
+            # print('vote_dist',vote_dist)
+            # print("dict_compare_dist",dict_compare_dist)
+            if rate_dist < THRESHOLD_DISTANCE_SIGNAL_QUESTION:
+                return dict_define_confuse[vote_token],1.0,message
 
     else:
         for notification in dict_business_intent['major_name']:
@@ -383,7 +388,7 @@ def catch_intent(mess):
 
 # print(catch_intent("phải không ạ"))
 
-# s = "cho em hỏi có năm nào dưới 27 điểm không ạ"
+# s = "cho em hỏi ngành kỹ thuật máy tính có ưu tiên xét tuyển không ạ"
 # s = 'Ngành kỹ thuật hoá học năm 2018 lấy điểm chuẩn là bao nhiêu?'
 # print(catch_intent(s))
 

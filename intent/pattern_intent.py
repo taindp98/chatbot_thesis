@@ -60,3 +60,6 @@ list_anything_notification = ["sao cũng được","gì cũng được","anythin
 
 list_agree_notification = ['yes','ok','đúng rồi','đúng','chắc vậy','chính xác','phải rồi']
 list_disagree_notification = ['không phải','no','sai rồi','sai']
+
+
+THRESHOLD_DISTANCE_SIGNAL_QUESTION = 0.3

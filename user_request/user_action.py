@@ -51,6 +51,38 @@ def get_user_request(mess,state_tracker):
             if state_tracker.history:
                 last_agent_action = state_tracker.history[-1]
 
+                if last_agent_action['intent'] != 'match_found':
+                    # print("last_agent_action",last_agent_action)
+                    #nếu agent request 1 key thì user trả lời key đó
+                    user_inform_key = None
+                    slot_inform = None
+                    if len(list(last_agent_action['request_slots'].keys())) > 0:
+                        user_inform_key = list(last_agent_action['request_slots'].keys())[0]
+
+                    #nếu agent inform 1 key thì user cũng inform lại key đó
+                    elif len(list(last_agent_action['inform_slots'].keys())) > 0:
+                        user_inform_key = list(last_agent_action['inform_slots'].keys())[0]
+
+                    # if user_inform_key != 'major':
+                    if len(list(last_agent_action['request_slots'].keys())) > 0 or len(list(last_agent_action['inform_slots'].keys())) > 0:
+                        final_intent = user_inform_key + '_inform'
+                    else:
+                        final_intent = 'not_intent'
+                    user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess)
+                    user_action['intent'] = 'inform'
+                    user_action['request_slots'] = {}
+                else:
+                    # tránh crash
+                    other_key_avoid_crash = 'major_name'
+                    user_action['intent'] = 'inform'
+                    user_action['inform_slots'] = {other_key_avoid_crash:'anything'}
+                    user_action['request_slots'] = {}
+
+        elif intent_catched in ['agree','disagree']:
+            last_agent_action = state_tracker.history[-1]
+
+            if last_agent_action['intent'] != 'match_found':
+
                 # print(last_agent_action)
                 #nếu agent request 1 key thì user trả lời key đó
                 user_inform_key = None
@@ -59,60 +91,35 @@ def get_user_request(mess,state_tracker):
                     user_inform_key = list(last_agent_action['request_slots'].keys())[0]
 
                 #nếu agent inform 1 key thì user cũng inform lại key đó
-                elif len(list(last_agent_action['inform_slots'].keys())) > 0:
+                if len(list(last_agent_action['inform_slots'].keys())) > 0:
                     user_inform_key = list(last_agent_action['inform_slots'].keys())[0]
                 if len(list(last_agent_action['request_slots'].keys())) > 0 or len(list(last_agent_action['inform_slots'].keys())) > 0:
                     final_intent = user_inform_key + '_inform'
                 else:
                     final_intent = 'not_intent'
-                user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess)
+                # user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess)
                 user_action['intent'] = 'inform'
                 user_action['request_slots'] = {}
-            else:
-                # tránh crash
-                other_key_avoid_crash = 'major_name'
-                user_action['intent'] = 'inform'
-                user_action['inform_slots'] = {other_key_avoid_crash:'anything'}
-                user_action['request_slots'] = {}
-        elif intent_catched in ['agree','disagree']:
-            last_agent_action = state_tracker.history[-1]
-            # print(last_agent_action)
-            #nếu agent request 1 key thì user trả lời key đó
-            user_inform_key = None
-            slot_inform = None
-            if len(list(last_agent_action['request_slots'].keys())) > 0:
-                user_inform_key = list(last_agent_action['request_slots'].keys())[0]
 
-            #nếu agent inform 1 key thì user cũng inform lại key đó
-            if len(list(last_agent_action['inform_slots'].keys())) > 0:
-                user_inform_key = list(last_agent_action['inform_slots'].keys())[0]
-            if len(list(last_agent_action['request_slots'].keys())) > 0 or len(list(last_agent_action['inform_slots'].keys())) > 0:
-                final_intent = user_inform_key + '_inform'
-            else:
-                final_intent = 'not_intent'
-            # user_action['inform_slots'],confirm_obj=find_all_entity(final_intent,mess)
-            user_action['intent'] = 'inform'
-            user_action['request_slots'] = {}
-
-            if intent_catched == 'agree':
-                user_action['inform_slots'] = dict(last_agent_action['inform_slots'].items())
-            else:
-                ## fix entity
-
-                dict_fix_entity,confirm_obj = find_all_entity(final_intent,mess)
-
-                if not dict_fix_entity:
-                    user_action['inform_slots'] = {}
-                    user_action['inform_slots'][user_inform_key] = 'anything'
+                if intent_catched == 'agree':
+                    user_action['inform_slots'] = dict(last_agent_action['inform_slots'].items())
                 else:
-                    user_action['inform_slots'] = dict_fix_entity
+                    ## fix entity
 
-            # if user_inform_key in list_map_key:
-            #     for key in list_map_key:
-            #         if key ==  user_inform_key:
-            #             user_action['list_match_obj'][0][key] = result_entity_dict[user_inform_key]
-            #         else:
-            #             user_action['list_match_obj'][0][key] = ''
+                    dict_fix_entity,confirm_obj = find_all_entity(final_intent,mess)
+
+                    if not dict_fix_entity:
+                        user_action['inform_slots'] = {}
+                        user_action['inform_slots'][user_inform_key] = 'anything'
+                    else:
+                        user_action['inform_slots'] = dict_fix_entity
+
+                # if user_inform_key in list_map_key:
+                #     for key in list_map_key:
+                #         if key ==  user_inform_key:
+                #             user_action['list_match_obj'][0][key] = result_entity_dict[user_inform_key]
+                #         else:
+                #             user_action['list_match_obj'][0][key] = ''
 
         elif intent_catched == 'anything':
             anything_key = None
