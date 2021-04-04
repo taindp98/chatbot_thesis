@@ -15,3 +15,4 @@ pyvi==0.1
 requests
 telebot==0.0.4
 tensorflow==1.14.0
+regex
