@@ -4,6 +4,7 @@ from dqn.utils import convert_list_to_dict
 from dqn.dialogue_config import all_intents, all_slots, usersim_default_key,agent_inform_slots,agent_request_slots
 import copy
 import time
+import random
 # from entity.constants_ner import map_order_entity
 from dqn.map_fsm import map_order_entity
 import pandas as pd
@@ -330,13 +331,8 @@ class StateTracker:
         self.list_target = list(df_define_target['target'])
 
 
-    def recursion_find_best_way(self):
+    def recursion_find_best_way(self,diversity=False):
 
-        ## last state is
-    #     last_state = list_state_tracker[-1]
-
-        ## remove last state --> sucess rate
-        # print('update list state tracker',list_state_tracker)
         for item in self.list_state_tracker:
             if item != 'initial' and item in self.pattern_target:
     #             if last_state in pattern_target:
@@ -347,19 +343,42 @@ class StateTracker:
             # print('recursion sucess')
             self.recursion_success = True
             return True
+        if diversity:
+            for idx in range(len(self.list_state_tracker)):
+                if idx < len(self.list_state_tracker) - 1:
+                    window = self.list_state_tracker[idx:idx+2]
 
-        for idx in range(len(self.list_state_tracker)):
-            if idx < len(self.list_state_tracker) - 1:
-                window = self.list_state_tracker[idx:idx+2]
+                    ## add list choice
+                    list_choice_action = []
 
-                for idx, sublist in enumerate(self.list_input):
-                    if window == sublist and self.current_request_slots[0] == self.list_request[idx]:
-                        target_match = self.list_target[idx]
-                        ## update state tracker
-                        if target_match not in self.list_state_tracker:
-                            self.list_state_tracker.append(target_match)
-                            return True
+                    for idx, sublist in enumerate(self.list_input):
+                        if window == sublist and self.current_request_slots[0] == self.list_request[idx]:
+                            target_match = self.list_target[idx]
 
+                            list_choice_action.append(target_match)
+
+                    if list_choice_action:
+                        choice_action = random.choice(list_choice_action)
+                        while choice_action in self.list_state_tracker:
+                            choice_action = random.choice(list_choice_action)
+
+                        self.list_state_tracker.append(choice_action)
+                        return True
+        else:
+            for idx in range(len(self.list_state_tracker)):
+                if idx < len(self.list_state_tracker) - 1:
+                    window = self.list_state_tracker[idx:idx+2]
+
+                    ## add list choice
+                    # list_choice_action = []
+
+                    for idx, sublist in enumerate(self.list_input):
+                        if window == sublist and self.current_request_slots[0] == self.list_request[idx]:
+                            target_match = self.list_target[idx]
+                            ## update state tracker
+                            if target_match not in self.list_state_tracker:
+                                self.list_state_tracker.append(target_match)
+                                return True
 
         ## recursion
         self.recursion_find_best_way()
