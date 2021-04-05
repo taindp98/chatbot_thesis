@@ -26,7 +26,7 @@ dict_business_intent['object'] = ['đối tượng','doi tuong','thí sinh','thi
 
 dict_business_intent['major_name'] = ['ngành','ngành nào','tên ngành','nganh nao']
 
-dict_business_intent['register'] = ['đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
+dict_business_intent['register'] = ['làm','đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
 
 dict_business_intent['criteria'] = ['chỉ tiêu','chi tieu']
 
