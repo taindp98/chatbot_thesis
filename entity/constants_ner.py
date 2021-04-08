@@ -16,7 +16,7 @@ map_order_entity['criteria'] = ['major_name','case','object','register','subject
 # label = ['other','type_edu','case','career']
 map_order_entity['type_edu']=['major_name','subject_group','subject','case','object','register','criteria']
 map_order_entity['case']=['major_name','criteria','subject','subject_group','case','register','criteria']
-map_order_entity['career']=['major_name','subject','subject_group']
+map_order_entity['career']=['major_name','subject','subject_group',"major_code"]
 
 # map_order_entity['other']=['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
 
@@ -24,6 +24,8 @@ map_order_entity['career']=['major_name','subject','subject_group']
 
 # bổ sung intent là INFORM cho user_request:
 map_order_entity['not_intent']=['major_name','type_edu','point','year','career','subject','tuition','subject_group','case','major_code','criteria','object','register']
+# print(len(map_order_entity['not_intent']))
+
 map_order_entity['major_name_inform'] = ['major_name']
 map_order_entity['major_code_inform'] = ['major_code']
 map_order_entity['subject_group_inform'] = ['subject_group']

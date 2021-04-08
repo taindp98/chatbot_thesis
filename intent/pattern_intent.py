@@ -24,13 +24,13 @@ dict_business_intent["subject"] = ["môn thi","mon thi","môn nào","mon nao","t
 
 dict_business_intent['object'] = ['đối tượng','doi tuong','thí sinh','thi sinh', 'đôi tuong','doi tượng']
 
-dict_business_intent['major_name'] = ['ngành','ngành nào','tên ngành','nganh nao']
+dict_business_intent['major_name'] = ['ngành nào','tên ngành','nganh nao']
 
-dict_business_intent['register'] = ['làm','đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
+dict_business_intent['register'] = ['làm thế nào','đăng ký','đăng kí','dang ki','dang ky','nộp','ứng tuyển','dự tuyển','ung tuyen','du tuyen']
 
 dict_business_intent['criteria'] = ['chỉ tiêu','chi tieu']
 
-dict_business_intent['year'] = ['năm','năm nào','năm nay']
+dict_business_intent['year'] = ['năm nào']
 
 dict_random_intent = {}
 
@@ -62,4 +62,5 @@ list_agree_notification = ['yes','ok','đúng rồi','đúng','chắc vậy','ch
 list_disagree_notification = ['không phải','no','sai rồi','sai']
 
 
-THRESHOLD_DISTANCE_SIGNAL_QUESTION = 0.3
+THRESHOLD_DISTANCE_SIGNAL_QUESTION = 0.5
+THRESHOLD_PRED_INTENT = 0.9

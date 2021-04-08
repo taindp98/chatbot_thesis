@@ -229,13 +229,15 @@ def distance(s, w1, w2):
     # minimum distance
     min_dist = len(words)+1
 
+    # print("min_dist",min_dist)
+
     # traverse through the entire string
     for index in range(len(words)):
 
-        if words[index] == w1_tok:
+        if words[index] in w1_tok or w1_tok in words[index]:
             for search in range(len(words)):
 
-                if words[search] == w2_tok:
+                if words[search] in w2_tok or w2_tok in words[search]:
 
                     # the distance between the words is
                     # the index of the first word - the
@@ -259,3 +261,8 @@ def norm_special(string):
     return string
 
 # print(check_match_sublist_and_substring(['b'],['b00', 'b']))
+
+def flatten_lol(lol):
+    sublist = []
+    flat_list = [item for sublist in lol for item in sublist]
+    return flat_list

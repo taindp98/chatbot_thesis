@@ -28,7 +28,7 @@ def find_all_entity(intent,mess_clean):
         # threshold wordnumber
         if entity_name in ['subject','tuition', 'subject_group','major_code','year']:
             map_entity_name_to_threshold[entity_name]=1
-        elif entity_name in ['major_name','type_edu','career']:
+        elif entity_name in ['major_name','type_edu']:
             map_entity_name_to_threshold[entity_name]=2
         elif entity_name in ['case']:
             map_entity_name_to_threshold[entity_name]=3

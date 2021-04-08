@@ -281,6 +281,7 @@ def check_question(message):
 
 def predict_lstm(mess):
     url = 'https://api-intent.herokuapp.com/predict'
+    # url = 'http://127.0.0.1:5000/predict'
     pred = requests.post(url,json={'message':mess})
     dict_pred = pred.json()
     return dict_pred['intent'],dict_pred['probability'],dict_pred['message']
@@ -288,11 +289,16 @@ def predict_lstm(mess):
 def clasify_business_random_intent(message,signal):
 
     if signal:
+
+        # _,prob,_ = predict_lstm(message)
+        # if prob > THRESHOLD_PRED_INTENT:
+        #     return predict_lstm(message)
+
         signal_token = ViTokenizer.tokenize(signal).split(' ')[0]
 
         # signal_first_word = signal_token.split(' ')[0]
         # print(signal_first_word)
-        print(signal)
+        # print(signal)
         message_token = ViTokenizer.tokenize(message)
         list_confuse = []
         key_confuse = []
@@ -377,6 +383,7 @@ def clasify_business_random_intent(message,signal):
         dict_compare_dist = {}
         for confuse_token in list_confuse_token:
             # print('confuse_token',confuse_token)
+            # print('signal_token',signal_token)
             dist = distance(message_token,signal_token,confuse_token)
             dict_compare_dist[confuse_token] = dist
 
@@ -386,14 +393,19 @@ def clasify_business_random_intent(message,signal):
             vote_dist = dict_compare_dist_sort[vote_token]
 
             rate_dist = float(vote_dist/len(message_token.split(' ')))
+            # print(message_token.split(' '))
             # print("rate_dist",rate_dist)
             # print('vote_dist',vote_dist)
             # print("dict_compare_dist",dict_compare_dist)
 
-            if rate_dist < THRESHOLD_DISTANCE_SIGNAL_QUESTION:
+            if rate_dist <= THRESHOLD_DISTANCE_SIGNAL_QUESTION:
                 return dict_define_confuse[vote_token],1.0,message
 
     else:
+        
+        # _,prob,_ = predict_lstm(message)
+        # if prob > THRESHOLD_PRED_INTENT:
+        #     return predict_lstm(message)
 
         for notification in dict_business_intent['major_code']:
             if message.lower().find(notification)!=-1:
@@ -517,6 +529,6 @@ def catch_intent(mess):
 # print(catch_intent(s))
 # print(catch_intent('cho em hỏi ngành kỹ thuật hóa học phải thi khối b đúng không ạ'))
 #
-# print(catch_confuse('cho hỏi mã ngành của khoa máy tính là gì'))
-
+# print(catch_intent('em muốn hỏi là mình đăng kí xét tuyển chương trình việt pháp như thế nào ạ'))
+# print(ViTokenizer.tokenize('năm nay'))
 
