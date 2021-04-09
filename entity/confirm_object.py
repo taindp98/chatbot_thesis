@@ -4,6 +4,15 @@ DEFINE_COMPARE = {}
 DEFINE_COMPARE['lte'] = ["thấp","thap","thấp hơn","thap hon","giảm","tuột","nhỏ","nhỏ hơn","dưới","dưới mức","ít","ít hơn","tới","toi","đến","den","cỡ","khoảng","tầm","khoang","tam","đạt","được","dat","duoc","dc","đc"]
 DEFINE_COMPARE['gte'] = ["cao","cao hơn","tren","cao hon","tăng","trên","trên mức","nhiều","nhiều hơn","từ","tu"]
 
+
+def normalize_format_number(mess):
+    decmark_reg = re.compile('(?<=\d),(?=\d)')
+
+    mess_norm = decmark_reg.sub('.',mess)
+
+    return mess_norm
+
+
 def catch_point(mess):
 
     compare_flag = 'lte'
@@ -56,6 +65,8 @@ def catch_point(mess):
     return list_point_res,list_point_regex
 
 # mess = 'cho em hỏi ngành kỹ thuật hóa học phải thi khối d07 đúng không ạ'
+# mess = 'Cho em hỏi ngành công nghệ kỹ thuật hóa học, xét bằng học bạ đc 84,6 thì có cơ hội không ạ, em cảm ơn ạ'
 # mess = 'cho em xin Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?'
-# confirm_obj,list_point_regex = catch_point(mess)
+# confirm_obj,list_point_regex = catch_point(normalize_format_number(mess))
 # print(confirm_obj)
+# print(clean_mess(mess))

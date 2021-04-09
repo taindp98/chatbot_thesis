@@ -14,6 +14,11 @@ from preprocess.normalize_typing import chuan_hoa_dau_cau_tieng_viet
 # path = 'data/'
 path = './data'
 
+def normalize_format_number(mess):
+    decmark_reg = re.compile('(?<=\d),(?=\d)')
+    mess_norm = decmark_reg.sub('.',mess)
+    return mess_norm
+
 def create_token(mess):
     # input: câu nhập vào của người dùng
     # return: token(_) loại bỏ những special token
@@ -61,16 +66,26 @@ def convert_unicode(txt):
     return re.sub(
         r'à|á|ả|ã|ạ|ầ|ấ|ẩ|ẫ|ậ|ằ|ắ|ẳ|ẵ|ặ|è|é|ẻ|ẽ|ẹ|ề|ế|ể|ễ|ệ|ì|í|ỉ|ĩ|ị|ò|ó|ỏ|õ|ọ|ồ|ố|ổ|ỗ|ộ|ờ|ớ|ở|ỡ|ợ|ù|ú|ủ|ũ|ụ|ừ|ứ|ử|ữ|ự|ỳ|ý|ỷ|ỹ|ỵ|À|Á|Ả|Ã|Ạ|Ầ|Ấ|Ẩ|Ẫ|Ậ|Ằ|Ắ|Ẳ|Ẵ|Ặ|È|É|Ẻ|Ẽ|Ẹ|Ề|Ế|Ể|Ễ|Ệ|Ì|Í|Ỉ|Ĩ|Ị|Ò|Ó|Ỏ|Õ|Ọ|Ồ|Ố|Ổ|Ỗ|Ộ|Ờ|Ớ|Ở|Ỡ|Ợ|Ù|Ú|Ủ|Ũ|Ụ|Ừ|Ứ|Ử|Ữ|Ự|Ỳ|Ý|Ỷ|Ỹ|Ỵ',
         lambda x: dicchar[x.group()], txt)
+        
+def norm_special(string):
+    pattern = ["-","/","(",")","!","#","&","^","*","%","<",">","{","}",":",",",";","=","_","+","?","$","~","`","|","\\"]
+    for p in pattern:
+        if p in string:
+            string = string.replace(p,f' {p} ')
+#     string = string.replace('/','-')
+    return string
+
 def clean_mess(mess):
     # input: câu nhập vào của người dùng
     # return: câu đã loại bỏ special token
     mess_unic = chuan_hoa_dau_cau_tieng_viet(convert_unicode(mess)).lower()
-    mess_norm = norm_special(mess_unic)
-    mess_rmspectoken = re.findall(r'(?i)\b[a-záàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđ0-9\/\-]+\b', mess_norm)
+    mess_norm = normalize_format_number(mess_unic)
+    # mess_norm = mess_unic
+    mess_rmspectoken = re.findall(r'(?i)\b[a-záàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđ0-9\/\-\.]+\b', mess_norm)
     mess_norm = ' '.join(mess_rmspectoken)
     return mess_norm
 
-
+print(clean_mess('Cho em hỏi ngành công nghệ kỹ thuật hóa học, xét bằng học bạ đc 84,6 thì có cơ hội không ạ, em cảm ơn ạ'))
 
 def get_current_time():
     time= date.today()
@@ -252,13 +267,7 @@ def distance(s, w1, w2):
     # w1 and w2 are same and adjacent
     return min_dist
 
-def norm_special(string):
-    pattern = ["-","/","(",")","!","#","&","^","*","%","<",">","{","}",":",",",";","=","_","+","?","$","~","`","|","\\"]
-    for p in pattern:
-        if p in string:
-            string = string.replace(p,f' {p} ')
-#     string = string.replace('/','-')
-    return string
+
 
 # print(check_match_sublist_and_substring(['b'],['b00', 'b']))
 
