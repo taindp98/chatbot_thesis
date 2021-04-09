@@ -6,7 +6,7 @@ label,content
 0,thầy ơi cho em hỏi ví dụ nếu mình chọn nguyện vọng vào trường với ngành cao điểm nhất của trường là khoa học máy tính sau khi thi trung học phổ thông quốc gia điểm không đủ với điểm ngành đưa ra thì em có được đổi ngành lấy điểm thấp hơn phù hợp với điểm thi của em không ạ
 2,cho em hỏi chỉ tiêu ngành khoa học máy tính năm nay bao nhiêu và giới thiệu về ngành khoa học máy tính với ạ
 0,ngoài việc học thì trường mình có những hoạt động ngoại khóa câu lạc bộ nào không ạ
-3,ngành kỹ sư xây dựng có được đi qua các nước khác và ngành này điểm có cao không ạ
+0,ngành kỹ sư xây dựng có được đi qua các nước khác và ngành này điểm có cao không ạ
 2,cho em hỏi ngành khoa học máy tính có những hình thức tuyển sinh nào ạ
 1,cho em hỏi sau khi học xong 4 năm ở chương trình kỹ sư việt nhật ở trường thì mình sẽ qua nhật tiếp tục học hay làm việc ạ
 1,cho em hỏi chương trình việt nhật thì giảng dạy hoàn toàn bằng tiếng nhật hay sao ạ
@@ -40,15 +40,15 @@ label,content
 3,cho chú hỏi con chú đang học bắt đầu năm thứ 2 đại học bách khoa khoa học máy tính ra trường làm ở đâu vậy cháu
 3,cho e hỏi quản lí công nghiệp có đào tạo chuyên sâu vào từng nội dung không ạ e thấy nó có quá nhìu mảng khác nhau cần đạo tạo
 3,cho em hỏi sự khác nhau giữa điện tử và kỹ thuật điện ạ
-3,cho em hỏi về ngành kỹ thuật điện tử viễn thông tiên tiến ạ
+1,cho em hỏi về ngành kỹ thuật điện tử viễn thông tiên tiến ạ
 1,cho mình hỏi thăm sinh viên tốt nghiệp 1 ngành trường mình có thể đăng ký học văn bằng 2 học khoa học máy tính hay kỹ thuật máy tính được không
-0,mình đăng kí số nguyện vọng vào bách khoa theo phuong thức tốt nghiệp trung học phổ thông thì đăng ký bao nhiêu nguyện vọng cũng được đúng không ạ
-3,cách chia chuyên ngành trong khoa hoá như thế nào ạ
-3,em muốn hỏi kỹ thuật hệ thống công nghiệp có nhiều nữ không ạ
+2,mình đăng kí số nguyện vọng vào bách khoa theo phuong thức tốt nghiệp trung học phổ thông thì đăng ký bao nhiêu nguyện vọng cũng được đúng không ạ
+0,cách chia chuyên ngành trong khoa hoá như thế nào ạ
+0,em muốn hỏi kỹ thuật hệ thống công nghiệp có nhiều nữ không ạ
 0,hình như nếu xét trung học phổ thông thì được bao nhiêu nguyện vọng cũng được đúng không ạ
-3,kỹ thuật ô tô tầm mấy năm ra trường vậy ạ chưa kể thời gian học lại
+0,kỹ thuật ô tô tầm mấy năm ra trường vậy ạ chưa kể thời gian học lại
 3,cho em hỏi về ngành 208 ạ
-3,cho e hỏi nữ học ngành kỹ thuật vật lí với ạ
+0,cho e hỏi nữ học ngành kỹ thuật vật lí với ạ
 3,kỹ thuật máy tính với khoa học máy tính khác chỗ nào vậy mn
 0,27 6 có cơ hội đậu ô tô không anh chị
 0,dạ cho e hỏi 27 5 có đậu khoa học máy tính không ạ
@@ -56,7 +56,7 @@ label,content
 3,ngành 208 có cơ hội việc làm thế nào ạ
 3,cho e hỏi về ngành kiến trúc ạ
 3,cho em hỏi điện tử viễn thông ra là gì và cơ hội việc làm ạ
-0,ai điểm trung học phổ thông cao nhát khi đăng kí nhóm ngành xây dựng thì sẽ được chọn ngành phải không anh
+2,ai điểm trung học phổ thông cao nhát khi đăng kí nhóm ngành xây dựng thì sẽ được chọn ngành phải không anh
 3,cho em hỏi xíu về chương trình của kỹ thuật môi trường và quản lý tài nguyên môi trường của trường ạ cơ hội nghề nghiệp nữa ạ
 0,học phí học lại của k20 tính sao vậy ạ
 3,cho em xin thêm về ngành kỹ thuật hàng không đi ạ
@@ -73,10 +73,10 @@ label,content
 3,cho em hỏi về ngành dầu khí
 3,cho e hỏi về ngành kiến trúc
 3,anh ơi phân tích cơ kỹ thuật thử đi anh
-2,cho e hỏi điểm chuẩn và chỉ tiêu của ngành kiến trúc tầm bao nhiêu ạ
+0,cho e hỏi điểm chuẩn và chỉ tiêu của ngành kiến trúc tầm bao nhiêu ạ
 3,cho e hỏi về kỹ thuật môi trường
 3,cho em hỏi ngành vật lý kỹ thuật và cơ kỹ thuật ạ
-3,cho e hỏi ngành kỹ thuật cơ khí ạ hệ chất lượng cao ạ
+1,cho e hỏi ngành kỹ thuật cơ khí ạ hệ chất lượng cao ạ
 3,cơ hội việc làm bão dưỡng công nghiệp cao không ạ
 3,e muốn anh chị tư vấn dùm ngành cơ kỹ thuật ạ
 0,kỹ thuật xây dựng năm nay lấy bao nhiêu ạ
@@ -84,22 +84,22 @@ label,content
 0,mức điểm kỹ thuật ôtô đi ạ
 0,kỹ thuật xây dựng anh nghĩ bao nhiêu điểm năm nay vậy anh
 0,anh chị ơi em thi được 2495 có vào được ngành kỹ thuật xây dựng hong mấy anh chị
-0,ngành kỹ thuật máy tính có khó không cô
+3,ngành kỹ thuật máy tính có khó không cô
 0,điểm năm nay có cao lắm không vậy ạ
 0,cho em hỏi năm 2019 thì trường lấy điểm vào pfiev theo điểm trung học phổ thông gq ngành kỹ thuật hàng không là bao nhiêu ạ
 1,chương trình của việt pháp dạy hoàn toàn bằng tiếng việt hay sao ạ và yêu cầu chuẩn đầu ra như thế nào
 0,các môn học có giống như chương trình đại trà không ạ em nghe nói nặng lắm
 3,dạ cho em về ngành kỹ thuật hàng không ạ
-1,em muốn hỏi là mình đăng kí xét tuyển chương trình việt pháp như thế nào ạ
-1,cách tuyển sinh như thế nào ạ
-1,cho em hỏi khi nào sẽ thông báo kết quả xét tuyển chương trình chất lượng cao p f i e v hiện nay cháu đã đk nhập học chương trình đại trà rồi
-3,cho e hỏi đk kỹ thuật điện đại trà hay chất lượng cao là được đk học chương trình việt pháp ạ
+2,em muốn hỏi là mình đăng kí xét tuyển chương trình việt pháp như thế nào ạ
+2,cách tuyển sinh như thế nào ạ
+0,cho em hỏi khi nào sẽ thông báo kết quả xét tuyển chương trình chất lượng cao p f i e v hiện nay cháu đã đk nhập học chương trình đại trà rồi
+1,cho e hỏi đk kỹ thuật điện đại trà hay chất lượng cao là được đk học chương trình việt pháp ạ
 1,sinh viên tốt nghiệp rồi thì làm sao quay lại học priev được ạ
-3,dạ cho em hỏi về cơ hội du học ngành kỹ thuật hàng không ạ
+0,dạ cho em hỏi về cơ hội du học ngành kỹ thuật hàng không ạ
 1,cho e hỏi là ngành kỹ thuật hàng không thì nên học chương trình chất lượng cao hay đăng kí vô kỹ sư việt pháp ạ
 3,chào thầy cô em là sinh viên trúng tuyển khoa máy tính thầy cô có thể tư vấn cho em sinh viên khoa máy tính có những hướng đi nào
 3,dạ cho em hỏi hôm nay có nói về ngành kỹ thuật máy tính không ạ
-0,ngành kỹ thuật hàng không có chương trình này không nhỉ
+1,ngành kỹ thuật hàng không có chương trình này không nhỉ
 3,dạ cho em về ngành kỹ thuật hàng không ạ
 3,cho em hỏi về ngành công nghệ sinh học ạ
 2,khi nào có kết quả xét tuyển bằng kết quả đánh giá năng lực ạ
@@ -107,9 +107,9 @@ label,content
 0,học phí chương trình này là bao nhiêu ạ
 1,chương trình này khác với chương trình bình thường như thế nào ạ ví dụ như tín chỉ ạ
 1,ngành kỹ thuật máy tính chương trình chất lượng cao sinh viên thuộc dt đối tượng vùng đại học bách khoa có được giảm học phí không ạ
-3,dạ em hỏi về chương trình đi du học nếu học kỹ thuật hàng không ạ
+1,dạ em hỏi về chương trình đi du học nếu học kỹ thuật hàng không ạ
 1,dạ em xin hỏi là khi nào có tư vấn về ngành khoa học máy tính chất lượng cao vậy ạ
-2,em xin hỏi là khi nào mình biết được kết quả đăng kí ạ
+0,em xin hỏi là khi nào mình biết được kết quả đăng kí ạ
 0,học phí giữa chất lượng cao với đại trà của tự động hoá khác như nào ạ
 3,ai biết về ngành bảo dưỡng công nghiệp tư vấn hộ chút ạ
 0,cơ điện tử năm nay tầm bao nhiêu ạ
@@ -131,12 +131,12 @@ label,content
 2,thưa thầy chỉ tiêu tuyển sinh của năm nay là bao nhiêu ạ
 1,cho e hỏi tiếng anh e không giỏi thì có học được hệ chất lượng cao không ạ
 3,thầy cho em rõ hơn về ngành kỹ thuật điện được không ạ cụ thể về trong đào tạo các chương trình của ngành với lại công việc sau khi ra trường là như thế nào ạ
-3,cho em hỏi về ngành kỹ thuật hàng không và ngành này có chương trình học quá nặng so với nữ không ạ em cảm ơn
+3,cho em hỏi về ngành kỹ thuật hàng không
 3,dạ con muốn hỏi câu hỏi thứ 2 là ngành cơ điện tử sau này có học hướng theo trí tuệ nhân tạo được không ạ
 1,ngành kỹ thuật hóa học ở bách khoa giữa chất lượng cao và đại trà khác nhau như thế nào ạ
 1,cho em hỏi ngành bách khoa hóa có liên kết nước ngoài không ạ
 3,thầy ơi cho em xin thông tin về nhóm ngành xây dựng ạ
-2,cho em hỏi trường mình tổ chức thi riêng hay lấy kết quả thi tốt nghiệp năm nay ạ
+0,cho em hỏi trường mình tổ chức thi riêng hay lấy kết quả thi tốt nghiệp năm nay ạ
 3,thầy ơi tư vấn giúp em ngành kiến trúc của trường đi ạ
 1,thầy ơi cho e hỏi ngành kỹ thuật hóa ở chương trình chất lượng cao nhưng e chưa có ielts 6 0 thì trường có đào tạo không ạ
 3,thầy nói qua về ngành điều khiểu tự động hóa giúp em với ngành này sẽ học những gì ạ
@@ -147,11 +147,11 @@ label,content
 1,dạ cho em hỏi ngành hóa liên kết quốc tế với trường nào ạ
 1,cho em hỏi mình học chương trình kỹ sư việt nhật thì sao khi tốt nghiệp có được giới thiệu sang nhật làm việc không ạ
 0,thầy ơi cho em hỏi ngành kỹ thuật xây dựng công trình thì bao nhiêu điểm là chắc chắn vào được ạ
-0,dạ cho con hỏi trường mình có ngành nào dạy về trí tuệ nhân tạo không ạ với khoa học máy tính thì vào năm chuyên ngành có được rẽ hướng sang có được ngành về trí tuệ nhân tạo không ạ
+3,dạ cho con hỏi trường mình có ngành nào dạy về trí tuệ nhân tạo không ạ với khoa học máy tính thì vào năm chuyên ngành có được rẽ hướng sang có được ngành về trí tuệ nhân tạo không ạ
 1,cho em hỏi trường tuyển đầu vào cho hệ đại trà là bao nhiêu và hệ chất lượng cao là bao nhiêu ạ
 3,thầy cho em hỏi khi học ngành vật lý kỹ thuật sẽ được học những gì và khi ra trường có thể làm được công việc gì ạ
 0,cho em hỏi học phí ngành logistics với ạ
-0,cho e hỏi ngành khoa học máy tính ra trường có đảm bảo tiếng anh và việc làm không ạ
+3,cho e hỏi ngành khoa học máy tính ra trường có đảm bảo tiếng anh và việc làm không ạ
 3,các thầy cho em hỏi về định hướng ngành kỹ thuật máy tính ạ và sau khi ra trường có nhiều cơ hội việc làm không ạ
 3,cho em hỏi về cơ hội việc làm của ngành kỹ thuật hàng không và công nghệ ô tô trong tương lai ạ
 3,cơ hội làm việc ngành kỹ thuật hóa học như thế nào hả thầy
@@ -232,14 +232,14 @@ label,content
 2,kết quả ưu tiên xét tuyển có được công bố trước khi thi tốt nghiệp không thầy
 2,trường có xét tuyển học bạ không ạ ngành nào ạ e có bằng học sinh giỏi cấp tỉnh thì có được ưu tiên gì không ạ
 0,điểm sàn kỹ thuật ô tô là tầm bao nhiêu ạ
-0,ngành kỹ thuật hoá học có chương trình kỹ sư tài năng không ạ
-0,cho em hỏi em ở ngoài bắc phải nộp hồ sơ như nào ạ
+1,ngành kỹ thuật hoá học có chương trình kỹ sư tài năng không ạ
+2,cho em hỏi em ở ngoài bắc phải nộp hồ sơ như nào ạ
 2,cho em hỏi khi nào nộp hồ sơ xin xét tuyển thẳng theo học bạ ạ
 2,đánh giá năng lực khoảng bao nhiêu điểm thì chắc chắn sẽ được vào trường ạ
 0,cho em hỏi ngành điện tử viễn thông học phí bao nhiêu hk ạ
 2,điểm xét tuyển đánh giá năng lực ngành công nghệ thông tin là bao nhiêu ạ
 2,dạ cho em hỏi tiêu chí xét diện ưu tiên xét tuyển ạ
-0,ngành công nghệ thực phẩm có chương trình kỹ sư tài năng không ạ
+1,ngành công nghệ thực phẩm có chương trình kỹ sư tài năng không ạ
 2,điểm xét tuyển đánh giá năng lực của ngành công nghệ sinh học của trường mình là bao nhiêu vậy ạ
 1,cho em hỏi đối với ngành kỹ thuật dầu khí có những chương trình nào ạ
 0,cơ sở 2 của trường ở đâu thế ad
@@ -264,7 +264,7 @@ label,content
 1,chương trình việt pháp học phí thế nào ạ
 3,ở đây có ai kỹ thuật dầu khí không
 2,ngành điện điện tử lấy bao nhiêu chỉ tiêu thế
-0,thi đánh giá năng lực mình có ôn cụ thể không ạ hay là đề ra sao ạ
+2,thi đánh giá năng lực mình có ôn cụ thể không ạ hay là đề ra sao ạ
 3,ở đây ai thi công nghệ nhiệt không
 2,xét điểm học bạ thì tính điểm như nào anh em
 2,thầy ơi phương thức tuyển sinh trường mình chốt chưa ạ
@@ -282,19 +282,19 @@ label,content
 1,cho em hỏi ngành khoa học máy tính chương trình thường có giảng dạy bằng tiếng anh không ạ
 2,kỹ thuật chỉ tiêu đại trà năm nay lấy bao nhiêu vậy ad
 2,khi nào có link đăng ký ưu tiên xét tuyển và kết quả ưu tiên xét tuyển sẽ công bố trước hay sau kỳ thi đánh giá năng lực ạ
-2,tỉ lệ chọi ngành kiến trúc năm trước bao nhiêu vậy ạ
+0,tỉ lệ chọi ngành kiến trúc năm trước bao nhiêu vậy ạ
 2,ưu tiên xét tuyển thì xác suất đậu cao không ạ
 3,dạ kỹ thuật máy tính khác khoa học máy tính cái gì ạ
-2,năm nay logistics lấy bao nhiêu chỉ tiêu ạ
+0,năm nay logistics lấy bao nhiêu chỉ tiêu ạ
 3,ad cho mình hỏi điện lực là ngành nào vậy
-2,cho e hỏi ngành khoa học máy tính với kỹ thuật máy tính năm nay lấy chỉ tiêu bao nhiêu ạ
+0,cho e hỏi ngành khoa học máy tính với kỹ thuật máy tính năm nay lấy chỉ tiêu bao nhiêu ạ
 0,ngành công nghệ thực phẩm khối b xét sao vậy ạ
 0,nhóm ngành kỹ thuật điều kiển và tự động hóa có phải thuộc công nghệ thông tin hay cơ khí vậy ạ
 2,cho em hỏi ngành công nghệ sinh học tuyển sinh sao ạ
 2,cho em hỏi về việc xét tuyển của ngành kiến trúc có môn vẽ thì sẽ tuyển sinh như thế nào ạ
 0,cho em hỏi một ngành gồm 2 khối thi thì có chia đều chỉ tiêu cho 2 khối hay là điểm đầu vào như nhau ạ
 3,ngành kỹ thuật ô tô có gì mới không ạ
-2,cho em hỏi kỹ thuật ô tô đại trà năm nay chỉ tiêu bao nhiêu v
+0,cho em hỏi kỹ thuật ô tô đại trà năm nay chỉ tiêu bao nhiêu v
 0,ngành công nghệ sinh học toán hóa sinh thì xét tuyển sao ạ
 1,cho em hỏi tuyển sinh kỹ thuật dầu khí với ạ có những chương trình nào ạ em cảm ơn
 2,em thi ngành dầu khí thì xét tuyển sao ạ
@@ -310,7 +310,7 @@ label,content
 2,bao giờ nhận hồ sơ ưu tiên xét tuyển ạ
 2,e học sinh trường thường vào được đội tuyển thi học sinh giỏi quốc gia của tỉnh có được ưu tiên xét tuyển không ạ
 0,đăng kí học công nghệ thông tin mà hiện tại chưa biết gì về công nghệ thông tin thì có theo học được không ạ
-2,thầy ơi đủ điểm vào trường thì có xét tiêu chí phụ là học bạ không thầy hay là đủ điểm là được vào ạ
+0,thầy ơi đủ điểm vào trường thì có xét tiêu chí phụ là học bạ không thầy hay là đủ điểm là được vào ạ
 2,cho em hỏi khoa học máy tính thì có những cách xét tuyển nào ạ
 2,cho em hỏi về việc xét tuyển của ngành kiến trúc ạ
 1,học liên kết quốc tế thì cần học triết không ạ
@@ -326,7 +326,7 @@ label,content
 1,thầy ơi kỹ thuật môi trường đại trà và chất lượng cao khác nhau nhiều khoa học ạ
 3,cho e hỏi về ngành công nghệ thực phẩm với ạ
 1,ngành khoa học máy tính chương trình không phải chất lượng cao thì có giảng dạy bằng tiếng anh không ạ
-2,thầy ơi xét học bạ ưu tiên xét tuyển là chỉ tiêu bao nhiêu ạ
+0,thầy ơi xét học bạ ưu tiên xét tuyển là chỉ tiêu bao nhiêu ạ
 1,chương trình việt pháp tuyển sinh như thế nào ạ
 1,công nghệ thực phẩm đại trà và công nghệ thực phẩm chất lượng cao có gì khác nhau ạ
 2,khi nào mình xét tuyển phương thức ưu tiên ạ
@@ -337,17 +337,17 @@ label,content
 0,cho e hỏi là đăng kí thi vào khoa học máy tính mà hiện tại chưa biết gì về công nghệ thông tin thì có được không ạ
 1,thầy ơi chương trình chất lượng cao và liên kết có những điểm nào khác nhau ạ
 2,cho em hỏi trường chuyên với trường thường thì xét ưu tiên xét tuyển như nhau ạ
-2,cho em hỏi khi nào có chỉ tiêu cụ thể cho từng phương thức tuyển sinh ạ
+0,cho em hỏi khi nào có chỉ tiêu cụ thể cho từng phương thức tuyển sinh ạ
 2,cho em hỏi là khi viết bài luận cho phương thức xét tuyển ưu tiên thì viết những gì ạ
 2,ưu tiên xét tuyển ngày nào và gồm những gì vậy ạ
 3,ngành công nghệ sinh học thì sao ạ
-1,bây giờ em không biết tiếng nhật thì khi vào công nghệ thông tin việt nhật có học được không ạ
+0,bây giờ em không biết tiếng nhật thì khi vào công nghệ thông tin việt nhật có học được không ạ
 3,ngành cơ điện tử mình cần những yêu cầu nào ạ yêu cầu như thế nào về ngành này
 1,thầy ơi thầy nói rõ điểm khác biệt của chương trình đại trà và chất lượng cao được không ạ
 1,chương trình chất lượng cao và liên kết có những điểm nào khác nhau ạ
 1,thầy ơi nói rõ hơn về chương trình đại trà và chất lượng cao được không ạ
 1,hệ đại trà và hệ chất lượng cao khác nhau như thế nào ạ
-2,chỉ tiêu cho ngành khoa học máy tính bằng đánh giá năng lực là bao nhiêu ạ
+0,chỉ tiêu cho ngành khoa học máy tính bằng đánh giá năng lực là bao nhiêu ạ
 2,xét học bạ thì thế nào ạ
 2,em muốn hỏi về việc ưu tiên xét tuyển dạng trường chuyên ạ
 2,ngành kiến trúc có xét điểm đánh giá năng lực không ạ
@@ -358,7 +358,7 @@ label,content
 2,diện ưu tiên xét tuyển theo đại học quốc gia khi nào mới nộp hồ sơ vậy thầy
 0,em muốn hỏi về ngành công nghệ sinh học trường xét khối b toán hóa sinh lấy điểm sao ạ
 2,cho em hỏi phương thức xét tuyển học bạ như thế nào ạ
-3,cho em hỏi phân ngành trong khoa cơ khí gồm những gì ạ
+0,cho em hỏi phân ngành trong khoa cơ khí gồm những gì ạ
 3,kỹ sư dầu khí bây giờ có nên học không ạ
 3,ngành kỹ thuật ôtô cần những gì vậy thầy
 3,ngành công nghệ sinh học ở trường có cơ hội việc làm như thế nào ạ
@@ -375,8 +375,8 @@ label,content
 3,nếu em muốn học về kỹ thuật robot thì có nên học tự động hóa hay cơ điện tử ạ
 3,học dệt may có phải học nhiều về máy móc kỹ thuật không ạ
 3,ngành dầu khí giờ có nên học không ạ
-3,cho em hỏi học kỹ thuật dệt có phù hợp cho nam không ạ
-3,nữ học cơ khí có khó khăn hơn nam không ạ
+0,cho em hỏi học kỹ thuật dệt có phù hợp cho nam không ạ
+0,nữ học cơ khí có khó khăn hơn nam không ạ
 3,dạ thầy cô cho em hỏi ngành điện điện tử và cơ điện tử khác nhau như thế nào ạ
 3,thầy cô cho em hỏi là em muốn học về robot thì nên học tự động hóa hay cơ điện tử vậy ạ
 3,thầy cô ơi cho em hỏi ngành kỹ thuật dệt may có dạy về thiết kế thời trang không ạ
@@ -394,7 +394,7 @@ label,content
 3,em muốn được tư vấn về ngành kỹ thuật hàng không ạ
 3,cho em hỏi ngành kỹ thuật ô tô sẽ đi thực tập ở đâu ạ
 3,em muốn hỏi về định hướng tương lai ngành tàu thủy nhờ các thầy cô trả lời giúp ạ
-2,điểm đánh giá năng lực thường chiếm bao nhiêu phần trăm chỉ tiêu vậy ạ
+0,điểm đánh giá năng lực thường chiếm bao nhiêu phần trăm chỉ tiêu vậy ạ
 3,cho em hỏi ngành bảo dưỡng công nghiệp vừa học điện vừa học cơ khí đúng không ạ
 3,quản lý công nghiệp thì như nào ạ
 0,dạ cho em hỏi về kỹ thuật ô tô ạ chương trình học bao nhiêu chỉ ạ
@@ -419,7 +419,7 @@ label,content
 3,em muốn hiểu thêm về cơ hội nghề nghiệp của ngành kỹ thuật nhiệt ạ
 3,cho em xin tư vấn về ngành khoa học máy tính và cơ hội việc làm sau ra trường ạ
 1,trường mình có có đào tạo chất lượng cao ngành logistics không vậy ạ
-3,ngành khoa học máy tính có những chuyên ngành nào vậy ạ
+0,ngành khoa học máy tính có những chuyên ngành nào vậy ạ
 3,kỹ sư hóa học và công nghệ thực phẩm có liên quan gì đến nhau vậy ạ
 0,ngành khoa học máy tính đào tạo bao nhiêu năm ạ
 3,trường có đào tạo trí tuệ nhân tao không ạ

@@ -26,8 +26,9 @@ LIST INTENT FASTAI
 """
 def get_user_request(mess,state_tracker):
     confirm_obj = None
-    if isinstance(mess, str):
-        user_action = {}
+    user_action = {}
+    if isinstance(mess, str) and not mess.startswith('/'):
+        # user_action = {}
         # clean câu nhập vào
         intent_catched, prob,mess_clean = catch_intent(mess)
         # print("intent_catched",intent_catched)
@@ -141,7 +142,10 @@ def get_user_request(mess,state_tracker):
             user_action['inform_slots'] = {}
             user_action['request_slots'] = {}
 
-    else:
-        user_action = mess
+    # else:
+    #     anything_key = "major_name"
+    #     user_action['intent'] = 'inform'
+    #     user_action['inform_slots'] = {anything_key:'anything'}
+    #     user_action['request_slots'] = {}
 
     return user_action,confirm_obj

@@ -23,8 +23,9 @@ def get_bot_response(userText,user_id):
     r = requests.post(url=api_url, json=input_data)
     chatbot_respose = r.json()
     list_mess_response = chatbot_respose['message']
-    list_mess_response = [item.replace('\n', r'').replace(r'"',r'') for item in list_mess_response]
-    return list_mess_response
+    if list_mess_response:
+        list_mess_response = [item.replace('\n', r'').replace(r'"',r'') for item in list_mess_response]
+        return list_mess_response
 
 RULE_BASED = True
 
@@ -43,7 +44,7 @@ list_num_case_sort = sorted(list_num_case)
 
 print('----',use_case,'-----')
 for case_num in list_num_case_sort:
-    if case_num == 18:
+    if case_num == 19:
 
         print('='*50)
         current_case = os.path.join(case_path,str('case'+str(case_num)+'.txt'))
