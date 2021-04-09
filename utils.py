@@ -85,7 +85,7 @@ def clean_mess(mess):
     mess_norm = ' '.join(mess_rmspectoken)
     return mess_norm
 
-print(clean_mess('Cho em hỏi ngành công nghệ kỹ thuật hóa học, xét bằng học bạ đc 84,6 thì có cơ hội không ạ, em cảm ơn ạ'))
+# print(clean_mess('Cho em hỏi ngành công nghệ kỹ thuật hóa học, xét bằng học bạ đc 84,6 thì có cơ hội không ạ, em cảm ơn ạ'))
 
 def get_current_time():
     time= date.today()
