@@ -20,7 +20,9 @@ def get_bot_response():
     input_data['state_tracker_id'] = '1011'
     r = requests.post(url=api_url, json=input_data)
     chatbot_respose = r.json()
-    mess_response = chatbot_respose['message'].replace('\n', r'').replace(r'"',r'')
+    mess_response = [item.replace('\n', r'').replace(r'"',r'') for item in chatbot_respose['message']]
+    # mess_response = chatbot_respose['message'].replace('\n', r'').replace(r'"',r'')
+    print('mess_response',mess_response)
     return mess_response
 
 if __name__ == "__main__":

@@ -280,7 +280,8 @@ def check_question(message):
     return False
 
 def predict_lstm(mess):
-    url = 'https://api-intent.herokuapp.com/predict'
+    # url = 'https://api-intent.herokuapp.com/predict'
+    url = 'http://intentbot.azurewebsites.net/predict'
     # url = 'http://127.0.0.1:5000/predict'
     pred = requests.post(url,json={'message':mess})
     dict_pred = pred.json()
