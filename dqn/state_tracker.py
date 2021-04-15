@@ -25,7 +25,7 @@ class StateTracker:
             constants (dict): Loaded constants in dict
 
         """
-
+        self.history = []
         self.db_helper = DBQuery(database)
         self.match_key = usersim_default_key
         self.intents_dict = convert_list_to_dict(all_intents)

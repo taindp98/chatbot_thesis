@@ -80,7 +80,9 @@ def process_conversation_POST(state_tracker_id, message):
         confirm_obj = None
         StateTracker_Container[state_tracker_id] = (state_tracker, confirm_obj)
 
-#
+    # print('--- message ---')
+    # print(message)
+#   
     user_action, new_confirm_obj = get_user_request(message,state_tracker)
 
     ## edit
@@ -176,6 +178,8 @@ def post_api_cse_assistant():
         state_tracker_id = get_new_id()
     else:
         state_tracker_id = input_data["state_tracker_id"]
+
+    print('state_tracker_id',state_tracker_id)
     # print('StateTracker_Container',StateTracker_Container)
     K.clear_session()
     current_informs = 'null'
