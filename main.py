@@ -137,3 +137,7 @@
 # print(dict(a.items()))
 # import os
 # print(os.environ.get("MONGOLAB_URI"))
+# potential_extensions = ['.mp3', '.mp4']
+# file_name = 'music.mp3'
+
+# print(file_name.endswith(tuple(potential_extensions)))

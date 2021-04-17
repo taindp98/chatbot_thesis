@@ -1,4 +1,5 @@
 import re
+import string
 
 DEFINE_COMPARE = {}
 DEFINE_COMPARE['lte'] = ["thấp","thap","thấp hơn","thap hon","giảm","tuột","nhỏ","nhỏ hơn","dưới","dưới mức","ít","ít hơn","tới","toi","đến","den","cỡ","khoảng","tầm","khoang","tam","đạt","được","dat","duoc","dc","đc"]
@@ -24,7 +25,21 @@ def catch_point(mess):
                 continue
 
     define_regex_point = r"\d*\.\d+|\d+"
-    list_point_regex = re.findall(define_regex_point,mess)
+
+    ## split to word
+    words = mess.split(' ')
+    list_alphabet = list(string.ascii_lowercase) + list(string.ascii_uppercase)
+
+    viet_string = 'áàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịúùủũụưứừửữựýỳỷỹỵđ'
+    for v in viet_string:
+        list_alphabet.append(v)
+    list_point_regex = []
+    for w in words:
+        if not w.startswith(tuple(list_alphabet)):
+            list_point_regex += re.findall(define_regex_point,w)
+    # print('list_point_regex',list_point_regex)
+
+    # list_point_regex = re.findall(define_regex_point,mess)
     # print(list_point_regex)
     list_point_float = [float(item) for item in list_point_regex]
     list_point_sort = sorted(list_point_float)
