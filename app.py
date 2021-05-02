@@ -62,12 +62,12 @@ def get_new_id():
 
 def process_conversation_POST(state_tracker_id, message):
     now = datetime.now()
-    date_time = now.strftime("%m_%d_%Y_%H_%M_%S")
+    date_time = now.strftime("%m%d%Y%H%M%S")
     dict_investigate = {}
     state_tracker = None
     # print('tracker_id',state_tracker_id)
 
-    dict_investigate['time'] = date_time
+    dict_investigate['time'] = int(date_time)
     dict_investigate['state_tracker_id'] = state_tracker_id
 
 
@@ -161,7 +161,7 @@ def post_api():
 def post_api_cse_assistant():
     input_data = request.json
     now = datetime.now()
-    date_time = now.strftime("%m_%d_%Y_%H_%M_%S")
+    date_time = now.strftime("%m%d%Y%H%M%S")
     ## modify avoid crash
     try:
 
@@ -212,7 +212,7 @@ def post_api_cse_assistant():
     except Exception as e:
         # print('')
         mongo.db.investigate.insert_one({
-            'time':date_time,
+            'time':int(date_time),
             'error':str(e)
             })
 
