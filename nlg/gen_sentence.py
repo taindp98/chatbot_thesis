@@ -176,6 +176,7 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
                             sentence = EMPTY_SLOT[0].replace("*request_slot*",AGENT_INFORM_OBJECT[inform_slot])
 
                         list_sentence.append(sentence)
+                    # print(agent_intent)
                     # print(list_sentence)
             else:
                 # print('here')
@@ -194,5 +195,12 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
     sentence_res = [item.replace(r'"',r'') for item in list_sentence]
     # else:
     #     sentence_res = sentence.replace(r'"',r'')
-    print("sentence_res",sentence_res)
+    # print("sentence_res",sentence_res)
+
+    print('='*50)
+    print("Agent's intent: {}".format(agent_intent))
+    print("Agent's inform slots: {}".format(inform_slot))
+    print("Agent's inform values: {}".format(inform_value))
+    print("Natural sentence: {}".format(sentence_res))
+    print('='*50)
     return sentence_res

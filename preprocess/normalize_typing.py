@@ -164,4 +164,5 @@ def chuan_hoa_dau_cau_tieng_viet(sentence):
     Xem tại đây: https://vi.wikipedia.org/wiki/Quy_tắc_đặt_dấu_thanh_trong_chữ_quốc_ngữ
 """
 if __name__ == '__main__':
+    print(is_valid_vietnam_word('hoá học'))
     print(chuan_hoa_dau_cau_tieng_viet('hoá học'))

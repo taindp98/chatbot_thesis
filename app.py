@@ -20,7 +20,7 @@ import os
 
 app = Flask(__name__)
 # app.config["MONGO_URI"] = "mongodb://localhost:27017"
-# os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
+os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
 app.config['MONGO_URI'] = os.environ.get('MONGOLAB_URI')
 
 mongo = PyMongo(app)
@@ -90,9 +90,9 @@ def process_conversation_POST(state_tracker_id, message):
     # user_request_slot,user_inform_slot = state_tracker.update_state_user(user_action)
 
 
-    print("-------------user action-----------")
-    print(user_action,new_confirm_obj)
-    print('-----------------------------------')
+    # print("-------------user action-----------")
+    # print(user_action,new_confirm_obj)
+    # print('-----------------------------------')
     dict_investigate['user_action'] = user_action
     if user_action:
         if user_action['request_slots'] != {}:
@@ -107,9 +107,9 @@ def process_conversation_POST(state_tracker_id, message):
             dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
 
             agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
-            print('========================')
-            print('agent action',agent_act)
-            print('========================')
+            # print('========================')
+            # print('agent action',agent_act)
+            # print('========================')
 
             StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
             # print('state_tracker.current_request_slots[0]',state_tracker.current_request_slots[0])
@@ -130,7 +130,8 @@ def process_conversation_POST(state_tracker_id, message):
 
         dict_investigate['agent_action'] = agent_act
         dict_investigate['fail_pattern'] = 'success'
-
+        
+        mongo.db.messages.insert_one(dict_investigate)
 
         return agent_message,agent_act
     # except Exception as e:
@@ -145,7 +146,7 @@ def process_conversation_POST(state_tracker_id, message):
 
 @app.errorhandler(404)
 def url_error(e):
-    print("---------------------")
+    # print("---------------------")
     return msg(404,'URL ERROR')
 
 @app.errorhandler(500)
@@ -155,7 +156,7 @@ def server_error(e):
 @app.route('/api/', methods=['POST'])
 def post_api():
     input_data = request.get_json(force=True)
-    print(input_data)
+    # print(input_data)
     if "message" not in input_data.keys():
         return msg(400, "Message cannot be None")
     else:
@@ -179,7 +180,7 @@ def post_api_cse_assistant():
     else:
         state_tracker_id = input_data["state_tracker_id"]
 
-    print('state_tracker_id',state_tracker_id)
+    # print('state_tracker_id',state_tracker_id)
     # print('StateTracker_Container',StateTracker_Container)
     K.clear_session()
     current_informs = 'null'
@@ -198,8 +199,8 @@ def post_api_cse_assistant():
         res_dict['agent_action'] = agent_action
         res_dict['current_informs'] = current_informs
 
-        print('======================')
-        print('current_informs',current_informs)
+        # print('======================')
+        # print('current_informs',current_informs)
         # print(res_dict)
         # return jsonify({"code": 200, "message": agent_message,"state_tracker_id":state_tracker_id,"agent_action":agent_action,"current_informs":current_informs})
         return jsonify(res_dict)
@@ -260,7 +261,7 @@ def post_api_cse_assistant_reset_state_tracker():
 @app.route("/api/LT-conversation-manager/messages", methods=['POST'])
 def user_profile():
     input_data = request.json
-    print(input_data)
+    # print(input_data)
     if "message" not in input_data.keys():
         return msg(400, "Message cannot be None")
     if "intent" not in input_data.keys():
@@ -279,7 +280,7 @@ def user_profile():
 @app.route('/api/LT-conversation-manager/classify-message', methods=['POST'])
 def post_api_classify_message():
     input_data = request.get_json(force=True)
-    print(input_data)
+    # print(input_data)
     if "message" not in input_data.keys():
         return msg(400, "Message cannot be None")
     else:
