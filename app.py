@@ -89,10 +89,6 @@ def process_conversation_POST(state_tracker_id, message):
 
     # user_request_slot,user_inform_slot = state_tracker.update_state_user(user_action)
 
-
-    # print("-------------user action-----------")
-    # print(user_action,new_confirm_obj)
-    # print('-----------------------------------')
     dict_investigate['user_action'] = user_action
     if user_action:
         if user_action['request_slots'] != {}:
@@ -134,11 +130,7 @@ def process_conversation_POST(state_tracker_id, message):
         mongo.db.messages.insert_one(dict_investigate)
 
         return agent_message,agent_act
-    # except Exception as e:
-    #     dict_investigate['fail_pattern'] = str(e)
-    #     print('dict_investigate')
-    #     print(dict_investigate)
-    #     print('>'*50)
+
 
 # @app.route('/')
 # def index():
@@ -168,51 +160,71 @@ def post_api():
 @app.route('/api/convers-manager', methods=['POST'])
 def post_api_cse_assistant():
     input_data = request.json
+    now = datetime.now()
+    date_time = now.strftime("%m_%d_%Y_%H_%M_%S")
+    ## modify avoid crash
+    try:
 
-    if "message" not in input_data.keys():
-        return msg(400, "Message cannot be None")
-    else:
-        message = input_data["message"]
-    # print("-------------------------message")
-    # print(message)
-    if "state_tracker_id" not in input_data.keys():
-        state_tracker_id = get_new_id()
-    else:
-        state_tracker_id = input_data["state_tracker_id"]
+        if "message" not in input_data.keys():
+            return msg(400, "Message cannot be None")
+        else:
+            message = input_data["message"]
+        # print("-------------------------message")
+        # print(message)
+        if "state_tracker_id" not in input_data.keys():
+            state_tracker_id = get_new_id()
+        else:
+            state_tracker_id = input_data["state_tracker_id"]
 
-    # print('state_tracker_id',state_tracker_id)
-    # print('StateTracker_Container',StateTracker_Container)
-    K.clear_session()
-    current_informs = 'null'
-    if not message.startswith('/'):
-        agent_message , agent_action = process_conversation_POST(state_tracker_id, message)
-        if agent_action['intent'] in ["match_found","inform"]:
-            current_informs = StateTracker_Container[state_tracker_id][0].current_informs
+        # print('state_tracker_id',state_tracker_id)
+        # print('StateTracker_Container',StateTracker_Container)
         K.clear_session()
+        current_informs = 'null'
+        if not message.startswith('/'):
+            agent_message , agent_action = process_conversation_POST(state_tracker_id, message)
+            if agent_action['intent'] in ["match_found","inform"]:
+                current_informs = StateTracker_Container[state_tracker_id][0].current_informs
+            K.clear_session()
 
+
+            res_dict = {}
+            res_dict["code"] = 200
+            res_dict["message"] = agent_message
+            res_dict["state_tracker_id"] = state_tracker_id
+
+            res_dict['agent_action'] = agent_action
+            res_dict['current_informs'] = current_informs
+
+            # print('======================')
+            # print('current_informs',current_informs)
+            # print(res_dict)
+            # return jsonify({"code": 200, "message": agent_message,"state_tracker_id":state_tracker_id,"agent_action":agent_action,"current_informs":current_informs})
+            return jsonify(res_dict)
+        else:
+            res_dict = {}
+            res_dict["code"] = 200
+            res_dict["message"] = []
+            res_dict["state_tracker_id"] = state_tracker_id
+
+            res_dict['agent_action'] = {}
+            res_dict['current_informs'] = {}
+            return jsonify(res_dict)
+    except Exception as e:
+        # print('')
+        mongo.db.investigate.insert_one({
+            'time':date_time,
+            'error':str(e)
+            })
 
         res_dict = {}
-        res_dict["code"] = 200
-        res_dict["message"] = agent_message
-        res_dict["state_tracker_id"] = state_tracker_id
-
-        res_dict['agent_action'] = agent_action
-        res_dict['current_informs'] = current_informs
-
-        # print('======================')
-        # print('current_informs',current_informs)
-        # print(res_dict)
-        # return jsonify({"code": 200, "message": agent_message,"state_tracker_id":state_tracker_id,"agent_action":agent_action,"current_informs":current_informs})
-        return jsonify(res_dict)
-    else:
-        res_dict = {}
-        res_dict["code"] = 200
-        res_dict["message"] = []
+        res_dict["code"] = 500
+        res_dict["message"] = ["Xin lỗi bạn, mình không hiểu ý bạn lắm nè !"]
         res_dict["state_tracker_id"] = state_tracker_id
 
         res_dict['agent_action'] = {}
         res_dict['current_informs'] = {}
         return jsonify(res_dict)
+
 @app.route('/api/cse-assistant-conversation-manager/reset-state-tracker', methods=['POST'])
 def post_api_cse_assistant_reset_state_tracker():
     input_data = request.json

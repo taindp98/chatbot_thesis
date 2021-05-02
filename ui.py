@@ -22,8 +22,8 @@ def get_bot_response():
     chatbot_respose = r.json()
     mess_response = [item.replace('\n', r'').replace(r'"',r'') for item in chatbot_respose['message']]
     # mess_response = chatbot_respose['message'].replace('\n', r'').replace(r'"',r'')
-    print('mess_response',mess_response)
-    return mess_response
+    # print('mess_response',mess_response)
+    return {"message_list":mess_response}
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000,debug=True)

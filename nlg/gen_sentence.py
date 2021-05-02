@@ -197,10 +197,10 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
     #     sentence_res = sentence.replace(r'"',r'')
     # print("sentence_res",sentence_res)
 
-    print('='*50)
-    print("Agent's intent: {}".format(agent_intent))
-    print("Agent's inform slots: {}".format(inform_slot))
-    print("Agent's inform values: {}".format(inform_value))
-    print("Natural sentence: {}".format(sentence_res))
-    print('='*50)
+    # print('='*50)
+    # print("Agent's intent: {}".format(agent_intent))
+    # print("Agent's inform slots: {}".format(inform_slot))
+    # print("Agent's inform values: {}".format(inform_value))
+    # print("Natural sentence: {}".format(sentence_res))
+    # print('='*50)
     return sentence_res
