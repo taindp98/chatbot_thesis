@@ -109,18 +109,38 @@ def response_craft(agent_action, state_tracker, confirm_obj,isGreeting=False):
                 # print(confirm_obj[inform_slot],list_unique_slot_in_record_match)
 
                 for item in list_unique_slot_in_record_match:
+                    # print('item match',item)
                     check_match = check_match_sublist_and_substring(confirm_obj[inform_slot],item)
                     if check_match:
                         break
                 value_match = ''
                 if len(confirm_obj[inform_slot]) > 1:
-                    value_match = ',\n'.join(confirm_obj[inform_slot])
-                else:
-                    value_match = confirm_obj[inform_slot][0]
+                    # print(AGENT_INFORM_OBJECT[inform_slot])
+                    if inform_slot != 'point':
+                        value_match = ',\n'.join([str(item) for item in confirm_obj[inform_slot]])
+
+                    else:
+                        # print('#'*100)
+                        confirm_obj_non_limit = []
+                        for item in confirm_obj[inform_slot]:
+                            if item != float(0) and item != float(100) and item != float(1000):
+                                # print('item float',item,type(item))
+                                confirm_obj_non_limit.append(item)
+                        
+                        value_match = ' ,\n'.join([str(item) for item in confirm_obj_non_limit])
+                else:          
+                    # print('#'*100)
+                    value_match = str(confirm_obj[inform_slot][0])
                 if check_match:
-                    response_match = "\n\nĐúng rồi! {0} là {1}".format(AGENT_INFORM_OBJECT[inform_slot],value_match)
+                    if inform_slot != 'point':
+                        response_match = "\n\nĐúng rồi! Thông tin {0} bạn cần là {1}".format(AGENT_INFORM_OBJECT[inform_slot],value_match)
+                    else:
+                        response_match = "Chúc mừng bạn! Điểm của bạn cao hơn điểm chuẩn được công bố"
                 else:
-                    response_match = "\n\nSai rồi! {0} không là {1}".format(AGENT_INFORM_OBJECT[inform_slot],value_match)
+                    if inform_slot != 'point':
+                        response_match = "\n\nSai rồi! Thông tin {0} không phải là {1}".format(AGENT_INFORM_OBJECT[inform_slot],value_match)
+                    else:
+                        response_match = "Điểm của bạn thấp hơn điểm chuẩn được công bố!"
                 ## add list_sentence
                 list_sentence.append(response_match)
             if inform_slot != "major":

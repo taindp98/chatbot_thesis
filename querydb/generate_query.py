@@ -57,10 +57,11 @@ if __name__ == '__main__':
     collection = db['general'].find({})
 
 #     constr = {'major_name': ['hóa'], 'year': ['2019','2020']}
-    constraint = {'major_name': ['điện tử']}
+    constraint = {'major_name': ['cơ khí'],'year':['2020'],'point':[0.0,27.0]}
     mycol = db['general']
     user_action = {}
     user_action['intent'] = 'request'
     data=mycol.find(convert_constraint(constraint,user_action))
     for x in data:
-        print(x['major_name'])
+        # print(x['major_name'])
+        print(x['point'])

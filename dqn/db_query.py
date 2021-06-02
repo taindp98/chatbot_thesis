@@ -179,7 +179,7 @@ class DBQuery:
                         # value = []
 
                     list_and_in.append({
-                            "$or" : [
+                            "$and" : [
                                         {
                                             keys: {
                                                 "$all": [re.compile(".*{0}.*".format(value))]
@@ -237,6 +237,8 @@ class DBQuery:
 
 
         regex_constraint = self.convert_constraint(new_constraints, user_action)
+        print('#'*100)
+        print('regex_constraint',regex_constraint)
         results = self.database.general.find(regex_constraint)
         for result in results:
             #đổi từ object id sang string và dùng id đó làm key (thay vì dùng index của mảng để làm key vì không xác định đc index)

@@ -215,14 +215,39 @@ def export_pickle_file(data_dict,path):
 def check_match_sublist_and_substring(list_children,list_parent):
         # print("match sublist")
         count_match=0
-        list_children = [convert_unicode(x) for x in list_children]
-        list_parent = [convert_unicode(x) for x in list_parent]
-        for children_value in list_children:
-            for parent_value in list_parent:
-                if children_value in parent_value:
-                    count_match+=1
-                    break
-        if count_match==len(list_children):
+        # print('='*100)
+        # print('list_children',list_children)
+
+        ## check string
+        list_child_check = []
+        list_par_check = []
+
+        for x in list_children:
+            if type(x) is str:
+                list_child_check.append(convert_unicode(x))
+            else:
+                list_child_check.append(x)
+
+        for x in list_parent:
+            if type(x) is str:
+                list_par_check.append(convert_unicode(x))
+            else:
+                list_par_check.append(x)
+        # list_children = [convert_unicode(x) for x in list_children]
+        # list_parent = [convert_unicode(x) for x in list_parent]
+        for children_value in list_child_check:
+            for parent_value in list_par_check:
+                if type(children_value) is str and type(parent_value) is str:
+                    if children_value in parent_value:
+                        count_match+=1
+                        break
+                elif type(children_value) is float and type(parent_value) is float:
+                    # if children_value == parent_value:
+                    if parent_value >= min(list_child_check) and  parent_value <= max(list_child_check):
+                        # count_match+=1
+                        return True
+                        # break 
+        if count_match==len(list_child_check):
             # print("match sublist")
             return True
         return False

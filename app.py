@@ -176,7 +176,8 @@ def post_api_cse_assistant():
         else:
             state_tracker_id = input_data["state_tracker_id"]
 
-        # print('state_tracker_id',state_tracker_id)
+        print('state_tracker_id ',state_tracker_id)
+        print('receive_message ',message)
         # print('StateTracker_Container',StateTracker_Container)
         K.clear_session()
         current_informs = 'null'
@@ -186,6 +187,7 @@ def post_api_cse_assistant():
                 current_informs = StateTracker_Container[state_tracker_id][0].current_informs
             K.clear_session()
 
+            print('agent_message',agent_message)
 
             res_dict = {}
             res_dict["code"] = 200
@@ -215,7 +217,8 @@ def post_api_cse_assistant():
             'time':int(date_time),
             'error':str(e)
             })
-
+        print('>'*20)
+        print(str(e))
         res_dict = {}
         res_dict["code"] = 500
         res_dict["message"] = ["Xin lỗi bạn, mình không hiểu ý bạn lắm nè !"]
