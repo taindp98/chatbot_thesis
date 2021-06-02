@@ -99,7 +99,7 @@ def process_conversation_POST(state_tracker_id, message):
             confirm_obj = new_confirm_obj
 
         # try:
-        if user_action['intent'] not in ["hello","other","done"]:
+        if user_action['intent'] not in ["hello","other","done","thanks"]:
             dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
 
             agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
@@ -120,7 +120,7 @@ def process_conversation_POST(state_tracker_id, message):
             agent_message = [random.choice(response_to_user_free_style[user_action['intent']])]
 
             #nếu là done thì reset và cho confirm về None
-            if user_action['intent'] == "done":
+            if user_action['intent'] in ["done","thanks"]:
                 state_tracker.reset()
                 StateTracker_Container[state_tracker_id] = (state_tracker,None)
 

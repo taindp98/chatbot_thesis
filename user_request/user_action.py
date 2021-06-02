@@ -40,7 +40,7 @@ def get_user_request(mess,state_tracker):
             # print(mess)
 
             intent_catched, prob,mess_clean = catch_intent(mess)
-            # print("intent_catched",intent_catched)
+            print("intent_catched",intent_catched)
             # kiểm tra câu nhập vào có phải câu hỏi
             # check_ques = check_question(mess_clean)
             ignore_intent = ['hello','done','other','anything','thanks','not_intent']

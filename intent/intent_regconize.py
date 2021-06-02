@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 from utils import *
 import os
 import pandas as pd
@@ -522,7 +524,7 @@ def catch_intent(mess):
 
     return 'not_intent',1.0,mess_clean
 
-# print(catch_intent("phải không ạ"))
+# print(catch_intent("cảm ơn ad"))
 # s = 'cho em biết Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?'
 # # s = "Tên ngành đào tạo về tự động là gì?"
 # # s = 'Thi khối B cần học những môn nào?'

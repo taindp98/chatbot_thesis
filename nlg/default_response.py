@@ -9,5 +9,10 @@ response_to_user_free_style = {
         "OK chào tạm biệt nha ^^ ! Rất vui được giúp bạn nè ",
         "Okie bái bai bạn nè ^^ ! Rất vui được giúp bạn nè ",
         "Bye bye nha ! :D Rất vui được giúp bạn nè "
+    ],
+    'thanks':[
+        "OK chào tạm biệt nha ^^ ! Rất vui được giúp bạn nè ",
+        "Okie bái bai bạn nè ^^ ! Rất vui được giúp bạn nè ",
+        "Bye bye nha ! :D Rất vui được giúp bạn nè "
     ]
 }
