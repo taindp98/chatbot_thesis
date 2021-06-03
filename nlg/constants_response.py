@@ -34,13 +34,13 @@ user_known = ['major_name', 'type_edu','subject','subject_group','point', 'year'
 """
 ###############################################################################################################
 REQUEST['major_name'] = [
-    'Bạn định hỏi về *major_name* nào? (khoa học máy tính, điện điện tử, cơ khí, ...)',
-    '*major_name* là gì vậy bạn?',
-    'Bạn cần thông tin về *major_name* nào?'
+    'Bạn định hỏi về *major_name* nào? (Vd: khoa học máy tính, điện điện tử, cơ khí, ...)',
+    '*major_name* là gì vậy bạn? (Vd: khoa học máy tính, điện điện tử, cơ khí, ...)',
+    'Bạn cần thông tin về *major_name* nào? (Vd: khoa học máy tính, điện điện tử, cơ khí, ...)'
 ]
 REQUEST['type_edu'] = [
-    '*type_edu* bạn cần tìm là gì vậy ạ? (đại trà,chất lượng cao, tiên tiến)',
-    'Bạn muốn tìm thông tin về *type_edu* nào?'
+    '*type_edu* bạn cần tìm là gì vậy ạ? (Vd: đại trà,chất lượng cao, tiên tiến)',
+    'Bạn muốn tìm thông tin về *type_edu* nào? (Vd: đại trà,chất lượng cao, tiên tiến)'
 ]
 REQUEST['point'] = [
     'Bạn muốn tra cứu mức *point* thế nào ạ?',
@@ -65,8 +65,8 @@ REQUEST['year'] = [
 ]
 
 REQUEST['case'] = [
-    'Bạn cho mình xin *case* cụ thể bạn muốn tìm nha!',
-    '*case* bạn cần tìm là gì vậy ạ? (thi tốt nghiệp,đánh giá năng lực, ưu tiên xét tuyển)'
+    'Bạn cho mình xin *case* cụ thể bạn muốn tìm nha! (Vd: thi tốt nghiệp, đánh giá năng lực, ưu tiên xét tuyển)',
+    '*case* bạn cần tìm là gì vậy ạ? (Vd: thi tốt nghiệp, đánh giá năng lực, ưu tiên xét tuyển)'
 ]
 
 REQUEST['criteria'] = [
@@ -75,12 +75,12 @@ REQUEST['criteria'] = [
 ]
 
 REQUEST['object'] = [
-    'Bạn thuộc *object* nào vậy ạ? (thi tốt nghiệp, trường chuyên, học sinh giỏi quốc gia,...)'
+    'Bạn thuộc *object* nào vậy ạ? (Vd: thi tốt nghiệp, trường chuyên, học sinh giỏi quốc gia,...)'
 ]
 
 REQUEST['register'] = [
     'Bạn muốn *register* theo hình thức nào vậy ạ?',
-    'Bạn muốn lựa chọn hình thức *register* như thế nào vậy ạ? (đăng ký thi tốt nghiệp, đăng ký ưu tiên xét tuyển,...)'
+    'Bạn muốn lựa chọn hình thức *register* như thế nào vậy ạ? (Vd: đăng ký thi tốt nghiệp, đăng ký ưu tiên xét tuyển,...)'
 ]
 REQUEST['major_code'] = [
     'Bạn cho mình xin *major_code* cụ thể bạn muốn tìm nha!',
@@ -208,5 +208,5 @@ NOT_FOUND = [
     'Mình không tìm thấy ngành nào thỏa mãn các thông tin bạn đã cung cấp, vui lòng điều chỉnh lại giúp mình nhé!'
 ]
 EMPTY_SLOT = [
-    'Thông tin bạn tìm có thể không yêu cầu về *request_slot*'
+    'Bạn muốn tìm thông tin với *request_slot* nào cũng được đúng không ạ ?'
 ]

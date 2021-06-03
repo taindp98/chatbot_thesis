@@ -11,6 +11,7 @@ from user_request.user_action import get_user_request
 from agent_response.agent_action import get_agent_action
 from nlg.gen_sentence import response_craft
 from nlg.default_response import response_to_user_free_style
+from nlg.constants_response import *
 import random
 from datetime import datetime,timezone
 import time
@@ -230,7 +231,7 @@ def post_api_cse_assistant():
         print(str(e))
         res_dict = {}
         res_dict["code"] = 500
-        res_dict["message"] = ["Xin lỗi bạn, mình không hiểu ý bạn lắm nè !"]
+        res_dict["message"] = [random.choice(DONT_UNDERSTAND)]
         res_dict["state_tracker_id"] = state_tracker_id
 
         res_dict['agent_action'] = {}
