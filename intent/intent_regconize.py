@@ -286,8 +286,14 @@ def predict_lstm(mess):
     # url = 'http://intentbot.azurewebsites.net/predict'
     # url = 'http://127.0.0.1:5000/predict'
     pred = requests.post(url,json={'message':mess})
+
+    # weight for class predict
     dict_pred = pred.json()
-    return dict_pred['intent'],dict_pred['probability'],dict_pred['message']
+    
+    if dict_pred['probability'] >= THRESHOLD_PRED_INTENT[dict_pred['intent']]:
+        return dict_pred['intent'],dict_pred['probability'],dict_pred['message']
+    else:
+        return 'other',1.0,dict_pred['message']
 
 def clasify_business_random_intent(message,signal):
 
@@ -524,7 +530,7 @@ def catch_intent(mess):
 
     return 'not_intent',1.0,mess_clean
 
-# print(catch_intent("cảm ơn ad"))
+print(catch_intent("cho hỏi học bk ra trường có việc làm không ạ"))
 # s = 'cho em biết Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?'
 # # s = "Tên ngành đào tạo về tự động là gì?"
 # # s = 'Thi khối B cần học những môn nào?'

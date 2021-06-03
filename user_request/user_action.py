@@ -3,6 +3,7 @@ from intent.intent_regconize import catch_intent
 from entity.pattern_ner import find_all_entity
 from constant_general import list_map_key
 from nlg.constants_response import *
+import time
 """
 LIST INTENT PATTERN MATCHING
 'major_code',
@@ -65,6 +66,12 @@ def get_user_request(mess,state_tracker):
                 # print('#'*100)
                 # print(state_tracker.history)
                 if state_tracker.history:
+                    
+                    print('$'*50)
+                    print('history',state_tracker.history)
+
+                    while len(state_tracker.history) < 1:
+                        time.sleep(0.01)
                     last_agent_action = state_tracker.history[-1]
 
                     # print('last_agent_action',last_agent_action)
