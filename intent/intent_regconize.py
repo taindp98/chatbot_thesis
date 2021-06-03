@@ -530,7 +530,7 @@ def catch_intent(mess):
 
     return 'not_intent',1.0,mess_clean
 
-print(catch_intent("cho hỏi học bk ra trường có việc làm không ạ"))
+# print(catch_intent("cho hỏi học bk ra trường có việc làm không ạ"))
 # s = 'cho em biết Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?'
 # # s = "Tên ngành đào tạo về tự động là gì?"
 # # s = 'Thi khối B cần học những môn nào?'
