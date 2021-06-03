@@ -27,6 +27,9 @@ LIST INTENT FASTAI
 def get_user_request(mess,state_tracker):
     confirm_obj = None
     user_action = {}
+    user_action['intent'] = None
+    user_action['inform_slots'] = {}
+    user_action['request_slots'] = {}
     # if isinstance(mess, str) and not mess.startswith('/'):
 
     # print('>'*100)
