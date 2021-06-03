@@ -69,9 +69,10 @@ def get_user_request(mess,state_tracker):
                     
                     print('$'*50)
                     print('history',state_tracker.history)
-
-                    while len(state_tracker.history) < 1:
+                    count_sleep = 0
+                    while len(state_tracker.history) < 1 and count_sleep < 100:
                         time.sleep(0.01)
+                        count_sleep += 1
                     last_agent_action = state_tracker.history[-1]
 
                     # print('last_agent_action',last_agent_action)
@@ -106,9 +107,10 @@ def get_user_request(mess,state_tracker):
             elif intent_catched in ['agree','disagree']:
                 print('$'*50)
                 print('history',state_tracker.history)
-
-                while len(state_tracker.history) < 1:
+                count_sleep = 0
+                while len(state_tracker.history) < 1 and count_sleep < 100:
                     time.sleep(0.01)
+                    count_sleep += 1
                 last_agent_action = state_tracker.history[-1]
 
                 if last_agent_action['intent'] != 'match_found':
@@ -155,9 +157,10 @@ def get_user_request(mess,state_tracker):
                 anything_key = None
                 print('$'*50)
                 print('history',state_tracker.history)
-
-                while len(state_tracker.history) < 1:
+                count_sleep = 0
+                while len(state_tracker.history) < 1 and count_sleep < 100:
                     time.sleep(0.01)
+                    count_sleep += 1
                 last_agent_action = state_tracker.history[-1]
                 if len(list(last_agent_action['request_slots'].keys())) > 0:
                     anything_key = list(last_agent_action['request_slots'].keys())[0]
