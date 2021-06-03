@@ -12,8 +12,8 @@ from agent_response.agent_action import get_agent_action
 from nlg.gen_sentence import response_craft
 from nlg.default_response import response_to_user_free_style
 import random
-from datetime import datetime
-
+from datetime import datetime,timezone
+import time
 import os
 
 # from mongoengine import connect
@@ -62,14 +62,17 @@ def get_new_id():
 
 def process_conversation_POST(state_tracker_id, message):
     now = datetime.now()
-    date_time = now.strftime("%m%d%Y%H%M%S")
+    # date_time = now.strftime("%m%d%Y%H%M%S")
+    timestamp = now.timestamp()
     dict_investigate = {}
     state_tracker = None
     # print('tracker_id',state_tracker_id)
 
-    dict_investigate['time'] = int(date_time)
-    dict_investigate['state_tracker_id'] = state_tracker_id
-
+    # dict_investigate['time'] = int(date_time)
+    dict_investigate['time'] = timestamp
+    dict_investigate['visit_id'] = state_tracker_id
+    if message:
+        start_time = time.time()
 
     if state_tracker_id in StateTracker_Container.keys():
         state_tracker = StateTracker_Container[state_tracker_id][0]
@@ -88,8 +91,11 @@ def process_conversation_POST(state_tracker_id, message):
     ## edit
 
     # user_request_slot,user_inform_slot = state_tracker.update_state_user(user_action)
-
-    dict_investigate['user_action'] = user_action
+    dict_investigate['semantic_frame'] = {}
+    dict_investigate['semantic_frame']['user'] = {}
+    dict_investigate['semantic_frame']['user'] = user_action
+    dict_investigate['semantic_frame']['user']['message'] = message
+    
     if user_action:
         if user_action['request_slots'] != {}:
             state_tracker.reset()
@@ -123,11 +129,13 @@ def process_conversation_POST(state_tracker_id, message):
             if user_action['intent'] in ["done","thanks"]:
                 state_tracker.reset()
                 StateTracker_Container[state_tracker_id] = (state_tracker,None)
-
-        dict_investigate['agent_action'] = agent_act
-        dict_investigate['fail_pattern'] = 'success'
+        dict_investigate['semantic_frame']['agent'] = {}
+        dict_investigate['semantic_frame']['agent'] = agent_act
+        dict_investigate['semantic_frame']['agent']['message'] = agent_message
+        # dict_investigate['fail_pattern'] = 'success'
+        dict_investigate['timing'] = time.time() - start_time
         
-        mongo.db.messages.insert_one(dict_investigate)
+        mongo.db.messages.insert_one(dict_investigate)  
 
         return agent_message,agent_act
 
@@ -161,7 +169,8 @@ def post_api():
 def post_api_cse_assistant():
     input_data = request.json
     now = datetime.now()
-    date_time = now.strftime("%m%d%Y%H%M%S")
+    timestamp = now.timestamp()
+    # date_time = now.strftime("%m%d%Y%H%M%S")
     ## modify avoid crash
     try:
 
@@ -176,8 +185,8 @@ def post_api_cse_assistant():
         else:
             state_tracker_id = input_data["state_tracker_id"]
 
-        print('state_tracker_id ',state_tracker_id)
-        print('receive_message ',message)
+        # print('state_tracker_id ',state_tracker_id)
+        # print('receive_message ',message)
         # print('StateTracker_Container',StateTracker_Container)
         K.clear_session()
         current_informs = 'null'
@@ -187,7 +196,7 @@ def post_api_cse_assistant():
                 current_informs = StateTracker_Container[state_tracker_id][0].current_informs
             K.clear_session()
 
-            print('agent_message',agent_message)
+            # print('agent_message',agent_message)
 
             res_dict = {}
             res_dict["code"] = 200
@@ -214,7 +223,7 @@ def post_api_cse_assistant():
     except Exception as e:
         # print('')
         mongo.db.investigate.insert_one({
-            'time':int(date_time),
+            'time':timestamp,
             'error':str(e)
             })
         print('>'*20)
@@ -287,8 +296,8 @@ def user_profile():
     is_correct = input_data["is_correct"]
 
     # check mongo insert cloud
-    mongo.db.messages.insert_one(
-        {"user_id": user_id, "message": message, "intent": intent, "is_correct": is_correct})
+    # mongo.db.messages.insert_one(
+        # {"user_id": user_id, "message": message, "intent": intent, "is_correct": is_correct})
 
     return jsonify({"code": 200, "message": "insert successed!"})
 
