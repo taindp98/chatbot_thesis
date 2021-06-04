@@ -179,7 +179,7 @@ class DBQuery:
                         # value = []
 
                     list_and_in.append({
-                            "$and" : [
+                            "$or" : [
                                         {
                                             keys: {
                                                 "$all": [re.compile(".*{0}.*".format(value))]
