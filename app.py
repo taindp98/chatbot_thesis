@@ -17,13 +17,14 @@ from datetime import datetime,timezone
 import time
 import os
 import time
+from dotenv import load_dotenv
 
+load_dotenv()
 # from mongoengine import connect
 
 app = Flask(__name__)
-# app.config["MONGO_URI"] = "mongodb://localhost:27017"
-# os.environ["MONGOLAB_URI"] = 'mongodb://taindp:chatbot2020@thesis-shard-00-00.bdisf.mongodb.net:27017,thesis-shard-00-01.bdisf.mongodb.net:27017,thesis-shard-00-02.bdisf.mongodb.net:27017/hcmut?ssl=true&replicaSet=atlas-12fynb-shard-0&authSource=admin&retryWrites=true&w=majority'
-app.config['MONGO_URI'] = os.environ.get('MONGOLAB_URI')
+
+app.config['MONGO_URI'] = os.getenv('MONGOLAB_URI')
 
 mongo = PyMongo(app)
 
@@ -32,16 +33,9 @@ CONSTANTS_FILE_PATH = f'{FOLDER_PATH}/constants.json'
 # CONSTANT_FILE_PATH = 'constants.json'
 with open(CONSTANTS_FILE_PATH) as f:
     constants = json.load(f)
-client = pymongo.MongoClient(os.environ.get('MONGOLAB_URI'))
+# client = pymongo.MongoClient(os.environ.get('MONGOLAB_URI'))
+client = pymongo.MongoClient(os.getenv('MONGOLAB_URI'))
 database = client.hcmut
-# collection = db['general'].find({})
-# collection = db['general']
-# database = []
-# for item in collection:
-#     bad_id = item['_id']
-#     good_id = str(bad_id)
-#     item['_id'] = good_id
-#     database.append(item)
 
 # khoi tao app
 app = Flask(__name__)
