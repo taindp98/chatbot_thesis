@@ -33,7 +33,7 @@ def get_user_request(mess,state_tracker):
     user_action['request_slots'] = {}
     # if isinstance(mess, str) and not mess.startswith('/'):
 
-    # print('>'*500)
+    # print('>'*800)
     # print(mess)
 
     if isinstance(mess,str):
@@ -63,7 +63,7 @@ def get_user_request(mess,state_tracker):
 
             # elif intent_catched == 'not_intent' or intent_catched == 'other':
             elif intent_catched in ['not_intent','other']:
-                # print('#'*500)
+                # print('#'*800)
                 # print(state_tracker.history)
                 # if state_tracker.history:
                     
@@ -71,7 +71,7 @@ def get_user_request(mess,state_tracker):
 
                 print('history',state_tracker.history)
                 count_sleep = 0
-                while len(state_tracker.history) < 1 and count_sleep < 500:
+                while len(state_tracker.history) < 1 and count_sleep < 800:
                     time.sleep(0.01)
                     count_sleep += 1
                 last_agent_action = state_tracker.history[-1]
@@ -109,7 +109,7 @@ def get_user_request(mess,state_tracker):
                 print('$'*50)
                 print('history',state_tracker.history)
                 count_sleep = 0
-                while len(state_tracker.history) < 1 and count_sleep < 500:
+                while len(state_tracker.history) < 1 and count_sleep < 800:
                     time.sleep(0.01)
                     count_sleep += 1
                 last_agent_action = state_tracker.history[-1]
@@ -159,7 +159,7 @@ def get_user_request(mess,state_tracker):
                 print('$'*50)
                 print('history',state_tracker.history)
                 count_sleep = 0
-                while len(state_tracker.history) < 1 and count_sleep < 500:
+                while len(state_tracker.history) < 1 and count_sleep < 800:
                     time.sleep(0.01)
                     count_sleep += 1
                 last_agent_action = state_tracker.history[-1]
