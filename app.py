@@ -16,6 +16,7 @@ import random
 from datetime import datetime,timezone
 import time
 import os
+import time
 
 # from mongoengine import connect
 
@@ -86,7 +87,11 @@ def process_conversation_POST(state_tracker_id, message):
 
     # print('--- message ---')
     # print(message)
-#   
+    # while not (state_tracker.flag_update_agent and state_tracker.flag_update_user):
+        # time.sleep(0.1)
+    print('='*50)
+    print(state_tracker.flag_update_agent,state_tracker.flag_update_user)
+
     user_action, new_confirm_obj = get_user_request(message,state_tracker)
 
     ## edit

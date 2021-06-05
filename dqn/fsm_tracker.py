@@ -54,7 +54,7 @@ def recursion_find_best_way(list_state_tracker,pattern_target,request_slot):
 #     last_state = list_state_tracker[-1]
 
     ## remove last state --> sucess rate
-    print('update list state tracker',list_state_tracker)
+    # print('update list state tracker',list_state_tracker)
     for item in list_state_tracker:
         if item != 'initial' and item in pattern_target:
 #             if last_state in pattern_target:

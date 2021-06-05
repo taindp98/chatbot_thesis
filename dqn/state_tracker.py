@@ -45,6 +45,8 @@ class StateTracker:
         self.pattern_target = []
         self.recursion_success = False
 
+        self.flag_update_agent = False
+        self.flag_update_user = False 
         # self.all_slot = self.current_request_slots + list(self.current_informs.keys())
 
     def get_state_size(self):
@@ -265,7 +267,12 @@ class StateTracker:
                 agent_action['inform_slots'][self.match_key] = 'no match available'
             self.current_informs[self.match_key] = agent_action['inform_slots'][self.match_key]
         agent_action.update({'round': self.round_num, 'speaker': 'Agent'})
+        self.flag_update_agent = False
         self.history.append(agent_action)
+
+        # return True
+        self.flag_update_agent = True
+        # self.flag_update_user = False 
 
     def update_state_user(self, user_action):
         """
@@ -292,13 +299,15 @@ class StateTracker:
             if key not in self.current_request_slots:
                 self.current_request_slots.append(key)
         user_action.update({'round': self.round_num, 'speaker': 'User'})
+        self.flag_update_user = False
         self.history.append(user_action)
         if self.round_num == 0 or user_action['intent'] == 'request':
             self.all_slot = self.current_request_slots + list(self.current_informs.keys())
             self.pattern_target = self.all_slot + map_order_entity[self.current_request_slots[0]].copy()
             self.list_state_tracker += self.all_slot
         self.round_num += 1
-
+        # return True
+        self.flag_update_user = True 
 
         # return self.current_request_slots,list(self.current_informs.keys())
 
