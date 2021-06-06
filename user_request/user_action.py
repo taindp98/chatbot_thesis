@@ -70,7 +70,7 @@ def get_user_request(mess,state_tracker):
                 runtime = 0
                 while len(state_tracker.history) < 1:
                     runtime += 1
-                    get_user_request(mess,state_tracker)
+                    # get_user_request(mess,state_tracker)
 
                 print('-'*10,'runtime: ',runtime,'-'*10)
                 last_agent_action = state_tracker.history[-1]
@@ -108,7 +108,7 @@ def get_user_request(mess,state_tracker):
                 runtime = 0
                 while len(state_tracker.history) < 1:
                     runtime += 1
-                    get_user_request(mess,state_tracker)
+                    # get_user_request(mess,state_tracker)
                 print('-'*10,'runtime: ',runtime,'-'*10)
                 last_agent_action = state_tracker.history[-1]
 
@@ -157,7 +157,7 @@ def get_user_request(mess,state_tracker):
                 runtime = 0
                 while len(state_tracker.history) < 1:
                     runtime += 1
-                    get_user_request(mess,state_tracker)
+                    # get_user_request(mess,state_tracker)
 
                 print('-'*10,'runtime: ',runtime,'-'*10)
                 last_agent_action = state_tracker.history[-1]
