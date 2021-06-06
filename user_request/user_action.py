@@ -67,12 +67,12 @@ def get_user_request(mess,state_tracker):
                 # print(state_tracker.history)
                 # if state_tracker.history:
                     
-                runtime = 0
-                while len(state_tracker.history) < 1:
-                    runtime += 1
-                    # get_user_request(mess,state_tracker)
+                # runtime = 0
+                # while len(state_tracker.history) < 1:
+                #     runtime += 1
+                #     # get_user_request(mess,state_tracker)
 
-                print('-'*10,'runtime: ',runtime,'-'*10)
+                # print('-'*10,'runtime: ',runtime,'-'*10)
                 last_agent_action = state_tracker.history[-1]
 
                 # print('last_agent_action',last_agent_action)
@@ -105,11 +105,11 @@ def get_user_request(mess,state_tracker):
                     user_action['request_slots'] = {}
 
             elif intent_catched in ['agree','disagree']:
-                runtime = 0
-                while len(state_tracker.history) < 1:
-                    runtime += 1
-                    # get_user_request(mess,state_tracker)
-                print('-'*10,'runtime: ',runtime,'-'*10)
+                # runtime = 0
+                # while len(state_tracker.history) < 1:
+                #     runtime += 1
+                #     # get_user_request(mess,state_tracker)
+                # print('-'*10,'runtime: ',runtime,'-'*10)
                 last_agent_action = state_tracker.history[-1]
 
                 if last_agent_action['intent'] != 'match_found':
@@ -154,12 +154,12 @@ def get_user_request(mess,state_tracker):
 
             elif intent_catched == 'anything':
                 anything_key = None
-                runtime = 0
-                while len(state_tracker.history) < 1:
-                    runtime += 1
-                    # get_user_request(mess,state_tracker)
+                # runtime = 0
+                # while len(state_tracker.history) < 1:
+                #     runtime += 1
+                #     # get_user_request(mess,state_tracker)
 
-                print('-'*10,'runtime: ',runtime,'-'*10)
+                # print('-'*10,'runtime: ',runtime,'-'*10)
                 last_agent_action = state_tracker.history[-1]
                 if len(list(last_agent_action['request_slots'].keys())) > 0:
                     anything_key = list(last_agent_action['request_slots'].keys())[0]
