@@ -5,7 +5,7 @@ from flask_cors import CORS
 from dqn.state_tracker import StateTracker
 from dqn.dqn_agent import DQNAgent
 
-from keras import backend as K
+# from keras import backend as K
 from intent.intent_regconize import *
 from user_request.user_action import get_user_request
 from agent_response.agent_action import get_agent_action
@@ -188,13 +188,13 @@ def post_api_cse_assistant():
         # print('state_tracker_id ',state_tracker_id)
         # print('receive_message ',message)
         # print('StateTracker_Container',StateTracker_Container)
-        K.clear_session()
+        # K.clear_session()
         current_informs = 'null'
         if not message.startswith('/'):
             agent_message , agent_action = process_conversation_POST(state_tracker_id, message)
             if agent_action['intent'] in ["match_found","inform"]:
                 current_informs = StateTracker_Container[state_tracker_id][0].current_informs
-            K.clear_session()
+            # K.clear_session()
 
             # print('agent_message',agent_message)
 
@@ -252,7 +252,7 @@ def post_api_cse_assistant_reset_state_tracker():
     # # else:
     # #     state_tracker_id = input_data["state_tracker_id"]
     # print(StateTracker_Container)
-    K.clear_session()
+    # K.clear_session()
 
     if state_tracker_id in StateTracker_Container:
         state_tracker = StateTracker_Container[state_tracker_id][0]
@@ -263,7 +263,7 @@ def post_api_cse_assistant_reset_state_tracker():
     else:
         message = "fail"
         code = 404
-    K.clear_session()
+    # K.clear_session()
     return jsonify({"code": code, "message": message,"state_tracker_id":state_tracker_id})
 
 

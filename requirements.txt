@@ -5,16 +5,11 @@ Flask-PyMongo==2.3.0
 grpcio==1.34.0
 gunicorn==20.0.4
 h5py==2.10.0
-Keras==2.2.4
 numpy==1.16.4
 pandas==1.1.5
 pymongo==3.11.2
-pyTelegramBotAPI==3.7.6
-python-telegram-bot==13.1
 pyvi==0.1
 requests
-telebot==0.0.4
-tensorflow==1.14.0
 regex
 python-dotenv
 python-Levenshtein

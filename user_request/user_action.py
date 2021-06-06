@@ -1,7 +1,7 @@
 from utils import *
 from intent.intent_regconize import catch_intent
 from entity.pattern_ner import find_all_entity
-from constant_general import list_map_key
+# from constant_general import list_map_key
 from nlg.constants_response import *
 import time
 """
