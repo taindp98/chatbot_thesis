@@ -49,7 +49,7 @@ list_verb_want = ["hỏi","biết","xin"]
 list_verb_have = ["có","được"]
 
 #intent not want information
-list_hello_notification = ["hello","chào","helo"]
+list_hello_notification = ["hello","chào","helo",'hi']
 list_done_notification = ["bye","tạm biệt","bai","gặp lại",'pp']
 list_thanks_notification = ["cảm ơn","tks","thanks",'thank']
 list_anything_notification = ["sao cũng được","gì cũng được","anything","s cũng được",\
@@ -58,7 +58,7 @@ list_anything_notification = ["sao cũng được","gì cũng được","anythin
 
 #intent agree or disagree
 
-list_agree_notification = ['yes','ok','đúng rồi','đúng','chắc vậy','chính xác','phải rồi']
+list_agree_notification = ['yes','ok','đúng rồi','đúng','chắc vậy','chính xác','phải rồi','vâng']
 list_disagree_notification = ['không phải','no','sai rồi','sai']
 
 
@@ -69,3 +69,5 @@ THRESHOLD_PRED_INTENT = {
     'case': 0.65,
     'career': 0.6
 }
+
+THRESHOLD_EDIT_DIST = 0.85

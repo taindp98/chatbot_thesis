@@ -17,3 +17,5 @@ telebot==0.0.4
 tensorflow==1.14.0
 regex
 python-dotenv
+python-Levenshtein
+fuzzywuzzy

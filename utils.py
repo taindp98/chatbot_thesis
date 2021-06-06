@@ -9,11 +9,24 @@ import json
 # from fastai.text import *
 import pandas as pd
 import pickle
+from fuzzywuzzy import fuzz
 from preprocess.normalize_typing import chuan_hoa_dau_cau_tieng_viet
 # path = '/home/taindp/Database/intent/'
 # path = 'data/'
 path = './data'
+def compare_word(token_rule,sentence):
+    """
+    compare 2 char
+    params:
+        character a, character b, threshold
+    return:
+        boolean, True if pass thresshold
+    """
+    token_set_ratio = fuzz.token_set_ratio(token_rule,sentence)
 
+    token_set_ratio = float(token_set_ratio)/100
+    return token_set_ratio
+    
 def normalize_format_number(mess):
     decmark_reg = re.compile('(?<=\d),(?=\d)')
     mess_norm = decmark_reg.sub('.',mess)

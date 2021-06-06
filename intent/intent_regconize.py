@@ -6,6 +6,8 @@ import pandas as pd
 import requests
 from pyvi import ViTokenizer
 from intent.pattern_intent import *
+
+
 #
 # def predict_fastai(mess):
 #     mess_clean = mess
@@ -517,20 +519,25 @@ def catch_intent(mess):
         ##
 
     for notification in list_done_notification:
-        if mess_clean.lower().find(notification)!=-1:
+        # if mess_clean.lower().find(notification)!=-1:
+        if compare_word(notification,mess_clean) >= THRESHOLD_EDIT_DIST:
             return 'done',1.0,mess_clean
 
     for notification in list_hello_notification:
-        if mess_clean.lower().find(notification)!=-1:
+        # if mess_clean.lower().find(notification)!=-1:
+        if compare_word(notification,mess_clean) >= THRESHOLD_EDIT_DIST:
             return 'hello',1.0,mess_clean
 
     for notification in list_thanks_notification:
-        if mess_clean.lower().find(notification)!=-1:
+        # if mess_clean.lower().find(notification)!=-1:
+        if compare_word(notification,mess_clean) >= THRESHOLD_EDIT_DIST:
             return 'thanks',1.0,mess_clean
 
     return 'not_intent',1.0,mess_clean
 
-# print(catch_intent("cho hỏi học bk ra trường có việc làm không ạ"))
+# print(catch_intent("thi"))
+# print('-'*50)
+# print(catch_intent('hi'))
 # s = 'cho em biết Chỉ tiêu tuyển sinh năm 2019 của khối A1 ngành điện điện tử?'
 # # s = "Tên ngành đào tạo về tự động là gì?"
 # # s = 'Thi khối B cần học những môn nào?'
