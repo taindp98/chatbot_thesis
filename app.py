@@ -96,7 +96,7 @@ def process_conversation_POST(state_tracker_id, message):
     dict_investigate['semantic_frame']['user'] = user_action
     dict_investigate['semantic_frame']['user']['message'] = message
     
-    if user_action:
+    if user_action['intent']:
         if user_action['request_slots'] != {}:
             state_tracker.reset()
             confirm_obj = None
@@ -129,15 +129,19 @@ def process_conversation_POST(state_tracker_id, message):
             if user_action['intent'] in ["done","thanks"]:
                 state_tracker.reset()
                 StateTracker_Container[state_tracker_id] = (state_tracker,None)
-        dict_investigate['semantic_frame']['agent'] = {}
-        dict_investigate['semantic_frame']['agent'] = agent_act
-        dict_investigate['semantic_frame']['agent']['message'] = agent_message
-        # dict_investigate['fail_pattern'] = 'success'
-        dict_investigate['timing'] = time.time() - start_time
-        
-        mongo.db.messages.insert_one(dict_investigate)  
+    else:
+        agent_act =  {'intent':'start','request_slots':[],'inform_slots':[]}
+        agent_message = ['Xin chào, mình là trợ lý ảo có thể cung cấp cho bạn các thông tin liên quan đến tuyển sinh đại học như: điểm chuẩn, mã ngành, cách thức đăng ký,... cũng như cơ hội nghề nghiệp về các ngành/ nhóm ngành đang được đào tạo tại trường Đại học Bách Khoa Tp.HCM. Vậy mình có thể giúp được gì cho bạn ?']
+    
+    dict_investigate['semantic_frame']['agent'] = {}
+    dict_investigate['semantic_frame']['agent'] = agent_act
+    dict_investigate['semantic_frame']['agent']['message'] = agent_message
+    # dict_investigate['fail_pattern'] = 'success'
+    dict_investigate['timing'] = time.time() - start_time
+    
+    mongo.db.messages.insert_one(dict_investigate)  
 
-        return agent_message,agent_act
+    return agent_message,agent_act
 
 
 # @app.route('/')
