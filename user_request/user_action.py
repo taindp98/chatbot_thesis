@@ -177,10 +177,10 @@ def get_user_request(mess,state_tracker):
                 user_action['inform_slots'] = {}
                 user_action['request_slots'] = {}
 
-        # else:
+        elif mess == '/start':
         #     anything_key = "major_name"
-        #     user_action['intent'] = 'inform'
-        #     user_action['inform_slots'] = {anything_key:'anything'}
-        #     user_action['request_slots'] = {}
+            user_action['intent'] = 'start'
+            user_action['inform_slots'] = {}
+            user_action['request_slots'] = {}
 
     return user_action,confirm_obj

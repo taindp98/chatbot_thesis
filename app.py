@@ -96,42 +96,40 @@ def process_conversation_POST(state_tracker_id, message):
     dict_investigate['semantic_frame']['user'] = user_action
     dict_investigate['semantic_frame']['user']['message'] = message
     
-    if user_action['intent']:
-        if user_action['request_slots'] != {}:
-            state_tracker.reset()
-            confirm_obj = None
+    # if user_action['intent']:
+    if user_action['request_slots'] != {}:
+        state_tracker.reset()
+        confirm_obj = None
 
-        if new_confirm_obj != None:
-            confirm_obj = new_confirm_obj
+    if new_confirm_obj != None:
+        confirm_obj = new_confirm_obj
 
-        # try:
-        if user_action['intent'] not in ["hello","other","done","thanks"]:
-            dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
+    # try:
+    if user_action['intent'] not in ["hello","other","done","thanks",'start']:
+        dqn_agent = DQNAgent(state_tracker.get_state_size(), constants)
 
-            agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
-            # print('========================')
-            # print('agent action',agent_act)
-            # print('========================')
+        agent_act = get_agent_action(state_tracker, dqn_agent, user_action)
+        # print('========================')
+        # print('agent action',agent_act)
+        # print('========================')
 
-            StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
-            # print('state_tracker.current_request_slots[0]',state_tracker.current_request_slots[0])
-            agent_message = response_craft(agent_act, state_tracker,confirm_obj)
-        else:
-            # to prevent key error
-            # print('day ne')
-            agent_act = {'intent':user_action['intent'],'request_slots':[],'inform_slots':[]}
-            # print('========================')
-            # print('agent action',agent_act)
-            # print('========================')
-            agent_message = [random.choice(response_to_user_free_style[user_action['intent']])]
-
-            #nếu là done thì reset và cho confirm về None
-            if user_action['intent'] in ["done","thanks"]:
-                state_tracker.reset()
-                StateTracker_Container[state_tracker_id] = (state_tracker,None)
+        StateTracker_Container[state_tracker_id] = (state_tracker,confirm_obj)
+        # print('state_tracker.current_request_slots[0]',state_tracker.current_request_slots[0])
+        agent_message = response_craft(agent_act, state_tracker,confirm_obj)
     else:
-        agent_act =  {'intent':'start','request_slots':[],'inform_slots':[]}
-        agent_message = ['Xin chào, mình là trợ lý ảo có thể cung cấp cho bạn các thông tin liên quan đến tuyển sinh đại học như: điểm chuẩn, mã ngành, cách thức đăng ký,... cũng như cơ hội nghề nghiệp về các ngành/ nhóm ngành đang được đào tạo tại trường Đại học Bách Khoa Tp.HCM. Vậy mình có thể giúp được gì cho bạn ?']
+        # to prevent key error
+        # print('day ne')
+        agent_act = {'intent':user_action['intent'],'request_slots':[],'inform_slots':[]}
+        # print('========================')
+        # print('agent action',agent_act)
+        # print('========================')
+        agent_message = [random.choice(response_to_user_free_style[user_action['intent']])]
+
+        #nếu là done thì reset và cho confirm về None
+        if user_action['intent'] in ["done","thanks"]:
+            state_tracker.reset()
+            StateTracker_Container[state_tracker_id] = (state_tracker,None)
+
     
     dict_investigate['semantic_frame']['agent'] = {}
     dict_investigate['semantic_frame']['agent'] = agent_act
